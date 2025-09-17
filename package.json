@@ -31,7 +31,7 @@
 		"@cloudflare/workers-types": "^4.20250812.0",
 		"@eslint/js": "latest",
 		"@types/node": "^20.14.11",
-		"eslint": "9.25.1",
+		"eslint": "^9.33.0",
 		"eslint-plugin-qwik": "^1.15.0",
 		"globals": "16.0.0",
 		"prettier": "3.3.3",
@@ -39,8 +39,13 @@
 		"typescript-eslint": "8.26.1",
 		"typescript-plugin-css-modules": "latest",
 		"undici": "*",
-		"vite": "5.3.5",
+		"vite": "^5.4.19",
 		"vite-tsconfig-paths": "^4.2.1",
-		"wrangler": "^3.0.0"
+		"wrangler": "^4.29.0"
+	},
+	"dependencies": {
+		"@tailwindcss/vite": "^4.1.11",
+		"gsap": "^3.13.0",
+		"tailwindcss": "^4.1.11"
 	}
 }
