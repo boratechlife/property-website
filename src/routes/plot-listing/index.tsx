@@ -4,7 +4,6 @@ import {
   useSignal,
   useStore,
   useTask$,
-  type Signal,
   type QRL,
 } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
@@ -76,25 +75,6 @@ const SIZE_RANGES = {
   MAX: 100,
   STEP: 0.25,
 } as const;
-
-const LAND_USE_TYPES = [
-  "all",
-  "residential",
-  "commercial",
-  "agricultural",
-  "industrial",
-  "mixed",
-] as const;
-
-const TRANSACTION_TYPES = ["all", "sale", "lease", "both"] as const;
-
-const TOPOGRAPHY_TYPES = [
-  "all",
-  "flat",
-  "gently-sloping",
-  "hilly",
-  "valley",
-] as const;
 
 // Enhanced sample plot data
 const plots: readonly Plot[] = [

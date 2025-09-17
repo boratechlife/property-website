@@ -423,6 +423,7 @@ const PropertyOwnerModal = component$<{
       }, 2500);
     } catch (error) {
       errors.general = "Failed to send inquiry. Please try again.";
+      console.log(error);
     } finally {
       isSubmitting.value = false;
     }

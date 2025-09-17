@@ -4,7 +4,6 @@ import {
   useSignal,
   useStore,
   useTask$,
-  type Signal,
   type QRL,
 } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
@@ -68,22 +67,6 @@ const PRICE_RANGES = {
   MAX: 150000,
   STEP: 2500,
 } as const;
-
-const PROPERTY_TYPES = [
-  "all",
-  "single-room",
-  "bedsitter",
-  "studio",
-  "apartment",
-  "house",
-  "villa",
-  "shop",
-  "office",
-  "warehouse",
-  "commercial",
-] as const;
-
-const CATEGORIES = ["all", "residential", "commercial"] as const;
 
 // Enhanced sample data with more property types
 const properties: readonly Property[] = [
