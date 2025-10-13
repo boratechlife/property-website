@@ -15,9 +15,7 @@ import qwikCityPlan from "@qwik-city-plan";
 import render from "./entry.ssr";
 
 declare global {
-  interface QwikCityPlatform extends PlatformCloudflarePages {
-    env: Env
-  }
+  interface QwikCityPlatform extends PlatformCloudflarePages {}
 }
 
 const fetch = createQwikCity({ render, qwikCityPlan });
