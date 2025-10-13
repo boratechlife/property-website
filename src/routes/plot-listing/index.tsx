@@ -4,10 +4,9 @@ import {
   useSignal,
   useStore,
   useTask$,
-  type Signal,
   type QRL,
-} from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+} from '@builder.io/qwik';
+import type { DocumentHead } from '@builder.io/qwik-city';
 
 // Plot-specific TypeScript interfaces
 interface Plot {
@@ -22,15 +21,15 @@ interface Plot {
   readonly description: string;
   readonly features: readonly string[];
   readonly landUse:
-    | "residential"
-    | "commercial"
-    | "agricultural"
-    | "industrial"
-    | "mixed";
-  readonly transactionType: "sale" | "lease" | "both";
-  readonly availability: "available" | "pending" | "sold" | "leased";
+    | 'residential'
+    | 'commercial'
+    | 'agricultural'
+    | 'industrial'
+    | 'mixed';
+  readonly transactionType: 'sale' | 'lease' | 'both';
+  readonly availability: 'available' | 'pending' | 'sold' | 'leased';
   readonly dateAdded: string;
-  readonly topography: "flat" | "gently-sloping" | "hilly" | "valley";
+  readonly topography: 'flat' | 'gently-sloping' | 'hilly' | 'valley';
   readonly soilType?: string;
   readonly leasePeriod?: string; // For lease plots
 }
@@ -40,7 +39,7 @@ interface PlotContactFormData {
   email: string;
   phone: string;
   message: string;
-  interestedIn: "purchase" | "lease" | "both" | "more-info";
+  interestedIn: 'purchase' | 'lease' | 'both' | 'more-info';
   budget?: string;
   preferredMeetingDate?: string;
 }
@@ -77,312 +76,312 @@ const SIZE_RANGES = {
   STEP: 0.25,
 } as const;
 
-const LAND_USE_TYPES = [
-  "all",
-  "residential",
-  "commercial",
-  "agricultural",
-  "industrial",
-  "mixed",
-] as const;
+// const LAND_USE_TYPES = [
+//   'all',
+//   'residential',
+//   'commercial',
+//   'agricultural',
+//   'industrial',
+//   'mixed',
+// ] as const;
 
-const TRANSACTION_TYPES = ["all", "sale", "lease", "both"] as const;
+// const TRANSACTION_TYPES = ['all', 'sale', 'lease', 'both'] as const;
 
-const TOPOGRAPHY_TYPES = [
-  "all",
-  "flat",
-  "gently-sloping",
-  "hilly",
-  "valley",
-] as const;
+// const TOPOGRAPHY_TYPES = [
+//   'all',
+//   'flat',
+//   'gently-sloping',
+//   'hilly',
+//   'valley',
+// ] as const;
 
 // Enhanced sample plot data
 const plots: readonly Plot[] = [
   {
-    id: "1",
-    title: "Prime Residential Plot - Elgon View",
-    location: "Elgon View, Eldoret",
+    id: '1',
+    title: 'Prime Residential Plot - Elgon View',
+    location: 'Elgon View, Eldoret',
     totalPrice: 2500000,
     pricePerAcre: 2500000,
     sizeAcres: 1.0,
     sizeHectares: 0.4,
-    landUse: "residential",
-    transactionType: "sale",
-    availability: "available",
-    dateAdded: "2024-01-15",
-    topography: "gently-sloping",
+    landUse: 'residential',
+    transactionType: 'sale',
+    availability: 'available',
+    dateAdded: '2024-01-15',
+    topography: 'gently-sloping',
     image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop',
     description:
-      "Prime residential plot in the prestigious Elgon View area. Perfect for building your dream home with panoramic views of Mt. Elgon.",
+      'Prime residential plot in the prestigious Elgon View area. Perfect for building your dream home with panoramic views of Mt. Elgon.',
     features: [
-      "Title Deed Ready",
-      "Electricity Connection",
-      "Water Connection",
-      "Tarmac Road Access",
-      "Perimeter Wall",
-      "Gate",
-      "Mature Trees",
+      'Title Deed Ready',
+      'Electricity Connection',
+      'Water Connection',
+      'Tarmac Road Access',
+      'Perimeter Wall',
+      'Gate',
+      'Mature Trees',
     ],
   },
   {
-    id: "2",
-    title: "Commercial Plot - CBD Adjacent",
-    location: "Uganda Road, Eldoret",
+    id: '2',
+    title: 'Commercial Plot - CBD Adjacent',
+    location: 'Uganda Road, Eldoret',
     totalPrice: 8000000,
     pricePerAcre: 16000000,
     sizeAcres: 0.5,
     sizeHectares: 0.2,
-    landUse: "commercial",
-    transactionType: "both",
-    availability: "available",
-    dateAdded: "2024-01-12",
-    topography: "flat",
-    leasePeriod: "99 years available",
+    landUse: 'commercial',
+    transactionType: 'both',
+    availability: 'available',
+    dateAdded: '2024-01-12',
+    topography: 'flat',
+    leasePeriod: '99 years available',
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop',
     description:
-      "Strategic commercial plot on Uganda Road, ideal for retail, office complex, or mixed-use development. High traffic area with excellent visibility.",
+      'Strategic commercial plot on Uganda Road, ideal for retail, office complex, or mixed-use development. High traffic area with excellent visibility.',
     features: [
-      "Corner Plot",
-      "High Traffic Area",
-      "Three Phase Power",
-      "Sewer Connection",
-      "Wide Road Frontage",
-      "Commercial Zone",
-      "Near Banks & Offices",
+      'Corner Plot',
+      'High Traffic Area',
+      'Three Phase Power',
+      'Sewer Connection',
+      'Wide Road Frontage',
+      'Commercial Zone',
+      'Near Banks & Offices',
     ],
   },
   {
-    id: "3",
-    title: "Agricultural Land - Kapseret",
-    location: "Kapseret, Eldoret",
+    id: '3',
+    title: 'Agricultural Land - Kapseret',
+    location: 'Kapseret, Eldoret',
     pricePerAcre: 800000,
     totalPrice: 8000000,
     sizeAcres: 10.0,
     sizeHectares: 4.0,
-    landUse: "agricultural",
-    transactionType: "both",
-    availability: "available",
-    dateAdded: "2024-01-10",
-    topography: "flat",
-    soilType: "Red volcanic soil",
-    leasePeriod: "50-99 years negotiable",
+    landUse: 'agricultural',
+    transactionType: 'both',
+    availability: 'available',
+    dateAdded: '2024-01-10',
+    topography: 'flat',
+    soilType: 'Red volcanic soil',
+    leasePeriod: '50-99 years negotiable',
     image:
-      "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop',
     description:
-      "Fertile agricultural land perfect for crop farming or dairy farming. Rich volcanic soil with excellent drainage and access to irrigation.",
+      'Fertile agricultural land perfect for crop farming or dairy farming. Rich volcanic soil with excellent drainage and access to irrigation.',
     features: [
-      "Fertile Soil",
-      "Borehole",
-      "Irrigation Ready",
-      "Access Road",
-      "Fenced",
-      "Near Market",
-      "Water Rights Included",
+      'Fertile Soil',
+      'Borehole',
+      'Irrigation Ready',
+      'Access Road',
+      'Fenced',
+      'Near Market',
+      'Water Rights Included',
     ],
   },
   {
-    id: "4",
-    title: "Residential Plots - Kipkorgot Estate",
-    location: "Kipkorgot, Eldoret",
+    id: '4',
+    title: 'Residential Plots - Kipkorgot Estate',
+    location: 'Kipkorgot, Eldoret',
     pricePerAcre: 1800000,
     totalPrice: 900000,
     sizeAcres: 0.5,
     sizeHectares: 0.2,
-    landUse: "residential",
-    transactionType: "sale",
-    availability: "available",
-    dateAdded: "2024-01-08",
-    topography: "gently-sloping",
+    landUse: 'residential',
+    transactionType: 'sale',
+    availability: 'available',
+    dateAdded: '2024-01-08',
+    topography: 'gently-sloping',
     image:
-      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop',
     description:
-      "Affordable residential plots in a planned estate. Perfect for first-time home builders. Located in a growing residential area with good infrastructure.",
+      'Affordable residential plots in a planned estate. Perfect for first-time home builders. Located in a growing residential area with good infrastructure.',
     features: [
-      "Planned Estate",
-      "Access Roads",
-      "Electricity Nearby",
-      "Water Connection",
-      "Security",
-      "Schools Nearby",
-      "Flexible Payment",
+      'Planned Estate',
+      'Access Roads',
+      'Electricity Nearby',
+      'Water Connection',
+      'Security',
+      'Schools Nearby',
+      'Flexible Payment',
     ],
   },
   {
-    id: "5",
-    title: "Industrial Plot - Eldoret Industrial Area",
-    location: "Industrial Area, Eldoret",
+    id: '5',
+    title: 'Industrial Plot - Eldoret Industrial Area',
+    location: 'Industrial Area, Eldoret',
     totalPrice: 15000000,
     pricePerAcre: 7500000,
     sizeAcres: 2.0,
     sizeHectares: 0.8,
-    landUse: "industrial",
-    transactionType: "lease",
-    availability: "available",
-    dateAdded: "2024-01-05",
-    topography: "flat",
-    leasePeriod: "50 years renewable",
+    landUse: 'industrial',
+    transactionType: 'lease',
+    availability: 'available',
+    dateAdded: '2024-01-05',
+    topography: 'flat',
+    leasePeriod: '50 years renewable',
     image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop',
     description:
       "Prime industrial plot in the heart of Eldoret's industrial zone. Perfect for manufacturing, warehousing, or logistics operations.",
     features: [
-      "Industrial Zone",
-      "Three Phase Power",
-      "Railway Access",
-      "Truck Route",
-      "Drainage System",
-      "Security",
-      "Near Airport",
+      'Industrial Zone',
+      'Three Phase Power',
+      'Railway Access',
+      'Truck Route',
+      'Drainage System',
+      'Security',
+      'Near Airport',
     ],
   },
   {
-    id: "6",
-    title: "Mixed-Use Development Plot",
-    location: "West Indies, Eldoret",
+    id: '6',
+    title: 'Mixed-Use Development Plot',
+    location: 'West Indies, Eldoret',
     totalPrice: 12000000,
     pricePerAcre: 8000000,
     sizeAcres: 1.5,
     sizeHectares: 0.6,
-    landUse: "mixed",
-    transactionType: "both",
-    availability: "pending",
-    dateAdded: "2024-01-03",
-    topography: "flat",
-    leasePeriod: "99 years available",
+    landUse: 'mixed',
+    transactionType: 'both',
+    availability: 'pending',
+    dateAdded: '2024-01-03',
+    topography: 'flat',
+    leasePeriod: '99 years available',
     image:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&h=300&fit=crop',
     description:
-      "Prime mixed-use development plot suitable for residential, commercial, or hotel development. Located in the rapidly developing West Indies area.",
+      'Prime mixed-use development plot suitable for residential, commercial, or hotel development. Located in the rapidly developing West Indies area.',
     features: [
-      "Mixed-Use Zone",
-      "High Growth Area",
-      "Good Road Network",
-      "Utilities Available",
-      "Near University",
-      "Investment Potential",
-      "Easy Financing",
+      'Mixed-Use Zone',
+      'High Growth Area',
+      'Good Road Network',
+      'Utilities Available',
+      'Near University',
+      'Investment Potential',
+      'Easy Financing',
     ],
   },
   {
-    id: "7",
-    title: "Budget Residential Plot",
-    location: "Huruma, Eldoret",
+    id: '7',
+    title: 'Budget Residential Plot',
+    location: 'Huruma, Eldoret',
     totalPrice: 400000,
     pricePerAcre: 1600000,
     sizeAcres: 0.25,
     sizeHectares: 0.1,
-    landUse: "residential",
-    transactionType: "sale",
-    availability: "available",
-    dateAdded: "2024-01-20",
-    topography: "gently-sloping",
+    landUse: 'residential',
+    transactionType: 'sale',
+    availability: 'available',
+    dateAdded: '2024-01-20',
+    topography: 'gently-sloping',
     image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop',
     description:
-      "Affordable residential plot perfect for building rental units or starter homes. Located in an upcoming residential area with good potential.",
+      'Affordable residential plot perfect for building rental units or starter homes. Located in an upcoming residential area with good potential.',
     features: [
-      "Affordable Price",
-      "Growing Area",
-      "Access Road",
-      "Power Line Nearby",
-      "Water Source",
-      "Quick Sale Process",
-      "Clear Title",
+      'Affordable Price',
+      'Growing Area',
+      'Access Road',
+      'Power Line Nearby',
+      'Water Source',
+      'Quick Sale Process',
+      'Clear Title',
     ],
   },
   {
-    id: "8",
-    title: "Large Agricultural Farm",
-    location: "Soy, Eldoret",
+    id: '8',
+    title: 'Large Agricultural Farm',
+    location: 'Soy, Eldoret',
     pricePerAcre: 600000,
     totalPrice: 30000000,
     sizeAcres: 50.0,
     sizeHectares: 20.0,
-    landUse: "agricultural",
-    transactionType: "both",
-    availability: "available",
-    dateAdded: "2024-01-18",
-    topography: "valley",
-    soilType: "Black cotton soil",
-    leasePeriod: "99 years available",
+    landUse: 'agricultural',
+    transactionType: 'both',
+    availability: 'available',
+    dateAdded: '2024-01-18',
+    topography: 'valley',
+    soilType: 'Black cotton soil',
+    leasePeriod: '99 years available',
     image:
-      "https://images.unsplash.com/photo-1625246333195-78d9c38ad649?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1625246333195-78d9c38ad649?w=400&h=300&fit=crop',
     description:
-      "Large-scale agricultural farm suitable for commercial farming, dairy farming, or agribusiness. Rich soil with natural irrigation from seasonal streams.",
+      'Large-scale agricultural farm suitable for commercial farming, dairy farming, or agribusiness. Rich soil with natural irrigation from seasonal streams.',
     features: [
-      "River Frontage",
-      "Natural Irrigation",
-      "Rich Soil",
-      "Existing Structures",
-      "Access Roads",
-      "Grazing Areas",
-      "Investment Grade",
+      'River Frontage',
+      'Natural Irrigation',
+      'Rich Soil',
+      'Existing Structures',
+      'Access Roads',
+      'Grazing Areas',
+      'Investment Grade',
     ],
   },
   {
-    id: "9",
-    title: "Premium Residential Estate Plot",
-    location: "Elgon View, Eldoret",
+    id: '9',
+    title: 'Premium Residential Estate Plot',
+    location: 'Elgon View, Eldoret',
     totalPrice: 5000000,
     pricePerAcre: 3333333,
     sizeAcres: 1.5,
     sizeHectares: 0.6,
-    landUse: "residential",
-    transactionType: "sale",
-    availability: "available",
-    dateAdded: "2024-01-16",
-    topography: "hilly",
+    landUse: 'residential',
+    transactionType: 'sale',
+    availability: 'available',
+    dateAdded: '2024-01-16',
+    topography: 'hilly',
     image:
-      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop',
     description:
-      "Premium residential plot in an exclusive estate with panoramic views. Perfect for luxury home development with scenic mountain views.",
+      'Premium residential plot in an exclusive estate with panoramic views. Perfect for luxury home development with scenic mountain views.',
     features: [
-      "Panoramic Views",
-      "Exclusive Estate",
-      "Paved Roads",
-      "Underground Power",
-      "Piped Water",
-      "Landscaping",
-      "24/7 Security",
+      'Panoramic Views',
+      'Exclusive Estate',
+      'Paved Roads',
+      'Underground Power',
+      'Piped Water',
+      'Landscaping',
+      '24/7 Security',
     ],
   },
   {
-    id: "10",
-    title: "Commercial Hub Plot",
-    location: "CBD, Eldoret",
+    id: '10',
+    title: 'Commercial Hub Plot',
+    location: 'CBD, Eldoret',
     totalPrice: 20000000,
     pricePerAcre: 40000000,
     sizeAcres: 0.5,
     sizeHectares: 0.2,
-    landUse: "commercial",
-    transactionType: "lease",
-    availability: "available",
-    dateAdded: "2024-01-14",
-    topography: "flat",
-    leasePeriod: "99 years",
+    landUse: 'commercial',
+    transactionType: 'lease',
+    availability: 'available',
+    dateAdded: '2024-01-14',
+    topography: 'flat',
+    leasePeriod: '99 years',
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop',
     description:
-      "Prime commercial plot in the heart of Eldoret CBD. Ideal for high-rise office building, shopping complex, or hotel development.",
+      'Prime commercial plot in the heart of Eldoret CBD. Ideal for high-rise office building, shopping complex, or hotel development.',
     features: [
-      "CBD Location",
-      "High Rise Approved",
-      "Maximum Visibility",
-      "Public Transport",
-      "Banking District",
-      "Parking Available",
-      "High ROI Potential",
+      'CBD Location',
+      'High Rise Approved',
+      'Maximum Visibility',
+      'Public Transport',
+      'Banking District',
+      'Parking Available',
+      'High ROI Potential',
     ],
   },
 ] as const;
 
 // Utility functions
 const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat("en-KE", {
-    style: "currency",
-    currency: "KES",
+  return new Intl.NumberFormat('en-KE', {
+    style: 'currency',
+    currency: 'KES',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);
@@ -390,7 +389,7 @@ const formatPrice = (price: number): string => {
 
 const formatSize = (acres: number, hectares: number): string => {
   if (acres >= 1) {
-    return `${acres} acre${acres !== 1 ? "s" : ""} (${hectares.toFixed(1)} ha)`;
+    return `${acres} acre${acres !== 1 ? 's' : ''} (${hectares.toFixed(1)} ha)`;
   } else {
     return `${acres} acre (${hectares.toFixed(2)} ha)`;
   }
@@ -403,7 +402,7 @@ const validateEmail = (email: string): boolean => {
 
 const validatePhone = (phone: string): boolean => {
   const phoneRegex = /^(\+254|0)[7-9]\d{8}$/;
-  return phoneRegex.test(phone.replace(/\s/g, ""));
+  return phoneRegex.test(phone.replace(/\s/g, ''));
 };
 
 const validatePlotForm = (
@@ -412,21 +411,21 @@ const validatePlotForm = (
   const errors: PlotContactFormErrors = {};
 
   if (!formData.name.trim()) {
-    errors.name = "Name is required";
+    errors.name = 'Name is required';
   } else if (formData.name.trim().length < 2) {
-    errors.name = "Name must be at least 2 characters";
+    errors.name = 'Name must be at least 2 characters';
   }
 
   if (!formData.email.trim()) {
-    errors.email = "Email is required";
+    errors.email = 'Email is required';
   } else if (!validateEmail(formData.email)) {
-    errors.email = "Please enter a valid email address";
+    errors.email = 'Please enter a valid email address';
   }
 
   if (!formData.phone.trim()) {
-    errors.phone = "Phone number is required";
+    errors.phone = 'Phone number is required';
   } else if (!validatePhone(formData.phone)) {
-    errors.phone = "Please enter a valid Kenyan phone number";
+    errors.phone = 'Please enter a valid Kenyan phone number';
   }
 
   return errors;
@@ -434,20 +433,20 @@ const validatePlotForm = (
 
 const getLandUseDisplayName = (landUse: string): string => {
   const landUseMap: Record<string, string> = {
-    residential: "Residential",
-    commercial: "Commercial",
-    agricultural: "Agricultural",
-    industrial: "Industrial",
-    mixed: "Mixed Use",
+    residential: 'Residential',
+    commercial: 'Commercial',
+    agricultural: 'Agricultural',
+    industrial: 'Industrial',
+    mixed: 'Mixed Use',
   };
   return landUseMap[landUse] || landUse;
 };
 
 const getTransactionTypeDisplayName = (transactionType: string): string => {
   const transactionMap: Record<string, string> = {
-    sale: "For Sale",
-    lease: "For Lease",
-    both: "Sale/Lease",
+    sale: 'For Sale',
+    lease: 'For Lease',
+    both: 'Sale/Lease',
   };
   return transactionMap[transactionType] || transactionType;
 };
@@ -459,13 +458,13 @@ const PlotContactModal = component$<{
   onClose: QRL<() => void>;
 }>((props) => {
   const formData = useStore<PlotContactFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-    interestedIn: "more-info",
-    budget: "",
-    preferredMeetingDate: "",
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+    interestedIn: 'more-info',
+    budget: '',
+    preferredMeetingDate: '',
   });
 
   const errors = useStore<PlotContactFormErrors>({});
@@ -474,13 +473,13 @@ const PlotContactModal = component$<{
 
   const resetForm = $(() => {
     Object.assign(formData, {
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-      interestedIn: "more-info",
-      budget: "",
-      preferredMeetingDate: "",
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+      interestedIn: 'more-info',
+      budget: '',
+      preferredMeetingDate: '',
     });
     Object.keys(errors).forEach(
       (key) => delete errors[key as keyof PlotContactFormErrors]
@@ -514,8 +513,8 @@ const PlotContactModal = component$<{
         resetForm();
       }, 2000);
     } catch (error) {
-      errors.general = "Failed to send message. Please try again.";
-      console.error("Form submission error:", error);
+      errors.general = 'Failed to send message. Please try again.';
+      console.error('Form submission error:', error);
     } finally {
       isSubmitting.value = false;
     }
@@ -531,17 +530,17 @@ const PlotContactModal = component$<{
 
     if (props.isOpen) {
       const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
+        if (e.key === 'Escape') {
           handleClose();
         }
       };
 
-      document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
 
       return () => {
-        document.removeEventListener("keydown", handleEscape);
-        document.body.style.overflow = "unset";
+        document.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = 'unset';
       };
     }
   });
@@ -628,7 +627,7 @@ const PlotContactModal = component$<{
                     if (errors.name) delete errors.name;
                   }}
                   class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors ${
-                    errors.name ? "border-red-300 bg-red-50" : "border-gray-300"
+                    errors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
                   }`}
                   placeholder="Enter your full name"
                 />
@@ -655,8 +654,8 @@ const PlotContactModal = component$<{
                   }}
                   class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors ${
                     errors.email
-                      ? "border-red-300 bg-red-50"
-                      : "border-gray-300"
+                      ? 'border-red-300 bg-red-50'
+                      : 'border-gray-300'
                   }`}
                   placeholder="Enter your email address"
                 />
@@ -683,8 +682,8 @@ const PlotContactModal = component$<{
                   }}
                   class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors ${
                     errors.phone
-                      ? "border-red-300 bg-red-50"
-                      : "border-gray-300"
+                      ? 'border-red-300 bg-red-50'
+                      : 'border-gray-300'
                   }`}
                   placeholder="e.g., +254700000000"
                 />
@@ -751,7 +750,7 @@ const PlotContactModal = component$<{
                       e.target as HTMLInputElement
                     ).value;
                   }}
-                  min={new Date().toISOString().split("T")[0]}
+                  min={new Date().toISOString().split('T')[0]}
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
@@ -795,7 +794,7 @@ const PlotContactModal = component$<{
                       Sending...
                     </>
                   ) : (
-                    "Send Inquiry"
+                    'Send Inquiry'
                   )}
                 </button>
               </div>
@@ -818,12 +817,12 @@ const PlotCard = component$<{
     <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
       <div class="relative">
         <div
-          class={`w-full h-48 bg-gray-200 ${imageLoaded.value ? "hidden" : "block animate-pulse"}`}
+          class={`w-full h-48 bg-gray-200 ${imageLoaded.value ? 'hidden' : 'block animate-pulse'}`}
         ></div>
         <img
           src={props.plot.image}
           alt={`${props.plot.title} in ${props.plot.location}`}
-          class={`w-full h-48 object-cover transition-opacity duration-300 ${imageLoaded.value ? "opacity-100" : "opacity-0"}`}
+          class={`w-full h-48 object-cover transition-opacity duration-300 ${imageLoaded.value ? 'opacity-100' : 'opacity-0'}`}
           loading="lazy"
           onLoad$={() => (imageLoaded.value = true)}
           onError$={() => (imageLoaded.value = true)}
@@ -834,10 +833,10 @@ const PlotCard = component$<{
             ? formatPrice(props.plot.totalPrice)
             : props.plot.pricePerAcre
               ? `${formatPrice(props.plot.pricePerAcre)}/acre`
-              : "Price on inquiry"}
+              : 'Price on inquiry'}
         </div>
 
-        {props.plot.availability === "pending" && (
+        {props.plot.availability === 'pending' && (
           <div class="absolute top-3 left-3 bg-orange-500 text-white px-2 py-1 rounded-md text-sm font-medium">
             Pending
           </div>
@@ -940,20 +939,20 @@ const PlotCard = component$<{
         <button
           onClick$={() => props.onContact(props.plot)}
           disabled={
-            props.plot.availability === "sold" ||
-            props.plot.availability === "leased"
+            props.plot.availability === 'sold' ||
+            props.plot.availability === 'leased'
           }
           class={`w-full py-2 px-4 rounded-md transition-colors duration-200 font-medium ${
-            props.plot.availability === "sold" ||
-            props.plot.availability === "leased"
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-green-600 hover:bg-green-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            props.plot.availability === 'sold' ||
+            props.plot.availability === 'leased'
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              : 'bg-green-600 hover:bg-green-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
           }`}
         >
-          {props.plot.availability === "sold" ||
-          props.plot.availability === "leased"
-            ? "Not Available"
-            : "Inquire Now"}
+          {props.plot.availability === 'sold' ||
+          props.plot.availability === 'leased'
+            ? 'Not Available'
+            : 'Inquire Now'}
         </button>
       </div>
     </article>
@@ -976,12 +975,12 @@ const PlotFilters = component$<{
           onClick$={() => (isExpanded.value = !isExpanded.value)}
           class="md:hidden px-3 py-1 text-sm bg-green-100 text-green-800 rounded-md hover:bg-green-200 transition-colors"
         >
-          {isExpanded.value ? "Hide" : "Show"} Filters
+          {isExpanded.value ? 'Hide' : 'Show'} Filters
         </button>
       </div>
 
       <div
-        class={`${isExpanded.value ? "block" : "hidden"} md:block space-y-4 md:space-y-0 md:grid md:grid-cols-3 lg:grid-cols-6 md:gap-4`}
+        class={`${isExpanded.value ? 'block' : 'hidden'} md:block space-y-4 md:space-y-0 md:grid md:grid-cols-3 lg:grid-cols-6 md:gap-4`}
       >
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -1113,8 +1112,8 @@ const PlotFilters = component$<{
 
       <div class="mt-4 pt-4 border-t border-gray-200">
         <p class="text-sm text-gray-600">
-          Showing <span class="font-semibold">{props.plotCount}</span>{" "}
-          {props.plotCount === 1 ? "plot" : "plots"}
+          Showing <span class="font-semibold">{props.plotCount}</span>{' '}
+          {props.plotCount === 1 ? 'plot' : 'plots'}
         </p>
       </div>
     </div>
@@ -1131,10 +1130,10 @@ export default component$(() => {
     maxPrice: PRICE_RANGES.MAX,
     minSize: SIZE_RANGES.MIN,
     maxSize: SIZE_RANGES.MAX,
-    landUse: "all",
-    transactionType: "all",
-    location: "",
-    topography: "all",
+    landUse: 'all',
+    transactionType: 'all',
+    location: '',
+    topography: 'all',
   });
 
   const filteredPlots = useSignal<Plot[]>([]);
@@ -1150,17 +1149,17 @@ export default component$(() => {
     filteredPlots.value = plots.filter((plot) => {
       if (plot.totalPrice && plot.totalPrice > filters.maxPrice) return false;
       if (plot.sizeAcres > filters.maxSize) return false;
-      if (filters.landUse !== "all" && plot.landUse !== filters.landUse)
+      if (filters.landUse !== 'all' && plot.landUse !== filters.landUse)
         return false;
       if (
-        filters.transactionType !== "all" &&
+        filters.transactionType !== 'all' &&
         plot.transactionType !== filters.transactionType
       )
         return false;
       if (filters.location && !plot.location.includes(filters.location))
         return false;
       if (
-        filters.topography !== "all" &&
+        filters.topography !== 'all' &&
         plot.topography !== filters.topography
       )
         return false;
@@ -1266,10 +1265,10 @@ export default component$(() => {
                 onClick$={() => {
                   filters.maxPrice = PRICE_RANGES.MAX;
                   filters.maxSize = SIZE_RANGES.MAX;
-                  filters.landUse = "all";
-                  filters.transactionType = "all";
-                  filters.location = "";
-                  filters.topography = "all";
+                  filters.landUse = 'all';
+                  filters.transactionType = 'all';
+                  filters.location = '';
+                  filters.topography = 'all';
                 }}
                 class="bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-md transition-colors font-medium"
               >
@@ -1310,30 +1309,30 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Land & Plots for Sale in Eldoret - Prime Investment Opportunities",
+  title: 'Land & Plots for Sale in Eldoret - Prime Investment Opportunities',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "Find prime land and plots for sale in Eldoret. Residential, commercial, agricultural and industrial land with verified title deeds. Expert guidance and secure transactions guaranteed.",
+        'Find prime land and plots for sale in Eldoret. Residential, commercial, agricultural and industrial land with verified title deeds. Expert guidance and secure transactions guaranteed.',
     },
     {
-      name: "keywords",
+      name: 'keywords',
       content:
-        "land for sale Eldoret, plots Eldoret, agricultural land Kenya, commercial plots, residential land, investment land, title deeds, land lease Eldoret",
+        'land for sale Eldoret, plots Eldoret, agricultural land Kenya, commercial plots, residential land, investment land, title deeds, land lease Eldoret',
     },
     {
-      name: "viewport",
-      content: "width=device-width, initial-scale=1.0",
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1.0',
     },
     {
-      property: "og:title",
-      content: "Premium Land & Plots for Sale in Eldoret",
+      property: 'og:title',
+      content: 'Premium Land & Plots for Sale in Eldoret',
     },
     {
-      property: "og:description",
+      property: 'og:description',
       content:
-        "Discover prime land investment opportunities in Eldoret. Verified plots for residential, commercial, and agricultural development.",
+        'Discover prime land investment opportunities in Eldoret. Verified plots for residential, commercial, and agricultural development.',
     },
   ],
 };

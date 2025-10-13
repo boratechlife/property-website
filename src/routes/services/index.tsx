@@ -267,7 +267,7 @@ export default component$(() => {
       }
     );
 
-    const scrollTrigger = ScrollTrigger.create({
+    ScrollTrigger.create({
       trigger: '#services',
       start: 'top bottom',
       end: 'bottom top',

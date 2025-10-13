@@ -4,10 +4,9 @@ import {
   useSignal,
   useStore,
   useTask$,
-  type Signal,
   type QRL,
-} from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+} from '@builder.io/qwik';
+import type { DocumentHead } from '@builder.io/qwik-city';
 
 // Enhanced TypeScript interfaces
 interface Property {
@@ -22,19 +21,19 @@ interface Property {
   readonly description: string;
   readonly features: readonly string[];
   readonly type:
-    | "house"
-    | "apartment"
-    | "villa"
-    | "studio"
-    | "single-room"
-    | "bedsitter"
-    | "shop"
-    | "office"
-    | "warehouse"
-    | "commercial";
-  readonly availability: "available" | "pending" | "rented";
+    | 'house'
+    | 'apartment'
+    | 'villa'
+    | 'studio'
+    | 'single-room'
+    | 'bedsitter'
+    | 'shop'
+    | 'office'
+    | 'warehouse'
+    | 'commercial';
+  readonly availability: 'available' | 'pending' | 'rented';
   readonly dateAdded: string;
-  readonly category: "residential" | "commercial";
+  readonly category: 'residential' | 'commercial';
 }
 
 interface ContactFormData {
@@ -69,365 +68,365 @@ const PRICE_RANGES = {
   STEP: 2500,
 } as const;
 
-const PROPERTY_TYPES = [
-  "all",
-  "single-room",
-  "bedsitter",
-  "studio",
-  "apartment",
-  "house",
-  "villa",
-  "shop",
-  "office",
-  "warehouse",
-  "commercial",
-] as const;
+// const PROPERTY_TYPES = [
+//   "all",
+//   "single-room",
+//   "bedsitter",
+//   "studio",
+//   "apartment",
+//   "house",
+//   "villa",
+//   "shop",
+//   "office",
+//   "warehouse",
+//   "commercial",
+// ] as const;
 
-const CATEGORIES = ["all", "residential", "commercial"] as const;
+// const CATEGORIES = ["all", "residential", "commercial"] as const;
 
 // Enhanced sample data with more property types
 const properties: readonly Property[] = [
   {
-    id: "1",
-    title: "Modern 3BR House",
-    location: "Kipkorgot, Eldoret",
+    id: '1',
+    title: 'Modern 3BR House',
+    location: 'Kipkorgot, Eldoret',
     price: 35000,
     bedrooms: 3,
     bathrooms: 2,
     area: 120,
-    type: "house",
-    category: "residential",
-    availability: "available",
-    dateAdded: "2024-01-15",
+    type: 'house',
+    category: 'residential',
+    availability: 'available',
+    dateAdded: '2024-01-15',
     image:
-      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=300&fit=crop',
     description:
-      "Beautiful modern house with spacious rooms and contemporary finishes. Perfect for families seeking comfort and style.",
+      'Beautiful modern house with spacious rooms and contemporary finishes. Perfect for families seeking comfort and style.',
     features: [
-      "Parking",
-      "Garden",
-      "Security",
-      "Water",
-      "Fitted Kitchen",
-      "Master En-suite",
+      'Parking',
+      'Garden',
+      'Security',
+      'Water',
+      'Fitted Kitchen',
+      'Master En-suite',
     ],
   },
   {
-    id: "2",
-    title: "Cozy 2BR Apartment",
-    location: "Kapsoya, Eldoret",
+    id: '2',
+    title: 'Cozy 2BR Apartment',
+    location: 'Kapsoya, Eldoret',
     price: 25000,
     bedrooms: 2,
     bathrooms: 1,
     area: 80,
-    type: "apartment",
-    category: "residential",
-    availability: "available",
-    dateAdded: "2024-01-12",
+    type: 'apartment',
+    category: 'residential',
+    availability: 'available',
+    dateAdded: '2024-01-12',
     image:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop',
     description:
-      "Comfortable apartment perfect for small families or young professionals. Located in a secure neighborhood.",
-    features: ["Balcony", "Parking", "Security", "Water", "Internet Ready"],
+      'Comfortable apartment perfect for small families or young professionals. Located in a secure neighborhood.',
+    features: ['Balcony', 'Parking', 'Security', 'Water', 'Internet Ready'],
   },
   {
-    id: "3",
-    title: "Spacious 4BR Villa",
-    location: "Elgon View, Eldoret",
+    id: '3',
+    title: 'Spacious 4BR Villa',
+    location: 'Elgon View, Eldoret',
     price: 55000,
     bedrooms: 4,
     bathrooms: 3,
     area: 180,
-    type: "villa",
-    category: "residential",
-    availability: "pending",
-    dateAdded: "2024-01-10",
+    type: 'villa',
+    category: 'residential',
+    availability: 'pending',
+    dateAdded: '2024-01-10',
     image:
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400&h=300&fit=crop',
     description:
-      "Luxurious villa with panoramic views and premium amenities. Features include spacious rooms and modern fixtures.",
+      'Luxurious villa with panoramic views and premium amenities. Features include spacious rooms and modern fixtures.',
     features: [
-      "Swimming Pool",
-      "Garden",
-      "Garage",
-      "Security",
-      "Generator",
-      "Gym",
-      "Study Room",
+      'Swimming Pool',
+      'Garden',
+      'Garage',
+      'Security',
+      'Generator',
+      'Gym',
+      'Study Room',
     ],
   },
   {
-    id: "4",
-    title: "Budget Studio",
-    location: "Kapseret, Eldoret",
+    id: '4',
+    title: 'Budget Studio',
+    location: 'Kapseret, Eldoret',
     price: 15000,
     bedrooms: 0,
     bathrooms: 1,
     area: 45,
-    type: "studio",
-    category: "residential",
-    availability: "available",
-    dateAdded: "2024-01-08",
+    type: 'studio',
+    category: 'residential',
+    availability: 'available',
+    dateAdded: '2024-01-08',
     image:
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop',
     description:
-      "Affordable studio apartment ideal for students or young professionals starting their careers.",
-    features: ["Furnished", "Security", "Water", "Wi-Fi Ready"],
+      'Affordable studio apartment ideal for students or young professionals starting their careers.',
+    features: ['Furnished', 'Security', 'Water', 'Wi-Fi Ready'],
   },
   {
-    id: "5",
-    title: "Family 3BR House",
-    location: "Pioneer, Eldoret",
+    id: '5',
+    title: 'Family 3BR House',
+    location: 'Pioneer, Eldoret',
     price: 40000,
     bedrooms: 3,
     bathrooms: 2,
     area: 135,
-    type: "house",
-    category: "residential",
-    availability: "available",
-    dateAdded: "2024-01-05",
+    type: 'house',
+    category: 'residential',
+    availability: 'available',
+    dateAdded: '2024-01-05',
     image:
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop',
     description:
-      "Well-maintained family house in a quiet, child-friendly neighborhood with excellent schools nearby.",
+      'Well-maintained family house in a quiet, child-friendly neighborhood with excellent schools nearby.',
     features: [
-      "Garden",
-      "Parking",
-      "Security",
-      "Borehole",
-      "Playground",
-      "Storage Room",
+      'Garden',
+      'Parking',
+      'Security',
+      'Borehole',
+      'Playground',
+      'Storage Room',
     ],
   },
   {
-    id: "6",
-    title: "Executive 2BR Flat",
-    location: "West Indies, Eldoret",
+    id: '6',
+    title: 'Executive 2BR Flat',
+    location: 'West Indies, Eldoret',
     price: 30000,
     bedrooms: 2,
     bathrooms: 2,
     area: 95,
-    type: "apartment",
-    category: "residential",
-    availability: "available",
-    dateAdded: "2024-01-03",
+    type: 'apartment',
+    category: 'residential',
+    availability: 'available',
+    dateAdded: '2024-01-03',
     image:
-      "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?w=400&h=300&fit=crop',
     description:
-      "Executive apartment with modern amenities and strategic location. Perfect for working professionals.",
+      'Executive apartment with modern amenities and strategic location. Perfect for working professionals.',
     features: [
-      "Balcony",
-      "Gym",
-      "Security",
-      "Backup Water",
-      "Elevator",
-      "Concierge",
+      'Balcony',
+      'Gym',
+      'Security',
+      'Backup Water',
+      'Elevator',
+      'Concierge',
     ],
   },
   {
-    id: "7",
-    title: "Affordable Single Room",
-    location: "Huruma, Eldoret",
+    id: '7',
+    title: 'Affordable Single Room',
+    location: 'Huruma, Eldoret',
     price: 8000,
     bedrooms: 0,
     bathrooms: 0,
     area: 12,
-    type: "single-room",
-    category: "residential",
-    availability: "available",
-    dateAdded: "2024-01-20",
+    type: 'single-room',
+    category: 'residential',
+    availability: 'available',
+    dateAdded: '2024-01-20',
     image:
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
     description:
-      "Clean single room perfect for students and young professionals. Shared bathroom facilities available.",
+      'Clean single room perfect for students and young professionals. Shared bathroom facilities available.',
     features: [
-      "Security",
-      "Water",
-      "Shared Bathroom",
-      "Electricity",
-      "Wi-Fi Ready",
+      'Security',
+      'Water',
+      'Shared Bathroom',
+      'Electricity',
+      'Wi-Fi Ready',
     ],
   },
   {
-    id: "8",
-    title: "Modern Bedsitter",
-    location: "Kipkorgot, Eldoret",
+    id: '8',
+    title: 'Modern Bedsitter',
+    location: 'Kipkorgot, Eldoret',
     price: 12000,
     bedrooms: 1,
     bathrooms: 1,
     area: 25,
-    type: "bedsitter",
-    category: "residential",
-    availability: "available",
-    dateAdded: "2024-01-18",
+    type: 'bedsitter',
+    category: 'residential',
+    availability: 'available',
+    dateAdded: '2024-01-18',
     image:
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop',
     description:
-      "Compact bedsitter with private bathroom and kitchenette. Ideal for young professionals seeking independence.",
+      'Compact bedsitter with private bathroom and kitchenette. Ideal for young professionals seeking independence.',
     features: [
-      "Private Bathroom",
-      "Kitchenette",
-      "Security",
-      "Water",
-      "Balcony",
+      'Private Bathroom',
+      'Kitchenette',
+      'Security',
+      'Water',
+      'Balcony',
     ],
   },
   {
-    id: "9",
-    title: "Prime Shop Space",
-    location: "CBD, Eldoret",
+    id: '9',
+    title: 'Prime Shop Space',
+    location: 'CBD, Eldoret',
     price: 45000,
     bedrooms: 0,
     bathrooms: 1,
     area: 60,
-    type: "shop",
-    category: "commercial",
-    availability: "available",
-    dateAdded: "2024-01-16",
+    type: 'shop',
+    category: 'commercial',
+    availability: 'available',
+    dateAdded: '2024-01-16',
     image:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop',
     description:
-      "Strategic shop location in the heart of Eldoret CBD. High foot traffic and excellent visibility for retail business.",
+      'Strategic shop location in the heart of Eldoret CBD. High foot traffic and excellent visibility for retail business.',
     features: [
-      "Street Facing",
-      "High Traffic",
-      "Security",
-      "Parking",
-      "Storage Area",
-      "Display Windows",
+      'Street Facing',
+      'High Traffic',
+      'Security',
+      'Parking',
+      'Storage Area',
+      'Display Windows',
     ],
   },
   {
-    id: "10",
-    title: "Modern Office Suite",
-    location: "West Indies, Eldoret",
+    id: '10',
+    title: 'Modern Office Suite',
+    location: 'West Indies, Eldoret',
     price: 35000,
     bedrooms: 0,
     bathrooms: 2,
     area: 80,
-    type: "office",
-    category: "commercial",
-    availability: "available",
-    dateAdded: "2024-01-14",
+    type: 'office',
+    category: 'commercial',
+    availability: 'available',
+    dateAdded: '2024-01-14',
     image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop',
     description:
-      "Professional office space with modern amenities. Perfect for small to medium businesses and professional services.",
+      'Professional office space with modern amenities. Perfect for small to medium businesses and professional services.',
     features: [
-      "Air Conditioning",
-      "High-Speed Internet",
-      "Conference Room",
-      "Parking",
-      "Security",
-      "Reception Area",
+      'Air Conditioning',
+      'High-Speed Internet',
+      'Conference Room',
+      'Parking',
+      'Security',
+      'Reception Area',
     ],
   },
   {
-    id: "11",
-    title: "Large Warehouse",
-    location: "Industrial Area, Eldoret",
+    id: '11',
+    title: 'Large Warehouse',
+    location: 'Industrial Area, Eldoret',
     price: 80000,
     bedrooms: 0,
     bathrooms: 2,
     area: 500,
-    type: "warehouse",
-    category: "commercial",
-    availability: "available",
-    dateAdded: "2024-01-12",
+    type: 'warehouse',
+    category: 'commercial',
+    availability: 'available',
+    dateAdded: '2024-01-12',
     image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop',
     description:
-      "Spacious warehouse facility with loading docks and office space. Ideal for storage, distribution, or light manufacturing.",
+      'Spacious warehouse facility with loading docks and office space. Ideal for storage, distribution, or light manufacturing.',
     features: [
-      "Loading Dock",
-      "Office Space",
-      "High Ceiling",
-      "24/7 Security",
-      "Truck Access",
-      "Three Phase Power",
+      'Loading Dock',
+      'Office Space',
+      'High Ceiling',
+      '24/7 Security',
+      'Truck Access',
+      'Three Phase Power',
     ],
   },
   {
-    id: "12",
-    title: "Budget Single Room",
-    location: "Bondeni, Eldoret",
+    id: '12',
+    title: 'Budget Single Room',
+    location: 'Bondeni, Eldoret',
     price: 6000,
     bedrooms: 0,
     bathrooms: 0,
     area: 10,
-    type: "single-room",
-    category: "residential",
-    availability: "available",
-    dateAdded: "2024-01-10",
+    type: 'single-room',
+    category: 'residential',
+    availability: 'available',
+    dateAdded: '2024-01-10',
     image:
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
     description:
-      "Very affordable single room for students and budget-conscious tenants. Basic amenities with shared facilities.",
+      'Very affordable single room for students and budget-conscious tenants. Basic amenities with shared facilities.',
     features: [
-      "Security",
-      "Water",
-      "Electricity",
-      "Shared Kitchen",
-      "Shared Bathroom",
+      'Security',
+      'Water',
+      'Electricity',
+      'Shared Kitchen',
+      'Shared Bathroom',
     ],
   },
   {
-    id: "13",
-    title: "Commercial Space",
-    location: "Uganda Road, Eldoret",
+    id: '13',
+    title: 'Commercial Space',
+    location: 'Uganda Road, Eldoret',
     price: 60000,
     bedrooms: 0,
     bathrooms: 3,
     area: 120,
-    type: "commercial",
-    category: "commercial",
-    availability: "available",
-    dateAdded: "2024-01-08",
+    type: 'commercial',
+    category: 'commercial',
+    availability: 'available',
+    dateAdded: '2024-01-08',
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop',
     description:
-      "Multi-purpose commercial space suitable for various businesses. Ground floor location with excellent accessibility.",
+      'Multi-purpose commercial space suitable for various businesses. Ground floor location with excellent accessibility.',
     features: [
-      "Ground Floor",
-      "Multiple Entrances",
-      "Parking",
-      "Security",
-      "Backup Power",
-      "Elevator Access",
+      'Ground Floor',
+      'Multiple Entrances',
+      'Parking',
+      'Security',
+      'Backup Power',
+      'Elevator Access',
     ],
   },
   {
-    id: "14",
-    title: "Furnished Bedsitter",
-    location: "Kapsoya, Eldoret",
+    id: '14',
+    title: 'Furnished Bedsitter',
+    location: 'Kapsoya, Eldoret',
     price: 18000,
     bedrooms: 1,
     bathrooms: 1,
     area: 28,
-    type: "bedsitter",
-    category: "residential",
-    availability: "available",
-    dateAdded: "2024-01-06",
+    type: 'bedsitter',
+    category: 'residential',
+    availability: 'available',
+    dateAdded: '2024-01-06',
     image:
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop',
     description:
-      "Fully furnished bedsitter ready for immediate occupation. All utilities included in the rent.",
+      'Fully furnished bedsitter ready for immediate occupation. All utilities included in the rent.',
     features: [
-      "Fully Furnished",
-      "Private Bathroom",
-      "Kitchenette",
-      "Water Included",
-      "Internet Ready",
-      "Security",
+      'Fully Furnished',
+      'Private Bathroom',
+      'Kitchenette',
+      'Water Included',
+      'Internet Ready',
+      'Security',
     ],
   },
 ] as const;
 
 // Utility functions
 const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat("en-KE", {
-    style: "currency",
-    currency: "KES",
+  return new Intl.NumberFormat('en-KE', {
+    style: 'currency',
+    currency: 'KES',
     minimumFractionDigits: 0,
   }).format(price);
 };
@@ -439,28 +438,28 @@ const validateEmail = (email: string): boolean => {
 
 const validatePhone = (phone: string): boolean => {
   const phoneRegex = /^(\+254|0)[7-9]\d{8}$/;
-  return phoneRegex.test(phone.replace(/\s/g, ""));
+  return phoneRegex.test(phone.replace(/\s/g, ''));
 };
 
 const validateForm = (formData: ContactFormData): ContactFormErrors => {
   const errors: ContactFormErrors = {};
 
   if (!formData.name.trim()) {
-    errors.name = "Name is required";
+    errors.name = 'Name is required';
   } else if (formData.name.trim().length < 2) {
-    errors.name = "Name must be at least 2 characters";
+    errors.name = 'Name must be at least 2 characters';
   }
 
   if (!formData.email.trim()) {
-    errors.email = "Email is required";
+    errors.email = 'Email is required';
   } else if (!validateEmail(formData.email)) {
-    errors.email = "Please enter a valid email address";
+    errors.email = 'Please enter a valid email address';
   }
 
   if (!formData.phone.trim()) {
-    errors.phone = "Phone number is required";
+    errors.phone = 'Phone number is required';
   } else if (!validatePhone(formData.phone)) {
-    errors.phone = "Please enter a valid Kenyan phone number";
+    errors.phone = 'Please enter a valid Kenyan phone number';
   }
 
   return errors;
@@ -468,16 +467,16 @@ const validateForm = (formData: ContactFormData): ContactFormErrors => {
 
 const getPropertyDisplayName = (type: string): string => {
   const typeMap: Record<string, string> = {
-    "single-room": "Single Room",
-    bedsitter: "Bedsitter",
-    studio: "Studio",
-    apartment: "Apartment",
-    house: "House",
-    villa: "Villa",
-    shop: "Shop",
-    office: "Office",
-    warehouse: "Warehouse",
-    commercial: "Commercial Space",
+    'single-room': 'Single Room',
+    bedsitter: 'Bedsitter',
+    studio: 'Studio',
+    apartment: 'Apartment',
+    house: 'House',
+    villa: 'Villa',
+    shop: 'Shop',
+    office: 'Office',
+    warehouse: 'Warehouse',
+    commercial: 'Commercial Space',
   };
   return typeMap[type] || type;
 };
@@ -489,11 +488,11 @@ const ContactModal = component$<{
   onClose: QRL<() => void>;
 }>((props) => {
   const formData = useStore<ContactFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-    preferredViewingDate: "",
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+    preferredViewingDate: '',
   });
 
   const errors = useStore<ContactFormErrors>({});
@@ -502,11 +501,11 @@ const ContactModal = component$<{
 
   const resetForm = $(() => {
     Object.assign(formData, {
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-      preferredViewingDate: "",
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+      preferredViewingDate: '',
     });
     Object.keys(errors).forEach(
       (key) => delete errors[key as keyof ContactFormErrors]
@@ -546,8 +545,8 @@ const ContactModal = component$<{
         resetForm();
       }, 2000);
     } catch (error) {
-      errors.general = "Failed to send message. Please try again.";
-      console.error("Form submission error:", error);
+      errors.general = 'Failed to send message. Please try again.';
+      console.error('Form submission error:', error);
     } finally {
       isSubmitting.value = false;
     }
@@ -564,17 +563,17 @@ const ContactModal = component$<{
 
     if (props.isOpen) {
       const handleEscape = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
+        if (e.key === 'Escape') {
           handleClose();
         }
       };
 
-      document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
 
       return () => {
-        document.removeEventListener("keydown", handleEscape);
-        document.body.style.overflow = "unset";
+        document.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = 'unset';
       };
     }
   });
@@ -652,10 +651,10 @@ const ContactModal = component$<{
                     if (errors.name) delete errors.name;
                   }}
                   class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors ${
-                    errors.name ? "border-red-300 bg-red-50" : "border-gray-300"
+                    errors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
                   }`}
                   placeholder="Enter your full name"
-                  aria-describedby={errors.name ? "name-error" : undefined}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
                 />
                 {errors.name && (
                   <p id="name-error" class="mt-1 text-sm text-red-600">
@@ -682,11 +681,11 @@ const ContactModal = component$<{
                   }}
                   class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors ${
                     errors.email
-                      ? "border-red-300 bg-red-50"
-                      : "border-gray-300"
+                      ? 'border-red-300 bg-red-50'
+                      : 'border-gray-300'
                   }`}
                   placeholder="Enter your email address"
-                  aria-describedby={errors.email ? "email-error" : undefined}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
                 />
                 {errors.email && (
                   <p id="email-error" class="mt-1 text-sm text-red-600">
@@ -713,11 +712,11 @@ const ContactModal = component$<{
                   }}
                   class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors ${
                     errors.phone
-                      ? "border-red-300 bg-red-50"
-                      : "border-gray-300"
+                      ? 'border-red-300 bg-red-50'
+                      : 'border-gray-300'
                   }`}
                   placeholder="e.g., +254700000000"
-                  aria-describedby={errors.phone ? "phone-error" : undefined}
+                  aria-describedby={errors.phone ? 'phone-error' : undefined}
                 />
                 {errors.phone && (
                   <p id="phone-error" class="mt-1 text-sm text-red-600">
@@ -731,9 +730,9 @@ const ContactModal = component$<{
                   for="viewing-date"
                   class="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  {props.property.category === "commercial"
-                    ? "Preferred Meeting Date"
-                    : "Preferred Viewing Date"}
+                  {props.property.category === 'commercial'
+                    ? 'Preferred Meeting Date'
+                    : 'Preferred Viewing Date'}
                 </label>
                 <input
                   id="viewing-date"
@@ -744,7 +743,7 @@ const ContactModal = component$<{
                       e.target as HTMLInputElement
                     ).value;
                   }}
-                  min={new Date().toISOString().split("T")[0]}
+                  min={new Date().toISOString().split('T')[0]}
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 />
               </div>
@@ -765,9 +764,9 @@ const ContactModal = component$<{
                   rows={4}
                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                   placeholder={
-                    props.property.category === "commercial"
-                      ? "Tell us about your business needs, budget, or any specific requirements..."
-                      : "Tell us about your specific requirements, budget constraints, or any questions..."
+                    props.property.category === 'commercial'
+                      ? 'Tell us about your business needs, budget, or any specific requirements...'
+                      : 'Tell us about your specific requirements, budget constraints, or any questions...'
                   }
                 />
               </div>
@@ -792,7 +791,7 @@ const ContactModal = component$<{
                       Sending...
                     </>
                   ) : (
-                    "Send Message"
+                    'Send Message'
                   )}
                 </button>
               </div>
@@ -815,12 +814,12 @@ const PropertyCard = component$<{
     <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
       <div class="relative">
         <div
-          class={`w-full h-48 bg-gray-200 ${imageLoaded.value ? "hidden" : "block animate-pulse"}`}
+          class={`w-full h-48 bg-gray-200 ${imageLoaded.value ? 'hidden' : 'block animate-pulse'}`}
         ></div>
         <img
           src={props.property.image}
           alt={`${props.property.title} in ${props.property.location}`}
-          class={`w-full h-48 object-cover transition-opacity duration-300 ${imageLoaded.value ? "opacity-100" : "opacity-0"}`}
+          class={`w-full h-48 object-cover transition-opacity duration-300 ${imageLoaded.value ? 'opacity-100' : 'opacity-0'}`}
           loading="lazy"
           onLoad$={() => (imageLoaded.value = true)}
           onError$={() => (imageLoaded.value = true)}
@@ -828,7 +827,7 @@ const PropertyCard = component$<{
         <div class="absolute top-3 right-3 bg-yellow-600 text-white px-2 py-1 rounded-md text-sm font-medium">
           {formatPrice(props.property.price)}/mo
         </div>
-        {props.property.availability === "pending" && (
+        {props.property.availability === 'pending' && (
           <div class="absolute top-3 left-3 bg-orange-500 text-white px-2 py-1 rounded-md text-sm font-medium">
             Pending
           </div>
@@ -864,7 +863,7 @@ const PropertyCard = component$<{
           class="flex items-center justify-between text-sm text-gray-600 mb-4 p-3 bg-gray-50 rounded-lg"
           role="list"
         >
-          {props.property.category === "residential" ? (
+          {props.property.category === 'residential' ? (
             <>
               <div class="flex items-center" role="listitem">
                 <svg
@@ -887,7 +886,7 @@ const PropertyCard = component$<{
                 >
                   {props.property.bedrooms > 0
                     ? `${props.property.bedrooms} BR`
-                    : "Room"}
+                    : 'Room'}
                 </span>
               </div>
               <div class="flex items-center" role="listitem">
@@ -911,7 +910,7 @@ const PropertyCard = component$<{
                 >
                   {props.property.bathrooms > 0
                     ? `${props.property.bathrooms} BA`
-                    : "Shared"}
+                    : 'Shared'}
                 </span>
               </div>
             </>
@@ -988,17 +987,17 @@ const PropertyCard = component$<{
 
         <button
           onClick$={() => props.onContact(props.property)}
-          disabled={props.property.availability === "rented"}
+          disabled={props.property.availability === 'rented'}
           class={`w-full py-2 px-4 rounded-md transition-colors duration-200 font-medium ${
-            props.property.availability === "rented"
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-yellow-600 hover:bg-yellow-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+            props.property.availability === 'rented'
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              : 'bg-yellow-600 hover:bg-yellow-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2'
           }`}
           aria-label={`Contact agent about ${props.property.title}`}
         >
-          {props.property.availability === "rented"
-            ? "Not Available"
-            : "Contact Agent"}
+          {props.property.availability === 'rented'
+            ? 'Not Available'
+            : 'Contact Agent'}
         </button>
       </div>
     </article>
@@ -1023,13 +1022,13 @@ const PropertyFilters = component$<{
           aria-expanded={isExpanded.value}
           aria-controls="filters-content"
         >
-          {isExpanded.value ? "Hide" : "Show"} Filters
+          {isExpanded.value ? 'Hide' : 'Show'} Filters
         </button>
       </div>
 
       <div
         id="filters-content"
-        class={`${isExpanded.value ? "block" : "hidden"} md:block space-y-4 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-5 md:gap-4`}
+        class={`${isExpanded.value ? 'block' : 'hidden'} md:block space-y-4 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-5 md:gap-4`}
       >
         <div>
           <label
@@ -1067,7 +1066,7 @@ const PropertyFilters = component$<{
             onChange$={(e) => {
               props.onFiltersChange({
                 category: (e.target as HTMLSelectElement).value,
-                propertyType: "all", // Reset property type when category changes
+                propertyType: 'all', // Reset property type when category changes
               });
             }}
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
@@ -1096,8 +1095,8 @@ const PropertyFilters = component$<{
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
           >
             <option value="all">All Types</option>
-            {props.filters.category === "all" ||
-            props.filters.category === "residential" ? (
+            {props.filters.category === 'all' ||
+            props.filters.category === 'residential' ? (
               <>
                 <option value="single-room">Single Room</option>
                 <option value="bedsitter">Bedsitter</option>
@@ -1107,8 +1106,8 @@ const PropertyFilters = component$<{
                 <option value="villa">Villa</option>
               </>
             ) : null}
-            {props.filters.category === "all" ||
-            props.filters.category === "commercial" ? (
+            {props.filters.category === 'all' ||
+            props.filters.category === 'commercial' ? (
               <>
                 <option value="shop">Shop</option>
                 <option value="office">Office</option>
@@ -1124,13 +1123,13 @@ const PropertyFilters = component$<{
             for="bedrooms-filter"
             class="block text-sm font-medium text-gray-700 mb-2"
           >
-            {props.filters.category === "commercial"
-              ? "Space Type"
-              : "Bedrooms"}
+            {props.filters.category === 'commercial'
+              ? 'Space Type'
+              : 'Bedrooms'}
           </label>
           <select
             id="bedrooms-filter"
-            value={props.filters.bedrooms?.toString() || ""}
+            value={props.filters.bedrooms?.toString() || ''}
             onChange$={(e) => {
               const value = (e.target as HTMLSelectElement).value;
               props.onFiltersChange({
@@ -1140,7 +1139,7 @@ const PropertyFilters = component$<{
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
           >
             <option value="">Any</option>
-            {props.filters.category === "commercial" ? (
+            {props.filters.category === 'commercial' ? (
               <>
                 <option value="0">Open Plan</option>
                 <option value="1">1+ Rooms</option>
@@ -1193,8 +1192,8 @@ const PropertyFilters = component$<{
 
       <div class="mt-4 pt-4 border-t border-gray-200">
         <p class="text-sm text-gray-600">
-          Showing <span class="font-semibold">{props.propertyCount}</span>{" "}
-          {props.propertyCount === 1 ? "property" : "properties"}
+          Showing <span class="font-semibold">{props.propertyCount}</span>{' '}
+          {props.propertyCount === 1 ? 'property' : 'properties'}
         </p>
       </div>
     </div>
@@ -1210,9 +1209,9 @@ export default component$(() => {
     minPrice: PRICE_RANGES.MIN,
     maxPrice: PRICE_RANGES.MAX,
     bedrooms: null,
-    propertyType: "all",
-    location: "",
-    category: "all",
+    propertyType: 'all',
+    location: '',
+    category: 'all',
   });
 
   const filteredProperties = useSignal<Property[]>([]);
@@ -1230,13 +1229,13 @@ export default component$(() => {
       if (filters.bedrooms !== null && property.bedrooms < filters.bedrooms)
         return false;
       if (
-        filters.propertyType !== "all" &&
+        filters.propertyType !== 'all' &&
         property.type !== filters.propertyType
       )
         return false;
       if (filters.location && !property.location.includes(filters.location))
         return false;
-      if (filters.category !== "all" && property.category !== filters.category)
+      if (filters.category !== 'all' && property.category !== filters.category)
         return false;
       return true;
     });
@@ -1367,9 +1366,9 @@ export default component$(() => {
                 onClick$={() => {
                   filters.maxPrice = PRICE_RANGES.MAX;
                   filters.bedrooms = null;
-                  filters.propertyType = "all";
-                  filters.location = "";
-                  filters.category = "all";
+                  filters.propertyType = 'all';
+                  filters.location = '';
+                  filters.category = 'all';
                 }}
                 class="bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-6 rounded-md transition-colors font-medium"
               >
@@ -1412,61 +1411,61 @@ export default component$(() => {
 
 export const head: DocumentHead = {
   title:
-    "Properties for Rent in Eldoret - Residential & Commercial | EldoretSpaces",
+    'Properties for Rent in Eldoret - Residential & Commercial | EldoretSpaces',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "Find rental properties in Eldoret - from budget single rooms to luxury homes, shops, offices, and commercial spaces. Verified listings with professional service and transparent pricing.",
+        'Find rental properties in Eldoret - from budget single rooms to luxury homes, shops, offices, and commercial spaces. Verified listings with professional service and transparent pricing.',
     },
     {
-      name: "keywords",
+      name: 'keywords',
       content:
-        "Eldoret rental properties, single rooms Eldoret, bedsitter Eldoret, shops for rent, office space Eldoret, houses Eldoret, apartments Eldoret, commercial property Kenya, warehouse rental",
+        'Eldoret rental properties, single rooms Eldoret, bedsitter Eldoret, shops for rent, office space Eldoret, houses Eldoret, apartments Eldoret, commercial property Kenya, warehouse rental',
     },
     {
-      name: "viewport",
-      content: "width=device-width, initial-scale=1.0",
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1.0',
     },
     {
-      name: "robots",
-      content: "index, follow",
+      name: 'robots',
+      content: 'index, follow',
     },
     {
-      property: "og:title",
-      content: "Properties for Rent in Eldoret - Residential & Commercial",
+      property: 'og:title',
+      content: 'Properties for Rent in Eldoret - Residential & Commercial',
     },
     {
-      property: "og:description",
+      property: 'og:description',
       content:
-        "Discover rental properties in Eldoret - single rooms, apartments, houses, shops, offices and commercial spaces. Professional service with verified listings.",
+        'Discover rental properties in Eldoret - single rooms, apartments, houses, shops, offices and commercial spaces. Professional service with verified listings.',
     },
     {
-      property: "og:type",
-      content: "website",
+      property: 'og:type',
+      content: 'website',
     },
     {
-      property: "og:locale",
-      content: "en_KE",
+      property: 'og:locale',
+      content: 'en_KE',
     },
     {
-      name: "twitter:card",
-      content: "summary_large_image",
+      name: 'twitter:card',
+      content: 'summary_large_image',
     },
     {
-      name: "theme-color",
-      content: "#d97706",
+      name: 'theme-color',
+      content: '#d97706',
     },
   ],
   links: [
     {
-      rel: "canonical",
-      href: "https://eldoretspaces.co.ke",
+      rel: 'canonical',
+      href: 'https://eldoretspaces.co.ke',
     },
     {
-      rel: "icon",
-      type: "image/png",
-      href: "/favicon.png",
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.png',
     },
   ],
 };
