@@ -863,9 +863,9 @@ const PlotCard = component$<{
               viewBox="0 0 20 20"
             >
               <path
-                fillRule="evenodd"
+                fill-rule="evenodd"
                 d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                clipRule="evenodd"
+                clip-rule="evenodd"
               />
             </svg>
             {props.plot.location}
@@ -881,9 +881,9 @@ const PlotCard = component$<{
               viewBox="0 0 24 24"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width={2}
                 d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
               />
             </svg>
@@ -900,9 +900,9 @@ const PlotCard = component$<{
               viewBox="0 0 24 24"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width={2}
                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
               />
             </svg>
@@ -1211,9 +1211,9 @@ export default component$(() => {
             <div class="flex items-center text-lg">
               <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
-                  fillRule="evenodd"
+                  fill-rule="evenodd"
                   d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2z"
-                  clipRule="evenodd"
+                  clip-rule="evenodd"
                 />
               </svg>
               Secure Transactions

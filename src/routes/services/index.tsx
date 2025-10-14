@@ -281,7 +281,11 @@ export default component$(() => {
     });
 
     // Hover interactions
-    const serviceCards = document.querySelectorAll('.service-card');
+    const serviceCards = document.querySelectorAll(
+      '.service-card'
+    ) as NodeListOf<HTMLElement>;
+
+    //const serviceCards = document.querySelectorAll('.service-card');
     const handleMouseMove = (e: MouseEvent) => {
       const card = e.currentTarget as HTMLElement;
       const rect = card.getBoundingClientRect();
@@ -346,7 +350,7 @@ export default component$(() => {
 
     // Cleanup function provided by useVisibleTask$
     cleanup(() => {
-      ScrollTrigger.kill();
+      //  ScrollTrigger.kill();
       serviceCards.forEach((card) => {
         card.removeEventListener('mousemove', handleMouseMove);
         card.removeEventListener('mouseleave', handleMouseLeave);

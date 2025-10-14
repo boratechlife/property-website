@@ -850,9 +850,9 @@ const PropertyCard = component$<{
               aria-hidden="true"
             >
               <path
-                fillRule="evenodd"
+                fill-rule="evenodd" // Corrected property name
                 d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                clipRule="evenodd"
+                clip-rule="evenodd" // Corrected property name
               />
             </svg>
             {props.property.location}
@@ -874,9 +874,9 @@ const PropertyCard = component$<{
                   aria-hidden="true"
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
+                    stroke-linecapinecap="round"
+                    stroke-linecapinejoin="round"
+                    stroke-widthidth={2}
                     d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"
                   />
                 </svg>
@@ -898,9 +898,9 @@ const PropertyCard = component$<{
                   aria-hidden="true"
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width={2}
                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2z"
                   />
                 </svg>
@@ -924,9 +924,9 @@ const PropertyCard = component$<{
                 aria-hidden="true"
               >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width={2}
                   d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H9m0 0H5m0 0H3"
                 />
               </svg>
@@ -942,9 +942,9 @@ const PropertyCard = component$<{
               aria-hidden="true"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width={2}
                 d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
               />
             </svg>
@@ -1306,9 +1306,9 @@ export default component$(() => {
                 aria-hidden="true"
               >
                 <path
-                  fillRule="evenodd"
+                  fill-rule="evenodd"
                   d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                  clipRule="evenodd"
+                  clip-rule="evenodd"
                 />
               </svg>
               Secure Transactions

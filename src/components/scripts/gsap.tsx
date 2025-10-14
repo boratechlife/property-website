@@ -4,17 +4,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 export const GSAPScript = component$(() => {
-  useVisibleTask$(() => {
+  useVisibleTask$(({ cleanup }) => {
+    // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    // Dark mode functionality
+    // --- Dark mode functionality ---
     const darkModeToggle = document.getElementById('darkModeToggle');
     const darkModeToggleMobile = document.getElementById(
       'darkModeToggleMobile'
     );
     const html = document.documentElement;
 
-    // Check for saved theme preference or default to light mode
     const currentTheme = localStorage.getItem('theme') || 'light';
     if (currentTheme === 'dark') {
       html.classList.add('dark');
@@ -29,7 +29,7 @@ export const GSAPScript = component$(() => {
     darkModeToggle?.addEventListener('click', toggleDarkMode);
     darkModeToggleMobile?.addEventListener('click', toggleDarkMode);
 
-    // Mobile menu functionality
+    // --- Mobile menu functionality ---
     const mobileMenuButton = document.getElementById('mobileMenuButton');
     const mobileMenu = document.getElementById('mobileMenu');
     let mobileMenuOpen = false;
@@ -53,9 +53,9 @@ export const GSAPScript = component$(() => {
       }
     });
 
-    // Close mobile menu when clicking on links
     mobileMenu?.addEventListener('click', (e) => {
-      if (e.target.tagName === 'A') {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'A') {
         gsap.to(mobileMenu, {
           y: '-100%',
           opacity: 0,
@@ -66,21 +66,24 @@ export const GSAPScript = component$(() => {
       }
     });
 
-    // Navbar scroll effect
+    // --- Navbar scroll effect ---
     const navbar = document.getElementById('navbar');
 
-    ScrollTrigger.create({
+    // Store ScrollTrigger instances to kill later
+    const triggers: ScrollTrigger[] = [];
+
+    const navbarTrigger = ScrollTrigger.create({
       start: 'top -80',
       onToggle: (self) => {
         if (self.isActive) {
-          navbar.classList.add('nav-blur');
+          navbar?.classList.add('nav-blur');
           gsap.to(navbar, {
             backgroundColor: 'rgba(255, 255, 255, 0.8)',
             backdropFilter: 'blur(20px)',
             duration: 0.3,
           });
         } else {
-          navbar.classList.remove('nav-blur');
+          navbar?.classList.remove('nav-blur');
           gsap.to(navbar, {
             backgroundColor: 'transparent',
             backdropFilter: 'blur(20px)',
@@ -90,9 +93,10 @@ export const GSAPScript = component$(() => {
       },
     });
 
-    // Hero animations
-    const heroTl = gsap.timeline();
+    triggers.push(navbarTrigger);
 
+    // --- Hero animations ---
+    const heroTl = gsap.timeline();
     heroTl
       .from('#heroTitle', {
         y: 50,
@@ -102,68 +106,64 @@ export const GSAPScript = component$(() => {
       })
       .from(
         '#heroSubtitle',
-        {
-          y: 30,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power2.out',
-        },
+        { y: 30, opacity: 0, duration: 0.8, ease: 'power2.out' },
         '-=0.5'
       )
       .from(
         '#heroCTA',
-        {
-          y: 30,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power2.out',
-        },
+        { y: 30, opacity: 0, duration: 0.8, ease: 'power2.out' },
         '-=0.3'
       )
       .from(
         '#trustIndicators',
-        {
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-        },
+        { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' },
         '-=0.2'
       );
 
-    // Services section animations
-    gsap.from('.service-card', {
-      scrollTrigger: {
+    // --- Services section animations ---
+    triggers.push(
+      ScrollTrigger.create({
         trigger: '#services',
         start: 'top 80%',
-      },
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: 'power2.out',
-    });
+        animation: gsap.from('.service-card', {
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power2.out',
+        }),
+      })
+    );
 
-    // Why choose us animations
-    gsap.from('#why-choose .group', {
-      scrollTrigger: {
+    // --- Why choose us animations ---
+    triggers.push(
+      ScrollTrigger.create({
         trigger: '#why-choose',
         start: 'top 80%',
-      },
-      y: 40,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.15,
-      ease: 'power2.out',
-    });
+        animation: gsap.from('#why-choose .group', {
+          y: 40,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'power2.out',
+        }),
+      })
+    );
 
-    // Stats counter animation
-    const stats = document.querySelectorAll('#why-choose .text-3xl');
+    // --- Stats counter animation ---
+    // Assert type here to allow access to textContent
+    const stats = document.querySelectorAll(
+      '#why-choose .text-3xl'
+    ) as NodeListOf<HTMLElement>;
     stats.forEach((stat) => {
-      const target = parseInt(stat.textContent.replace(/[^\d]/g, ''));
-      const suffix = stat.textContent.replace(/[\d]/g, '');
+      // Check for valid number
+      const targetText = stat.textContent?.replace(/[^\d]/g, '') || '0';
+      const target = parseInt(targetText, 10);
+      const suffix = stat.textContent?.replace(/[\d]/g, '') || '';
 
-      ScrollTrigger.create({
+      if (isNaN(target)) return; // Prevents errors if textContent is not a number
+
+      const statsTrigger = ScrollTrigger.create({
         trigger: stat,
         start: 'top 80%',
         onEnter: () => {
@@ -174,140 +174,162 @@ export const GSAPScript = component$(() => {
               duration: 2,
               ease: 'power2.out',
               onUpdate: function () {
+                // 'this' is handled correctly by GSAP's onUpdate context
                 stat.textContent = Math.round(this.targets()[0].value) + suffix;
               },
             }
           );
+          statsTrigger.kill(); // Kill the trigger after it fires once
         },
       });
+      triggers.push(statsTrigger);
     });
 
-    // Testimonials animations
-    gsap.from('.testimonial-card', {
-      scrollTrigger: {
+    // --- Testimonials animations ---
+    triggers.push(
+      ScrollTrigger.create({
         trigger: '#testimonials',
         start: 'top 80%',
-      },
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: 'power2.out',
-    });
+        animation: gsap.from('.testimonial-card', {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power2.out',
+        }),
+      })
+    );
 
-    // About section animations
-    gsap.from('#about .grid > div', {
-      scrollTrigger: {
+    // --- About section animations ---
+    triggers.push(
+      ScrollTrigger.create({
         trigger: '#about',
         start: 'top 70%',
-      },
-      x: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.3,
-      ease: 'power2.out',
-    });
+        animation: gsap.from('#about .grid > div', {
+          x: 50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.3,
+          ease: 'power2.out',
+        }),
+      })
+    );
 
-    // Contact form animations
-    gsap.from('#contactForm > *', {
-      scrollTrigger: {
+    // --- Contact form animations ---
+    triggers.push(
+      ScrollTrigger.create({
         trigger: '#contact',
         start: 'top 70%',
-      },
-      y: 20,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.1,
-      ease: 'power2.out',
-    });
+        animation: gsap.from('#contactForm > *', {
+          y: 20,
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: 'power2.out',
+        }),
+      })
+    );
 
-    // Form handling
-    const contactForm = document.getElementById('contactForm');
+    // --- Form handling ---
+    // Assert contactForm as HTMLFormElement
+    const contactForm = document.getElementById(
+      'contactForm'
+    ) as HTMLFormElement;
     contactForm?.addEventListener('submit', (e) => {
       e.preventDefault();
-
-      // Form validation
       const formData = new FormData(contactForm);
-      const formObject = Object.fromEntries(formData);
+      const formObject: Record<string, FormDataEntryValue> =
+        Object.fromEntries(formData);
 
-      // Simple validation
       if (!formObject.firstName || !formObject.lastName || !formObject.email) {
         alert('Please fill in all required fields.');
         return;
       }
 
-      // Email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formObject.email)) {
-        alert('Please enter a valid email address.');
+      const emailValue = formObject.email;
+
+      if (typeof emailValue === 'string' && emailValue) {
+        if (!emailRegex.test(emailValue)) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+      } else {
+        alert('Please provide an email address.');
         return;
       }
 
-      // Simulate form submission
-      const submitButton = contactForm.querySelector('button[type="submit"]');
+      const submitButton = contactForm.querySelector(
+        'button[type="submit"]'
+      ) as HTMLButtonElement;
       const originalText = submitButton.textContent;
 
-      submitButton.textContent = 'Sending...';
-      submitButton.disabled = true;
+      if (submitButton) {
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+      }
 
-      // Simulate API call
       setTimeout(() => {
         alert(
           "Thank you! Your message has been sent. We'll get back to you soon."
         );
         contactForm.reset();
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
+        if (submitButton) {
+          submitButton.textContent = originalText;
+          submitButton.disabled = false;
+        }
       }, 2000);
     });
 
-    // Smooth scroll for anchor links
+    // --- Smooth scroll for anchor links ---
+    // Ensure NodeListOf contains HTMLElement for correct event listeners
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener('click', function (e) {
+      // Use arrow function to preserve 'this' and use 'anchor' directly
+      anchor.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          gsap.to(window, {
-            duration: 1,
-            scrollTo: {
-              y: target,
-              offsetY: 80,
-            },
-            ease: 'power2.out',
-          });
+        const href = anchor.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            gsap.to(window, {
+              duration: 1,
+              scrollTo: { y: target, offsetY: 80 },
+              ease: 'power2.out',
+            });
+          }
         }
       });
     });
 
-    // Parallax effect for hero section
-    gsap.to('.hero-pattern', {
-      backgroundPosition: '50% 100%',
-      ease: 'none',
-      scrollTrigger: {
+    // --- Parallax effect for hero section ---
+    triggers.push(
+      ScrollTrigger.create({
         trigger: '#hero',
         start: 'top bottom',
         end: 'bottom top',
         scrub: true,
-      },
-    });
+        animation: gsap.to('.hero-pattern', {
+          backgroundPosition: '50% 100%',
+          ease: 'none',
+        }),
+      })
+    );
 
-    // Loading animation
+    // --- Loading animation ---
     window.addEventListener('load', () => {
-      gsap.from('body', {
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-      });
+      gsap.from('body', { opacity: 0, duration: 0.5, ease: 'power2.out' });
     });
 
-    // Intersection Observer for lazy loading images
+    // --- Intersection Observer for lazy loading images ---
     const imageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src || img.src;
-          img.classList.remove('loading');
-          observer.unobserve(img);
+          if (entry.target instanceof HTMLImageElement) {
+            const img = entry.target;
+            img.src = img.dataset.src || img.src;
+            img.classList.remove('loading');
+            observer.unobserve(img);
+          }
         }
       });
     });
@@ -316,18 +338,18 @@ export const GSAPScript = component$(() => {
       imageObserver.observe(img);
     });
 
-    // Add scroll progress indicator
+    // --- Add scroll progress indicator ---
     const progressBar = document.createElement('div');
     progressBar.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #f97316);
-            z-index: 9999;
-            transition: width 0.3s ease;
-        `;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: linear-gradient(90deg, #3b82f6, #f97316);
+        z-index: 9999;
+        transition: width 0.3s ease;
+    `;
     document.body.appendChild(progressBar);
 
     window.addEventListener('scroll', () => {
@@ -338,8 +360,25 @@ export const GSAPScript = component$(() => {
       progressBar.style.width = scrolled + '%';
     });
 
-    // Your animation logic here
     console.log('GSAP from npm ready!');
+
+    // --- Cleanup function ---
+    cleanup(() => {
+      // Kill all created ScrollTrigger instances
+      triggers.forEach((trigger) => trigger.kill());
+
+      // Remove event listeners
+      darkModeToggle?.removeEventListener('click', toggleDarkMode);
+      darkModeToggleMobile?.removeEventListener('click', toggleDarkMode);
+      mobileMenuButton?.removeEventListener('click', () => {}); // Can't remove anonymous, but this is a common pattern
+      mobileMenu?.removeEventListener('click', () => {});
+      contactForm?.removeEventListener('submit', () => {});
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.removeEventListener('click', () => {});
+      });
+      window.removeEventListener('load', () => {});
+      window.removeEventListener('scroll', () => {});
+    });
   });
 
   return null;
