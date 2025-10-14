@@ -1,8 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { DocumentHead } from '@builder.io/qwik-city';
-import { Header } from '~/components/common/header';
-import { Footer } from '~/components/common/footer';
-import { HeroSection } from '~/components/sections/hero-section';
+
 import { AboutSection } from '~/components/sections/about-section';
 import { StatsSection } from '~/components/sections/stats-section';
 import { ServicesSection } from '~/components/sections/services-section';

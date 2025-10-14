@@ -1,10 +1,4 @@
-import {
-  component$,
-  useSignal,
-  useVisibleTask$,
-  $,
-  type Signal,
-} from '@builder.io/qwik';
+import { component$, useSignal, useVisibleTask$, $ } from '@builder.io/qwik';
 
 // Note: In a real Qwik project, you'd install these via npm:
 // npm install gsap lottie-web
@@ -179,46 +173,51 @@ export default component$(() => {
   });
 
   // Demo Lottie animation data (in real app, load from JSON file)
-  const createPropertyAnimationData = () => ({
-    v: '5.7.4',
-    fr: 30,
-    ip: 0,
-    op: 90,
-    w: 400,
-    h: 400,
-    nm: 'Property Animation',
-    ddd: 0,
-    assets: [],
-    layers: [
-      {
-        ddd: 0,
-        ind: 1,
-        ty: 4,
-        nm: 'Building',
-        sr: 1,
-        ks: {
-          o: { a: 0, k: 100 },
-          r: { a: 0, k: 0 },
-          p: { a: 0, k: [200, 200, 0] },
-          a: { a: 0, k: [50, 50, 0] },
-          s: { a: 0, k: [100, 100, 100] },
-        },
-        ao: 0,
-        shapes: [
-          {
-            ty: 'rc',
-            p: { a: 0, k: [0, 0] },
-            s: { a: 0, k: [100, 120] },
-            r: { a: 0, k: 5 },
+  /*
+   * Corrected createPropertyAnimationData function
+   */
+  const createPropertyAnimationData = $(() =>
+    $({
+      v: '5.7.4',
+      fr: 30,
+      ip: 0,
+      op: 90,
+      w: 400,
+      h: 400,
+      nm: 'Property Animation',
+      ddd: 0,
+      assets: [],
+      layers: [
+        {
+          ddd: 0,
+          ind: 1,
+          ty: 4,
+          nm: 'Building',
+          sr: 1,
+          ks: {
+            o: { a: 0, k: 100 },
+            r: { a: 0, k: 0 },
+            p: { a: 0, k: [200, 200, 0] },
+            a: { a: 0, k: [50, 50, 0] },
+            s: { a: 0, k: [100, 100, 100] },
           },
-        ],
-        ip: 0,
-        op: 90,
-        st: 0,
-        bm: 0,
-      },
-    ],
-  });
+          ao: 0,
+          shapes: [
+            {
+              ty: 'rc',
+              p: { a: 0, k: [0, 0] },
+              s: { a: 0, k: [100, 120] },
+              r: { a: 0, k: 5 },
+            },
+          ],
+          ip: 0,
+          op: 90,
+          st: 0,
+          bm: 0,
+        },
+      ],
+    })
+  );
 
   return (
     <section

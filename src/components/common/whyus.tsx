@@ -50,8 +50,6 @@ export const StatCard = component$<{
   );
 });
 
-import styles from './hero.module.css';
-
 interface FeatureCardProps {
   icon: any;
   title: string;
