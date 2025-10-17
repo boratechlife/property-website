@@ -18,6 +18,7 @@ interface Property {
   readonly bathrooms: number;
   readonly area: number;
   readonly image: string;
+  readonly images: readonly string[]; // Multiple images array
   readonly description: string;
   readonly features: readonly string[];
   readonly type:
@@ -34,22 +35,7 @@ interface Property {
   readonly availability: 'available' | 'pending' | 'rented';
   readonly dateAdded: string;
   readonly category: 'residential' | 'commercial';
-}
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-  preferredViewingDate?: string;
-}
-
-interface ContactFormErrors {
-  name?: string;
-  email?: string;
-  phone?: string;
-  message?: string;
-  general?: string;
+  readonly whatsappNumber: string; // WhatsApp contact
 }
 
 interface FilterState {
@@ -68,23 +54,7 @@ const PRICE_RANGES = {
   STEP: 2500,
 } as const;
 
-// const PROPERTY_TYPES = [
-//   "all",
-//   "single-room",
-//   "bedsitter",
-//   "studio",
-//   "apartment",
-//   "house",
-//   "villa",
-//   "shop",
-//   "office",
-//   "warehouse",
-//   "commercial",
-// ] as const;
-
-// const CATEGORIES = ["all", "residential", "commercial"] as const;
-
-// Enhanced sample data with more property types
+// Enhanced sample data with multiple images
 const properties: readonly Property[] = [
   {
     id: '1',
@@ -99,7 +69,19 @@ const properties: readonly Property[] = [
     availability: 'available',
     dateAdded: '2024-01-15',
     image:
-      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=300&fit=crop',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.23 AM.jpeg',
+    images: [
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.23 AM.jpeg',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.26 AM.jpeg',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.27 AM.jpeg',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.28 AM (1).jpeg',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.28 AM.jpeg',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.29 AM.jpeg',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.30 AM.jpeg',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.31 AM.jpeg',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.32 AM.jpeg',
+      '/images/Prtment for sale/WhatsApp Image 2025-10-14 at 9.10.33 AM.jpeg',
+    ],
     description:
       'Beautiful modern house with spacious rooms and contemporary finishes. Perfect for families seeking comfort and style.',
     features: [
@@ -110,315 +92,7 @@ const properties: readonly Property[] = [
       'Fitted Kitchen',
       'Master En-suite',
     ],
-  },
-  {
-    id: '2',
-    title: 'Cozy 2BR Apartment',
-    location: 'Kapsoya, Eldoret',
-    price: 25000,
-    bedrooms: 2,
-    bathrooms: 1,
-    area: 80,
-    type: 'apartment',
-    category: 'residential',
-    availability: 'available',
-    dateAdded: '2024-01-12',
-    image:
-      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop',
-    description:
-      'Comfortable apartment perfect for small families or young professionals. Located in a secure neighborhood.',
-    features: ['Balcony', 'Parking', 'Security', 'Water', 'Internet Ready'],
-  },
-  {
-    id: '3',
-    title: 'Spacious 4BR Villa',
-    location: 'Elgon View, Eldoret',
-    price: 55000,
-    bedrooms: 4,
-    bathrooms: 3,
-    area: 180,
-    type: 'villa',
-    category: 'residential',
-    availability: 'pending',
-    dateAdded: '2024-01-10',
-    image:
-      'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400&h=300&fit=crop',
-    description:
-      'Luxurious villa with panoramic views and premium amenities. Features include spacious rooms and modern fixtures.',
-    features: [
-      'Swimming Pool',
-      'Garden',
-      'Garage',
-      'Security',
-      'Generator',
-      'Gym',
-      'Study Room',
-    ],
-  },
-  {
-    id: '4',
-    title: 'Budget Studio',
-    location: 'Kapseret, Eldoret',
-    price: 15000,
-    bedrooms: 0,
-    bathrooms: 1,
-    area: 45,
-    type: 'studio',
-    category: 'residential',
-    availability: 'available',
-    dateAdded: '2024-01-08',
-    image:
-      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop',
-    description:
-      'Affordable studio apartment ideal for students or young professionals starting their careers.',
-    features: ['Furnished', 'Security', 'Water', 'Wi-Fi Ready'],
-  },
-  {
-    id: '5',
-    title: 'Family 3BR House',
-    location: 'Pioneer, Eldoret',
-    price: 40000,
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 135,
-    type: 'house',
-    category: 'residential',
-    availability: 'available',
-    dateAdded: '2024-01-05',
-    image:
-      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop',
-    description:
-      'Well-maintained family house in a quiet, child-friendly neighborhood with excellent schools nearby.',
-    features: [
-      'Garden',
-      'Parking',
-      'Security',
-      'Borehole',
-      'Playground',
-      'Storage Room',
-    ],
-  },
-  {
-    id: '6',
-    title: 'Executive 2BR Flat',
-    location: 'West Indies, Eldoret',
-    price: 30000,
-    bedrooms: 2,
-    bathrooms: 2,
-    area: 95,
-    type: 'apartment',
-    category: 'residential',
-    availability: 'available',
-    dateAdded: '2024-01-03',
-    image:
-      'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?w=400&h=300&fit=crop',
-    description:
-      'Executive apartment with modern amenities and strategic location. Perfect for working professionals.',
-    features: [
-      'Balcony',
-      'Gym',
-      'Security',
-      'Backup Water',
-      'Elevator',
-      'Concierge',
-    ],
-  },
-  {
-    id: '7',
-    title: 'Affordable Single Room',
-    location: 'Huruma, Eldoret',
-    price: 8000,
-    bedrooms: 0,
-    bathrooms: 0,
-    area: 12,
-    type: 'single-room',
-    category: 'residential',
-    availability: 'available',
-    dateAdded: '2024-01-20',
-    image:
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-    description:
-      'Clean single room perfect for students and young professionals. Shared bathroom facilities available.',
-    features: [
-      'Security',
-      'Water',
-      'Shared Bathroom',
-      'Electricity',
-      'Wi-Fi Ready',
-    ],
-  },
-  {
-    id: '8',
-    title: 'Modern Bedsitter',
-    location: 'Kipkorgot, Eldoret',
-    price: 12000,
-    bedrooms: 1,
-    bathrooms: 1,
-    area: 25,
-    type: 'bedsitter',
-    category: 'residential',
-    availability: 'available',
-    dateAdded: '2024-01-18',
-    image:
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop',
-    description:
-      'Compact bedsitter with private bathroom and kitchenette. Ideal for young professionals seeking independence.',
-    features: [
-      'Private Bathroom',
-      'Kitchenette',
-      'Security',
-      'Water',
-      'Balcony',
-    ],
-  },
-  {
-    id: '9',
-    title: 'Prime Shop Space',
-    location: 'CBD, Eldoret',
-    price: 45000,
-    bedrooms: 0,
-    bathrooms: 1,
-    area: 60,
-    type: 'shop',
-    category: 'commercial',
-    availability: 'available',
-    dateAdded: '2024-01-16',
-    image:
-      'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop',
-    description:
-      'Strategic shop location in the heart of Eldoret CBD. High foot traffic and excellent visibility for retail business.',
-    features: [
-      'Street Facing',
-      'High Traffic',
-      'Security',
-      'Parking',
-      'Storage Area',
-      'Display Windows',
-    ],
-  },
-  {
-    id: '10',
-    title: 'Modern Office Suite',
-    location: 'West Indies, Eldoret',
-    price: 35000,
-    bedrooms: 0,
-    bathrooms: 2,
-    area: 80,
-    type: 'office',
-    category: 'commercial',
-    availability: 'available',
-    dateAdded: '2024-01-14',
-    image:
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop',
-    description:
-      'Professional office space with modern amenities. Perfect for small to medium businesses and professional services.',
-    features: [
-      'Air Conditioning',
-      'High-Speed Internet',
-      'Conference Room',
-      'Parking',
-      'Security',
-      'Reception Area',
-    ],
-  },
-  {
-    id: '11',
-    title: 'Large Warehouse',
-    location: 'Industrial Area, Eldoret',
-    price: 80000,
-    bedrooms: 0,
-    bathrooms: 2,
-    area: 500,
-    type: 'warehouse',
-    category: 'commercial',
-    availability: 'available',
-    dateAdded: '2024-01-12',
-    image:
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop',
-    description:
-      'Spacious warehouse facility with loading docks and office space. Ideal for storage, distribution, or light manufacturing.',
-    features: [
-      'Loading Dock',
-      'Office Space',
-      'High Ceiling',
-      '24/7 Security',
-      'Truck Access',
-      'Three Phase Power',
-    ],
-  },
-  {
-    id: '12',
-    title: 'Budget Single Room',
-    location: 'Bondeni, Eldoret',
-    price: 6000,
-    bedrooms: 0,
-    bathrooms: 0,
-    area: 10,
-    type: 'single-room',
-    category: 'residential',
-    availability: 'available',
-    dateAdded: '2024-01-10',
-    image:
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-    description:
-      'Very affordable single room for students and budget-conscious tenants. Basic amenities with shared facilities.',
-    features: [
-      'Security',
-      'Water',
-      'Electricity',
-      'Shared Kitchen',
-      'Shared Bathroom',
-    ],
-  },
-  {
-    id: '13',
-    title: 'Commercial Space',
-    location: 'Uganda Road, Eldoret',
-    price: 60000,
-    bedrooms: 0,
-    bathrooms: 3,
-    area: 120,
-    type: 'commercial',
-    category: 'commercial',
-    availability: 'available',
-    dateAdded: '2024-01-08',
-    image:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop',
-    description:
-      'Multi-purpose commercial space suitable for various businesses. Ground floor location with excellent accessibility.',
-    features: [
-      'Ground Floor',
-      'Multiple Entrances',
-      'Parking',
-      'Security',
-      'Backup Power',
-      'Elevator Access',
-    ],
-  },
-  {
-    id: '14',
-    title: 'Furnished Bedsitter',
-    location: 'Kapsoya, Eldoret',
-    price: 18000,
-    bedrooms: 1,
-    bathrooms: 1,
-    area: 28,
-    type: 'bedsitter',
-    category: 'residential',
-    availability: 'available',
-    dateAdded: '2024-01-06',
-    image:
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop',
-    description:
-      'Fully furnished bedsitter ready for immediate occupation. All utilities included in the rent.',
-    features: [
-      'Fully Furnished',
-      'Private Bathroom',
-      'Kitchenette',
-      'Water Included',
-      'Internet Ready',
-      'Security',
-    ],
+    whatsappNumber: '+254700000000',
   },
 ] as const;
 
@@ -429,40 +103,6 @@ const formatPrice = (price: number): string => {
     currency: 'KES',
     minimumFractionDigits: 0,
   }).format(price);
-};
-
-const validateEmail = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
-
-const validatePhone = (phone: string): boolean => {
-  const phoneRegex = /^(\+254|0)[7-9]\d{8}$/;
-  return phoneRegex.test(phone.replace(/\s/g, ''));
-};
-
-const validateForm = (formData: ContactFormData): ContactFormErrors => {
-  const errors: ContactFormErrors = {};
-
-  if (!formData.name.trim()) {
-    errors.name = 'Name is required';
-  } else if (formData.name.trim().length < 2) {
-    errors.name = 'Name must be at least 2 characters';
-  }
-
-  if (!formData.email.trim()) {
-    errors.email = 'Email is required';
-  } else if (!validateEmail(formData.email)) {
-    errors.email = 'Please enter a valid email address';
-  }
-
-  if (!formData.phone.trim()) {
-    errors.phone = 'Phone number is required';
-  } else if (!validatePhone(formData.phone)) {
-    errors.phone = 'Please enter a valid Kenyan phone number';
-  }
-
-  return errors;
 };
 
 const getPropertyDisplayName = (type: string): string => {
@@ -481,80 +121,46 @@ const getPropertyDisplayName = (type: string): string => {
   return typeMap[type] || type;
 };
 
-// Enhanced Contact Modal Component with better validation and UX
-const ContactModal = component$<{
+const generateWhatsAppLink = (property: Property): string => {
+  const message = encodeURIComponent(
+    `Hi, I'm interested in the ${property.title} located in ${property.location} priced at ${formatPrice(property.price)}/month. Can you provide more details?`
+  );
+  return `https://wa.me/${property.whatsappNumber.replace(/\+/g, '')}?text=${message}`;
+};
+
+// Image Gallery Modal Component
+const ImageGalleryModal = component$<{
   property: Property | null;
   isOpen: boolean;
   onClose: QRL<() => void>;
 }>((props) => {
-  const formData = useStore<ContactFormData>({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    preferredViewingDate: '',
-  });
+  const currentImageIndex = useSignal(0);
 
-  const errors = useStore<ContactFormErrors>({});
-  const isSubmitting = useSignal(false);
-  const submitSuccess = useSignal(false);
-
-  const resetForm = $(() => {
-    Object.assign(formData, {
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
-      preferredViewingDate: '',
-    });
-    Object.keys(errors).forEach(
-      (key) => delete errors[key as keyof ContactFormErrors]
-    );
-    isSubmitting.value = false;
-    submitSuccess.value = false;
-  });
-
-  const handleSubmit = $(async (event: Event) => {
-    event.preventDefault();
-
-    // Clear previous errors
-    Object.keys(errors).forEach(
-      (key) => delete errors[key as keyof ContactFormErrors]
-    );
-
-    // Validate form
-    const validationErrors = validateForm(formData);
-
-    if (Object.keys(validationErrors).length > 0) {
-      Object.assign(errors, validationErrors);
-      return;
-    }
-
-    isSubmitting.value = true;
-
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Success feedback
-      submitSuccess.value = true;
-
-      // Auto-close after success
-      setTimeout(() => {
-        props.onClose();
-        resetForm();
-      }, 2000);
-    } catch (error) {
-      errors.general = 'Failed to send message. Please try again.';
-      console.error('Form submission error:', error);
-    } finally {
-      isSubmitting.value = false;
+  const nextImage = $(() => {
+    if (
+      props.property &&
+      currentImageIndex.value < props.property.images.length - 1
+    ) {
+      currentImageIndex.value++;
     }
   });
 
-  const handleClose = $(() => {
-    props.onClose();
-    resetForm();
+  const previousImage = $(() => {
+    if (currentImageIndex.value > 0) {
+      currentImageIndex.value--;
+    }
+  });
+
+  const goToImage = $((index: number) => {
+    currentImageIndex.value = index;
+  });
+
+  // Reset index when modal opens
+  useTask$(({ track }) => {
+    track(() => props.isOpen);
+    if (props.isOpen) {
+      currentImageIndex.value = 0;
+    }
   });
 
   // Keyboard navigation
@@ -562,17 +168,21 @@ const ContactModal = component$<{
     track(() => props.isOpen);
 
     if (props.isOpen) {
-      const handleEscape = (e: KeyboardEvent) => {
+      const handleKeydown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
-          handleClose();
+          props.onClose();
+        } else if (e.key === 'ArrowLeft') {
+          previousImage();
+        } else if (e.key === 'ArrowRight') {
+          nextImage();
         }
       };
 
-      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('keydown', handleKeydown);
       document.body.style.overflow = 'hidden';
 
       return () => {
-        document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('keydown', handleKeydown);
         document.body.style.overflow = 'unset';
       };
     }
@@ -580,235 +190,134 @@ const ContactModal = component$<{
 
   if (!props.isOpen || !props.property) return null;
 
+  const images = props.property.images;
+
   return (
     <div
-      class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+      class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
       onClick$={(e) => {
         if (e.target === e.currentTarget) {
-          handleClose();
+          props.onClose();
         }
       }}
       role="dialog"
-      aria-labelledby="modal-title"
+      aria-labelledby="gallery-title"
       aria-modal="true"
     >
-      <div class="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-        <div class="p-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 id="modal-title" class="text-xl font-semibold text-gray-900">
-              Contact Agent
-            </h3>
-            <button
-              onClick$={handleClose}
-              class="text-gray-400 hover:text-gray-600 text-2xl font-bold p-2 rounded-full hover:bg-gray-100 transition-colors"
-              aria-label="Close modal"
-              type="button"
-            >
-              ×
-            </button>
-          </div>
+      <div class="relative w-full max-w-6xl">
+        {/* Close Button */}
+        <button
+          onClick$={props.onClose}
+          class="absolute -top-12 right-0 text-white hover:text-gray-300 text-4xl font-bold z-10"
+          aria-label="Close gallery"
+          type="button"
+        >
+          ×
+        </button>
 
-          <div class="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <h4 class="font-medium text-yellow-800">{props.property.title}</h4>
-            <p class="text-sm text-yellow-700">{props.property.location}</p>
-            <p class="text-sm font-semibold text-yellow-800">
-              {formatPrice(props.property.price)}/month
-            </p>
-          </div>
+        {/* Property Title */}
+        <h3
+          id="gallery-title"
+          class="text-white text-xl font-semibold mb-4 text-center"
+        >
+          {props.property.title} - {props.property.location}
+        </h3>
 
-          {submitSuccess.value ? (
-            <div class="text-center py-8">
-              <div class="text-green-600 text-5xl mb-4">✓</div>
-              <h4 class="text-lg font-semibold text-green-800 mb-2">
-                Message Sent Successfully!
-              </h4>
-              <p class="text-green-700">
-                Our agent will contact you shortly regarding your inquiry.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit$={handleSubmit} class="space-y-4" noValidate>
-              {errors.general && (
-                <div class="p-3 bg-red-50 border border-red-200 rounded-md">
-                  <p class="text-sm text-red-600">{errors.general}</p>
-                </div>
-              )}
+        {/* Main Image */}
+        <div class="relative bg-black rounded-lg overflow-hidden">
+          <img
+            src={images[currentImageIndex.value]}
+            alt={`${props.property.title} - Image ${currentImageIndex.value + 1}`}
+            class="w-full h-[60vh] object-contain"
+          />
 
-              <div>
-                <label
-                  for="contact-name"
-                  class="block text-sm font-medium text-gray-700 mb-1"
+          {/* Navigation Arrows */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick$={previousImage}
+                disabled={currentImageIndex.value === 0}
+                class="absolute left-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-3 rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                aria-label="Previous image"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  Full Name *
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onInput$={(e) => {
-                    formData.name = (e.target as HTMLInputElement).value;
-                    if (errors.name) delete errors.name;
-                  }}
-                  class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors ${
-                    errors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                  }`}
-                  placeholder="Enter your full name"
-                  aria-describedby={errors.name ? 'name-error' : undefined}
-                />
-                {errors.name && (
-                  <p id="name-error" class="mt-1 text-sm text-red-600">
-                    {errors.name}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  for="contact-email"
-                  class="block text-sm font-medium text-gray-700 mb-1"
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick$={nextImage}
+                disabled={currentImageIndex.value === images.length - 1}
+                class="absolute right-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-3 rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                aria-label="Next image"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  Email Address *
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onInput$={(e) => {
-                    formData.email = (e.target as HTMLInputElement).value;
-                    if (errors.email) delete errors.email;
-                  }}
-                  class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors ${
-                    errors.email
-                      ? 'border-red-300 bg-red-50'
-                      : 'border-gray-300'
-                  }`}
-                  placeholder="Enter your email address"
-                  aria-describedby={errors.email ? 'email-error' : undefined}
-                />
-                {errors.email && (
-                  <p id="email-error" class="mt-1 text-sm text-red-600">
-                    {errors.email}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  for="contact-phone"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Phone Number *
-                </label>
-                <input
-                  id="contact-phone"
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onInput$={(e) => {
-                    formData.phone = (e.target as HTMLInputElement).value;
-                    if (errors.phone) delete errors.phone;
-                  }}
-                  class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors ${
-                    errors.phone
-                      ? 'border-red-300 bg-red-50'
-                      : 'border-gray-300'
-                  }`}
-                  placeholder="e.g., +254700000000"
-                  aria-describedby={errors.phone ? 'phone-error' : undefined}
-                />
-                {errors.phone && (
-                  <p id="phone-error" class="mt-1 text-sm text-red-600">
-                    {errors.phone}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  for="viewing-date"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  {props.property.category === 'commercial'
-                    ? 'Preferred Meeting Date'
-                    : 'Preferred Viewing Date'}
-                </label>
-                <input
-                  id="viewing-date"
-                  type="date"
-                  value={formData.preferredViewingDate}
-                  onInput$={(e) => {
-                    formData.preferredViewingDate = (
-                      e.target as HTMLInputElement
-                    ).value;
-                  }}
-                  min={new Date().toISOString().split('T')[0]}
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                />
-              </div>
-
-              <div>
-                <label
-                  for="contact-message"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Additional Message
-                </label>
-                <textarea
-                  id="contact-message"
-                  value={formData.message}
-                  onInput$={(e) => {
-                    formData.message = (e.target as HTMLTextAreaElement).value;
-                  }}
-                  rows={4}
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
-                  placeholder={
-                    props.property.category === 'commercial'
-                      ? 'Tell us about your business needs, budget, or any specific requirements...'
-                      : 'Tell us about your specific requirements, budget constraints, or any questions...'
-                  }
-                />
-              </div>
-
-              <div class="flex gap-3 pt-4">
-                <button
-                  type="button"
-                  onClick$={handleClose}
-                  class="flex-1 px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors font-medium"
-                  disabled={isSubmitting.value}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting.value}
-                  class="flex-1 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 disabled:bg-yellow-400 disabled:cursor-not-allowed text-white rounded-md transition-colors font-medium flex items-center justify-center gap-2"
-                >
-                  {isSubmitting.value ? (
-                    <>
-                      <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Sending...
-                    </>
-                  ) : (
-                    'Send Message'
-                  )}
-                </button>
-              </div>
-            </form>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </>
           )}
+
+          {/* Image Counter */}
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black bg-opacity-75 text-white px-4 py-2 rounded-full text-sm">
+            {currentImageIndex.value + 1} / {images.length}
+          </div>
         </div>
+
+        {/* Thumbnail Navigation */}
+        {images.length > 1 && (
+          <div class="flex gap-2 mt-4 overflow-x-auto pb-2">
+            {images.map((image, index) => (
+              <button
+                key={index}
+                onClick$={() => goToImage(index)}
+                class={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                  currentImageIndex.value === index
+                    ? 'border-yellow-500 scale-105'
+                    : 'border-transparent hover:border-gray-400'
+                }`}
+                aria-label={`View image ${index + 1}`}
+              >
+                <img
+                  src={image}
+                  alt={`Thumbnail ${index + 1}`}
+                  class="w-full h-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 });
 
-// Enhanced Property Card with better accessibility and performance
+// Enhanced Property Card with gallery button and WhatsApp
 const PropertyCard = component$<{
   property: Property;
-  onContact: QRL<(property: Property) => void>;
+  onViewGallery: QRL<(property: Property) => void>;
 }>((props) => {
   const imageLoaded = useSignal(false);
+  const whatsappLink = generateWhatsAppLink(props.property);
 
   return (
     <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
@@ -835,6 +344,30 @@ const PropertyCard = component$<{
         <div class="absolute bottom-3 left-3 bg-blue-600 text-white px-2 py-1 rounded-md text-xs font-medium">
           {getPropertyDisplayName(props.property.type)}
         </div>
+
+        {/* View Gallery Button */}
+        {props.property.images.length > 1 && (
+          <button
+            onClick$={() => props.onViewGallery(props.property)}
+            class="absolute bottom-3 right-3 bg-white bg-opacity-90 hover:bg-opacity-100 text-gray-800 px-3 py-1 rounded-md text-xs font-medium flex items-center gap-1 transition-all"
+            aria-label={`View ${props.property.images.length} images`}
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width={2}
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            {props.property.images.length} Photos
+          </button>
+        )}
       </div>
 
       <div class="p-5">
@@ -850,9 +383,9 @@ const PropertyCard = component$<{
               aria-hidden="true"
             >
               <path
-                fill-rule="evenodd" // Corrected property name
+                fill-rule="evenodd"
                 d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                clip-rule="evenodd" // Corrected property name
+                clip-rule="evenodd"
               />
             </svg>
             {props.property.location}
@@ -874,9 +407,9 @@ const PropertyCard = component$<{
                   aria-hidden="true"
                 >
                   <path
-                    stroke-linecapinecap="round"
-                    stroke-linecapinejoin="round"
-                    stroke-widthidth={2}
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width={2}
                     d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"
                   />
                 </svg>
@@ -985,20 +518,25 @@ const PropertyCard = component$<{
           )}
         </div>
 
-        <button
-          onClick$={() => props.onContact(props.property)}
-          disabled={props.property.availability === 'rented'}
-          class={`w-full py-2 px-4 rounded-md transition-colors duration-200 font-medium ${
+        {/* WhatsApp Button */}
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={`w-full py-2 px-4 rounded-md transition-colors duration-200 font-medium flex items-center justify-center gap-2 ${
             props.property.availability === 'rented'
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-yellow-600 hover:bg-yellow-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2'
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none'
+              : 'bg-green-600 hover:bg-green-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
           }`}
-          aria-label={`Contact agent about ${props.property.title}`}
+          aria-label={`Contact via WhatsApp about ${props.property.title}`}
         >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+          </svg>
           {props.property.availability === 'rented'
             ? 'Not Available'
-            : 'Contact Agent'}
-        </button>
+            : 'Chat on WhatsApp'}
+        </a>
       </div>
     </article>
   );
@@ -1066,7 +604,7 @@ const PropertyFilters = component$<{
             onChange$={(e) => {
               props.onFiltersChange({
                 category: (e.target as HTMLSelectElement).value,
-                propertyType: 'all', // Reset property type when category changes
+                propertyType: 'all',
               });
             }}
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
@@ -1200,10 +738,10 @@ const PropertyFilters = component$<{
   );
 });
 
-// Main Page Component with enhanced features
+// Main Page Component
 export default component$(() => {
   const selectedProperty = useSignal<Property | null>(null);
-  const isModalOpen = useSignal(false);
+  const isGalleryOpen = useSignal(false);
 
   const filters = useStore<FilterState>({
     minPrice: PRICE_RANGES.MIN,
@@ -1241,19 +779,24 @@ export default component$(() => {
     });
   });
 
-  const openContactModal = $((property: Property) => {
+  const openGallery = $((property: Property) => {
     selectedProperty.value = property;
-    isModalOpen.value = true;
+    isGalleryOpen.value = true;
   });
 
-  const closeModal = $(() => {
-    isModalOpen.value = false;
+  const closeGallery = $(() => {
+    isGalleryOpen.value = false;
     selectedProperty.value = null;
   });
 
   const updateFilters = $((newFilters: Partial<FilterState>) => {
     Object.assign(filters, newFilters);
   });
+
+  // Generate WhatsApp link for general inquiry
+  const generalWhatsAppLink = `https://wa.me/254700000000?text=${encodeURIComponent(
+    "Hi, I'm looking for a property to rent in Eldoret. Can you help me find something suitable?"
+  )}`;
 
   return (
     <div class="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50">
@@ -1349,7 +892,7 @@ export default component$(() => {
                 <PropertyCard
                   key={property.id}
                   property={property}
-                  onContact={openContactModal}
+                  onViewGallery={openGallery}
                 />
               ))}
             </section>
@@ -1377,7 +920,7 @@ export default component$(() => {
             </div>
           )}
 
-          {/* Call to Action */}
+          {/* Call to Action with WhatsApp */}
           <aside class="text-center mt-16">
             <div class="bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto border border-yellow-200">
               <h3 class="text-2xl font-bold text-gray-900 mb-4">
@@ -1388,22 +931,27 @@ export default component$(() => {
                 the perfect property that matches your needs and budget -
                 whether residential or commercial.
               </p>
-              <button
-                onClick$={() => openContactModal(properties[0])}
-                class="bg-yellow-600 hover:bg-yellow-700 text-white py-3 px-8 rounded-md transition-colors duration-200 font-medium text-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+              <a
+                href={generalWhatsAppLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-8 rounded-md transition-colors duration-200 font-medium text-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
               >
-                Tell Us Your Requirements
-              </button>
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                </svg>
+                Chat with Us on WhatsApp
+              </a>
             </div>
           </aside>
         </div>
       </main>
 
-      {/* Contact Modal */}
-      <ContactModal
+      {/* Image Gallery Modal */}
+      <ImageGalleryModal
         property={selectedProperty.value}
-        isOpen={isModalOpen.value}
-        onClose={closeModal}
+        isOpen={isGalleryOpen.value}
+        onClose={closeGallery}
       />
     </div>
   );
