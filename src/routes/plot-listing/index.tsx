@@ -18,6 +18,7 @@ interface Plot {
   readonly sizeAcres: number;
   readonly sizeHectares: number;
   readonly image: string;
+  readonly images: readonly string[];
   readonly description: string;
   readonly features: readonly string[];
   readonly landUse:
@@ -32,24 +33,7 @@ interface Plot {
   readonly topography: 'flat' | 'gently-sloping' | 'hilly' | 'valley';
   readonly soilType?: string;
   readonly leasePeriod?: string; // For lease plots
-}
-
-interface PlotContactFormData {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-  interestedIn: 'purchase' | 'lease' | 'both' | 'more-info';
-  budget?: string;
-  preferredMeetingDate?: string;
-}
-
-interface PlotContactFormErrors {
-  name?: string;
-  email?: string;
-  phone?: string;
-  message?: string;
-  general?: string;
+  readonly whatsappNumber: string; // <-- ADDED: Individual plot contact
 }
 
 interface PlotFilterState {
@@ -76,26 +60,7 @@ const SIZE_RANGES = {
   STEP: 0.25,
 } as const;
 
-// const LAND_USE_TYPES = [
-//   'all',
-//   'residential',
-//   'commercial',
-//   'agricultural',
-//   'industrial',
-//   'mixed',
-// ] as const;
-
-// const TRANSACTION_TYPES = ['all', 'sale', 'lease', 'both'] as const;
-
-// const TOPOGRAPHY_TYPES = [
-//   'all',
-//   'flat',
-//   'gently-sloping',
-//   'hilly',
-//   'valley',
-// ] as const;
-
-// Enhanced sample plot data
+// Enhanced sample plot data with images array and whatsappNumber
 const plots: readonly Plot[] = [
   {
     id: '1',
@@ -110,8 +75,18 @@ const plots: readonly Plot[] = [
     availability: 'available',
     dateAdded: '2024-01-15',
     topography: 'gently-sloping',
-    image:
-      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop',
+    image: '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.25 AM.jpeg',
+    images: [
+      '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.26 AM (1).jpeg',
+      '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.26 AM (2).jpeg',
+      '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.26 AM (2).jpeg',
+      '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.26 AM.jpeg',
+      '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.27 AM (1).jpeg',
+      '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.27 AM (2).jpeg',
+      '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.27 AM.jpeg',
+      '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.28 AM.jpeg',
+      '/images/land for sale/WhatsApp Image 2025-10-14 at 9.11.53 AM.jpeg',
+    ],
     description:
       'Prime residential plot in the prestigious Elgon View area. Perfect for building your dream home with panoramic views of Mt. Elgon.',
     features: [
@@ -123,261 +98,12 @@ const plots: readonly Plot[] = [
       'Gate',
       'Mature Trees',
     ],
-  },
-  {
-    id: '2',
-    title: 'Commercial Plot - CBD Adjacent',
-    location: 'Uganda Road, Eldoret',
-    totalPrice: 8000000,
-    pricePerAcre: 16000000,
-    sizeAcres: 0.5,
-    sizeHectares: 0.2,
-    landUse: 'commercial',
-    transactionType: 'both',
-    availability: 'available',
-    dateAdded: '2024-01-12',
-    topography: 'flat',
-    leasePeriod: '99 years available',
-    image:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop',
-    description:
-      'Strategic commercial plot on Uganda Road, ideal for retail, office complex, or mixed-use development. High traffic area with excellent visibility.',
-    features: [
-      'Corner Plot',
-      'High Traffic Area',
-      'Three Phase Power',
-      'Sewer Connection',
-      'Wide Road Frontage',
-      'Commercial Zone',
-      'Near Banks & Offices',
-    ],
-  },
-  {
-    id: '3',
-    title: 'Agricultural Land - Kapseret',
-    location: 'Kapseret, Eldoret',
-    pricePerAcre: 800000,
-    totalPrice: 8000000,
-    sizeAcres: 10.0,
-    sizeHectares: 4.0,
-    landUse: 'agricultural',
-    transactionType: 'both',
-    availability: 'available',
-    dateAdded: '2024-01-10',
-    topography: 'flat',
-    soilType: 'Red volcanic soil',
-    leasePeriod: '50-99 years negotiable',
-    image:
-      'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop',
-    description:
-      'Fertile agricultural land perfect for crop farming or dairy farming. Rich volcanic soil with excellent drainage and access to irrigation.',
-    features: [
-      'Fertile Soil',
-      'Borehole',
-      'Irrigation Ready',
-      'Access Road',
-      'Fenced',
-      'Near Market',
-      'Water Rights Included',
-    ],
-  },
-  {
-    id: '4',
-    title: 'Residential Plots - Kipkorgot Estate',
-    location: 'Kipkorgot, Eldoret',
-    pricePerAcre: 1800000,
-    totalPrice: 900000,
-    sizeAcres: 0.5,
-    sizeHectares: 0.2,
-    landUse: 'residential',
-    transactionType: 'sale',
-    availability: 'available',
-    dateAdded: '2024-01-08',
-    topography: 'gently-sloping',
-    image:
-      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop',
-    description:
-      'Affordable residential plots in a planned estate. Perfect for first-time home builders. Located in a growing residential area with good infrastructure.',
-    features: [
-      'Planned Estate',
-      'Access Roads',
-      'Electricity Nearby',
-      'Water Connection',
-      'Security',
-      'Schools Nearby',
-      'Flexible Payment',
-    ],
-  },
-  {
-    id: '5',
-    title: 'Industrial Plot - Eldoret Industrial Area',
-    location: 'Industrial Area, Eldoret',
-    totalPrice: 15000000,
-    pricePerAcre: 7500000,
-    sizeAcres: 2.0,
-    sizeHectares: 0.8,
-    landUse: 'industrial',
-    transactionType: 'lease',
-    availability: 'available',
-    dateAdded: '2024-01-05',
-    topography: 'flat',
-    leasePeriod: '50 years renewable',
-    image:
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop',
-    description:
-      "Prime industrial plot in the heart of Eldoret's industrial zone. Perfect for manufacturing, warehousing, or logistics operations.",
-    features: [
-      'Industrial Zone',
-      'Three Phase Power',
-      'Railway Access',
-      'Truck Route',
-      'Drainage System',
-      'Security',
-      'Near Airport',
-    ],
-  },
-  {
-    id: '6',
-    title: 'Mixed-Use Development Plot',
-    location: 'West Indies, Eldoret',
-    totalPrice: 12000000,
-    pricePerAcre: 8000000,
-    sizeAcres: 1.5,
-    sizeHectares: 0.6,
-    landUse: 'mixed',
-    transactionType: 'both',
-    availability: 'pending',
-    dateAdded: '2024-01-03',
-    topography: 'flat',
-    leasePeriod: '99 years available',
-    image:
-      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&h=300&fit=crop',
-    description:
-      'Prime mixed-use development plot suitable for residential, commercial, or hotel development. Located in the rapidly developing West Indies area.',
-    features: [
-      'Mixed-Use Zone',
-      'High Growth Area',
-      'Good Road Network',
-      'Utilities Available',
-      'Near University',
-      'Investment Potential',
-      'Easy Financing',
-    ],
-  },
-  {
-    id: '7',
-    title: 'Budget Residential Plot',
-    location: 'Huruma, Eldoret',
-    totalPrice: 400000,
-    pricePerAcre: 1600000,
-    sizeAcres: 0.25,
-    sizeHectares: 0.1,
-    landUse: 'residential',
-    transactionType: 'sale',
-    availability: 'available',
-    dateAdded: '2024-01-20',
-    topography: 'gently-sloping',
-    image:
-      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop',
-    description:
-      'Affordable residential plot perfect for building rental units or starter homes. Located in an upcoming residential area with good potential.',
-    features: [
-      'Affordable Price',
-      'Growing Area',
-      'Access Road',
-      'Power Line Nearby',
-      'Water Source',
-      'Quick Sale Process',
-      'Clear Title',
-    ],
-  },
-  {
-    id: '8',
-    title: 'Large Agricultural Farm',
-    location: 'Soy, Eldoret',
-    pricePerAcre: 600000,
-    totalPrice: 30000000,
-    sizeAcres: 50.0,
-    sizeHectares: 20.0,
-    landUse: 'agricultural',
-    transactionType: 'both',
-    availability: 'available',
-    dateAdded: '2024-01-18',
-    topography: 'valley',
-    soilType: 'Black cotton soil',
-    leasePeriod: '99 years available',
-    image:
-      'https://images.unsplash.com/photo-1625246333195-78d9c38ad649?w=400&h=300&fit=crop',
-    description:
-      'Large-scale agricultural farm suitable for commercial farming, dairy farming, or agribusiness. Rich soil with natural irrigation from seasonal streams.',
-    features: [
-      'River Frontage',
-      'Natural Irrigation',
-      'Rich Soil',
-      'Existing Structures',
-      'Access Roads',
-      'Grazing Areas',
-      'Investment Grade',
-    ],
-  },
-  {
-    id: '9',
-    title: 'Premium Residential Estate Plot',
-    location: 'Elgon View, Eldoret',
-    totalPrice: 5000000,
-    pricePerAcre: 3333333,
-    sizeAcres: 1.5,
-    sizeHectares: 0.6,
-    landUse: 'residential',
-    transactionType: 'sale',
-    availability: 'available',
-    dateAdded: '2024-01-16',
-    topography: 'hilly',
-    image:
-      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop',
-    description:
-      'Premium residential plot in an exclusive estate with panoramic views. Perfect for luxury home development with scenic mountain views.',
-    features: [
-      'Panoramic Views',
-      'Exclusive Estate',
-      'Paved Roads',
-      'Underground Power',
-      'Piped Water',
-      'Landscaping',
-      '24/7 Security',
-    ],
-  },
-  {
-    id: '10',
-    title: 'Commercial Hub Plot',
-    location: 'CBD, Eldoret',
-    totalPrice: 20000000,
-    pricePerAcre: 40000000,
-    sizeAcres: 0.5,
-    sizeHectares: 0.2,
-    landUse: 'commercial',
-    transactionType: 'lease',
-    availability: 'available',
-    dateAdded: '2024-01-14',
-    topography: 'flat',
-    leasePeriod: '99 years',
-    image:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop',
-    description:
-      'Prime commercial plot in the heart of Eldoret CBD. Ideal for high-rise office building, shopping complex, or hotel development.',
-    features: [
-      'CBD Location',
-      'High Rise Approved',
-      'Maximum Visibility',
-      'Public Transport',
-      'Banking District',
-      'Parking Available',
-      'High ROI Potential',
-    ],
+    whatsappNumber: '254712345678', // Sample Number
   },
 ] as const;
 
-// Utility functions
+// --- Utility Functions ---
+
 const formatPrice = (price: number): string => {
   return new Intl.NumberFormat('en-KE', {
     style: 'currency',
@@ -393,42 +119,6 @@ const formatSize = (acres: number, hectares: number): string => {
   } else {
     return `${acres} acre (${hectares.toFixed(2)} ha)`;
   }
-};
-
-const validateEmail = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
-
-const validatePhone = (phone: string): boolean => {
-  const phoneRegex = /^(\+254|0)[7-9]\d{8}$/;
-  return phoneRegex.test(phone.replace(/\s/g, ''));
-};
-
-const validatePlotForm = (
-  formData: PlotContactFormData
-): PlotContactFormErrors => {
-  const errors: PlotContactFormErrors = {};
-
-  if (!formData.name.trim()) {
-    errors.name = 'Name is required';
-  } else if (formData.name.trim().length < 2) {
-    errors.name = 'Name must be at least 2 characters';
-  }
-
-  if (!formData.email.trim()) {
-    errors.email = 'Email is required';
-  } else if (!validateEmail(formData.email)) {
-    errors.email = 'Please enter a valid email address';
-  }
-
-  if (!formData.phone.trim()) {
-    errors.phone = 'Phone number is required';
-  } else if (!validatePhone(formData.phone)) {
-    errors.phone = 'Please enter a valid Kenyan phone number';
-  }
-
-  return errors;
 };
 
 const getLandUseDisplayName = (landUse: string): string => {
@@ -451,87 +141,68 @@ const getTransactionTypeDisplayName = (transactionType: string): string => {
   return transactionMap[transactionType] || transactionType;
 };
 
-// Plot Contact Modal Component
-const PlotContactModal = component$<{
+const generateWhatsAppLink = (plot: Plot): string => {
+  const priceDisplay = plot.totalPrice
+    ? formatPrice(plot.totalPrice)
+    : plot.pricePerAcre
+      ? `${formatPrice(plot.pricePerAcre)}/acre`
+      : 'Price on Inquiry';
+
+  const message = encodeURIComponent(
+    `Hello, I'm interested in the plot: "${plot.title}" in ${plot.location}, currently listed for ${priceDisplay}. Can you provide more details? (ID: ${plot.id})`
+  );
+  // Removes non-digit characters to ensure clean wa.me link
+  return `https://wa.me/${plot.whatsappNumber.replace(
+    /\D/g,
+    ''
+  )}?text=${message}`;
+};
+
+// --- Image Gallery Modal Component (Kept) ---
+
+const ImageGalleryModal = component$<{
   plot: Plot | null;
   isOpen: boolean;
   onClose: QRL<() => void>;
 }>((props) => {
-  const formData = useStore<PlotContactFormData>({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    interestedIn: 'more-info',
-    budget: '',
-    preferredMeetingDate: '',
-  });
+  const currentImageIndex = useSignal(0);
 
-  const errors = useStore<PlotContactFormErrors>({});
-  const isSubmitting = useSignal(false);
-  const submitSuccess = useSignal(false);
-
-  const resetForm = $(() => {
-    Object.assign(formData, {
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
-      interestedIn: 'more-info',
-      budget: '',
-      preferredMeetingDate: '',
-    });
-    Object.keys(errors).forEach(
-      (key) => delete errors[key as keyof PlotContactFormErrors]
-    );
-    isSubmitting.value = false;
-    submitSuccess.value = false;
-  });
-
-  const handleSubmit = $(async (event: Event) => {
-    event.preventDefault();
-
-    Object.keys(errors).forEach(
-      (key) => delete errors[key as keyof PlotContactFormErrors]
-    );
-
-    const validationErrors = validatePlotForm(formData);
-
-    if (Object.keys(validationErrors).length > 0) {
-      Object.assign(errors, validationErrors);
-      return;
-    }
-
-    isSubmitting.value = true;
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      submitSuccess.value = true;
-
-      setTimeout(() => {
-        props.onClose();
-        resetForm();
-      }, 2000);
-    } catch (error) {
-      errors.general = 'Failed to send message. Please try again.';
-      console.error('Form submission error:', error);
-    } finally {
-      isSubmitting.value = false;
+  const nextImage = $(() => {
+    if (props.plot && currentImageIndex.value < props.plot.images.length - 1) {
+      currentImageIndex.value++;
     }
   });
 
-  const handleClose = $(() => {
-    props.onClose();
-    resetForm();
+  const previousImage = $(() => {
+    if (currentImageIndex.value > 0) {
+      currentImageIndex.value--;
+    }
   });
 
+  const goToImage = $((index: number) => {
+    currentImageIndex.value = index;
+  });
+
+  // Reset index when modal opens
+  useTask$(({ track }) => {
+    track(() => props.isOpen);
+    if (props.isOpen) {
+      currentImageIndex.value = 0;
+    }
+  });
+
+  // Keyboard navigation and body scroll lock
   useTask$(({ track }) => {
     track(() => props.isOpen);
 
     if (props.isOpen) {
       const handleEscape = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
-          handleClose();
+          props.onClose();
+        } else if (e.key === 'ArrowLeft') {
+          previousImage();
+        } else if (e.key === 'ArrowRight') {
+          nextImage();
         }
       };
 
@@ -547,282 +218,152 @@ const PlotContactModal = component$<{
 
   if (!props.isOpen || !props.plot) return null;
 
+  const images = props.plot.images;
+
   return (
     <div
-      class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+      class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
       onClick$={(e) => {
         if (e.target === e.currentTarget) {
-          handleClose();
+          props.onClose();
         }
       }}
       role="dialog"
-      aria-labelledby="modal-title"
+      aria-labelledby="gallery-title"
       aria-modal="true"
     >
-      <div class="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-        <div class="p-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 id="modal-title" class="text-xl font-semibold text-gray-900">
-              Land Inquiry
-            </h3>
-            <button
-              onClick$={handleClose}
-              class="text-gray-400 hover:text-gray-600 text-2xl font-bold p-2 rounded-full hover:bg-gray-100 transition-colors"
-              aria-label="Close modal"
-              type="button"
-            >
-              ×
-            </button>
-          </div>
+      <div class="relative w-full max-w-6xl">
+        {/* Close Button */}
+        <button
+          onClick$={props.onClose}
+          class="absolute -top-12 right-0 text-white hover:text-gray-300 text-4xl font-bold z-10"
+          aria-label="Close gallery"
+          type="button"
+        >
+          ×
+        </button>
 
-          <div class="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-            <h4 class="font-medium text-green-800">{props.plot.title}</h4>
-            <p class="text-sm text-green-700">{props.plot.location}</p>
-            <div class="text-sm font-semibold text-green-800">
-              {props.plot.totalPrice && formatPrice(props.plot.totalPrice)}
-              {props.plot.pricePerAcre && (
-                <div class="text-xs text-green-600">
-                  {formatPrice(props.plot.pricePerAcre)}/acre
-                </div>
-              )}
-            </div>
-            <p class="text-xs text-green-600">
-              {formatSize(props.plot.sizeAcres, props.plot.sizeHectares)}
-            </p>
-          </div>
+        {/* Property Title */}
+        <h3
+          id="gallery-title"
+          class="text-white text-xl font-semibold mb-4 text-center"
+        >
+          {props.plot.title} - {props.plot.location}
+        </h3>
 
-          {submitSuccess.value ? (
-            <div class="text-center py-8">
-              <div class="text-green-600 text-5xl mb-4">✓</div>
-              <h4 class="text-lg font-semibold text-green-800 mb-2">
-                Inquiry Sent Successfully!
-              </h4>
-              <p class="text-green-700">
-                Our land specialist will contact you shortly to discuss this
-                plot.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit$={handleSubmit} class="space-y-4" noValidate>
-              {errors.general && (
-                <div class="p-3 bg-red-50 border border-red-200 rounded-md">
-                  <p class="text-sm text-red-600">{errors.general}</p>
-                </div>
-              )}
+        {/* Main Image Container */}
+        <div class="relative bg-black rounded-lg overflow-hidden">
+          <img
+            src={images[currentImageIndex.value]}
+            alt={`${props.plot.title} - Image ${currentImageIndex.value + 1}`}
+            class="w-full h-[60vh] object-contain"
+            loading="eager"
+          />
 
-              <div>
-                <label
-                  for="contact-name"
-                  class="block text-sm font-medium text-gray-700 mb-1"
+          {/* Navigation Arrows */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick$={previousImage}
+                disabled={currentImageIndex.value === 0}
+                class="absolute left-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-3 rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                aria-label="Previous image"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  Full Name *
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onInput$={(e) => {
-                    formData.name = (e.target as HTMLInputElement).value;
-                    if (errors.name) delete errors.name;
-                  }}
-                  class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors ${
-                    errors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                  }`}
-                  placeholder="Enter your full name"
-                />
-                {errors.name && (
-                  <p class="mt-1 text-sm text-red-600">{errors.name}</p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  for="contact-email"
-                  class="block text-sm font-medium text-gray-700 mb-1"
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick$={nextImage}
+                disabled={currentImageIndex.value === images.length - 1}
+                class="absolute right-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-3 rounded-full disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                aria-label="Next image"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  Email Address *
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onInput$={(e) => {
-                    formData.email = (e.target as HTMLInputElement).value;
-                    if (errors.email) delete errors.email;
-                  }}
-                  class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors ${
-                    errors.email
-                      ? 'border-red-300 bg-red-50'
-                      : 'border-gray-300'
-                  }`}
-                  placeholder="Enter your email address"
-                />
-                {errors.email && (
-                  <p class="mt-1 text-sm text-red-600">{errors.email}</p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  for="contact-phone"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Phone Number *
-                </label>
-                <input
-                  id="contact-phone"
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onInput$={(e) => {
-                    formData.phone = (e.target as HTMLInputElement).value;
-                    if (errors.phone) delete errors.phone;
-                  }}
-                  class={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors ${
-                    errors.phone
-                      ? 'border-red-300 bg-red-50'
-                      : 'border-gray-300'
-                  }`}
-                  placeholder="e.g., +254700000000"
-                />
-                {errors.phone && (
-                  <p class="mt-1 text-sm text-red-600">{errors.phone}</p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  for="interested-in"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  I am interested in
-                </label>
-                <select
-                  id="interested-in"
-                  value={formData.interestedIn}
-                  onChange$={(e) => {
-                    formData.interestedIn = (e.target as HTMLSelectElement)
-                      .value as any;
-                  }}
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                >
-                  <option value="more-info">Getting more information</option>
-                  <option value="purchase">Purchasing this plot</option>
-                  <option value="lease">Leasing this plot</option>
-                  <option value="both">Both purchase and lease options</option>
-                </select>
-              </div>
-
-              <div>
-                <label
-                  for="budget"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Budget Range (Optional)
-                </label>
-                <input
-                  id="budget"
-                  type="text"
-                  value={formData.budget}
-                  onInput$={(e) => {
-                    formData.budget = (e.target as HTMLInputElement).value;
-                  }}
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="e.g., KES 1M - 5M"
-                />
-              </div>
-
-              <div>
-                <label
-                  for="meeting-date"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Preferred Site Visit Date
-                </label>
-                <input
-                  id="meeting-date"
-                  type="date"
-                  value={formData.preferredMeetingDate}
-                  onInput$={(e) => {
-                    formData.preferredMeetingDate = (
-                      e.target as HTMLInputElement
-                    ).value;
-                  }}
-                  min={new Date().toISOString().split('T')[0]}
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                />
-              </div>
-
-              <div>
-                <label
-                  for="contact-message"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Additional Details
-                </label>
-                <textarea
-                  id="contact-message"
-                  value={formData.message}
-                  onInput$={(e) => {
-                    formData.message = (e.target as HTMLTextAreaElement).value;
-                  }}
-                  rows={4}
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="Tell us about your intended use of the land, timeline, or any specific questions..."
-                />
-              </div>
-
-              <div class="flex gap-3 pt-4">
-                <button
-                  type="button"
-                  onClick$={handleClose}
-                  class="flex-1 px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors font-medium"
-                  disabled={isSubmitting.value}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting.value}
-                  class="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-green-400 disabled:cursor-not-allowed text-white rounded-md transition-colors font-medium flex items-center justify-center gap-2"
-                >
-                  {isSubmitting.value ? (
-                    <>
-                      <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Sending...
-                    </>
-                  ) : (
-                    'Send Inquiry'
-                  )}
-                </button>
-              </div>
-            </form>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </>
           )}
+
+          {/* Image Counter */}
+          <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black bg-opacity-75 text-white px-4 py-2 rounded-full text-sm">
+            {currentImageIndex.value + 1} / {images.length}
+          </div>
         </div>
+
+        {/* Thumbnail Navigation */}
+        {images.length > 1 && (
+          <div class="flex gap-2 mt-4 overflow-x-auto pb-2">
+            {images.map((image, index) => (
+              <button
+                key={index}
+                onClick$={() => goToImage(index)}
+                class={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                  currentImageIndex.value === index
+                    ? 'border-green-500 scale-105'
+                    : 'border-transparent hover:border-gray-400'
+                }`}
+                aria-label={`View image ${index + 1}`}
+              >
+                <img
+                  src={image}
+                  alt={`Thumbnail ${index + 1}`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 });
 
-// Plot Card Component
+// --- Plot Card Component (Modified for WhatsApp CTA) ---
+
 const PlotCard = component$<{
   plot: Plot;
-  onContact: QRL<(plot: Plot) => void>;
+  onViewGallery: QRL<(plot: Plot) => void>;
 }>((props) => {
   const imageLoaded = useSignal(false);
+  const whatsappLink = generateWhatsAppLink(props.plot);
 
   return (
     <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
       <div class="relative">
         <div
-          class={`w-full h-48 bg-gray-200 ${imageLoaded.value ? 'hidden' : 'block animate-pulse'}`}
+          class={`w-full h-48 bg-gray-200 ${
+            imageLoaded.value ? 'hidden' : 'block animate-pulse'
+          }`}
         ></div>
         <img
           src={props.plot.image}
           alt={`${props.plot.title} in ${props.plot.location}`}
-          class={`w-full h-48 object-cover transition-opacity duration-300 ${imageLoaded.value ? 'opacity-100' : 'opacity-0'}`}
+          class={`w-full h-48 object-cover transition-opacity duration-300 ${
+            imageLoaded.value ? 'opacity-100' : 'opacity-0'
+          }`}
           loading="lazy"
           onLoad$={() => (imageLoaded.value = true)}
           onError$={() => (imageLoaded.value = true)}
@@ -849,6 +390,34 @@ const PlotCard = component$<{
         <div class="absolute bottom-3 right-3 bg-purple-600 text-white px-2 py-1 rounded-md text-xs font-medium">
           {getLandUseDisplayName(props.plot.landUse)}
         </div>
+
+        {/* View Gallery Button */}
+        {props.plot.images.length > 1 && (
+          <button
+            onClick$={() => props.onViewGallery(props.plot)}
+            class="absolute top-3 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-90 hover:bg-opacity-100 text-gray-800 px-3 py-1 rounded-md text-xs font-medium flex items-center gap-1 transition-all shadow-md"
+            aria-label={`View ${props.plot.images.length} images`}
+            disabled={
+              props.plot.availability === 'sold' ||
+              props.plot.availability === 'leased'
+            }
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width={2}
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            {props.plot.images.length} Photos
+          </button>
+        )}
       </div>
 
       <div class="p-5">
@@ -936,30 +505,33 @@ const PlotCard = component$<{
           </div>
         )}
 
-        <button
-          onClick$={() => props.onContact(props.plot)}
-          disabled={
+        {/* WhatsApp Button (Replaced Inquire Now button) */}
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={`w-full py-2 px-4 rounded-md transition-colors duration-200 font-medium flex items-center justify-center gap-2 ${
             props.plot.availability === 'sold' ||
             props.plot.availability === 'leased'
-          }
-          class={`w-full py-2 px-4 rounded-md transition-colors duration-200 font-medium ${
-            props.plot.availability === 'sold' ||
-            props.plot.availability === 'leased'
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none'
               : 'bg-green-600 hover:bg-green-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
           }`}
+          aria-label={`Chat via WhatsApp about ${props.plot.title}`}
         >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+          </svg>
           {props.plot.availability === 'sold' ||
           props.plot.availability === 'leased'
             ? 'Not Available'
-            : 'Inquire Now'}
-        </button>
+            : 'Chat on WhatsApp'}
+        </a>
       </div>
     </article>
   );
 });
 
-// Plot Filters Component
+// Plot Filters Component (Original, unchanged)
 const PlotFilters = component$<{
   filters: PlotFilterState;
   onFiltersChange: QRL<(filters: Partial<PlotFilterState>) => void>;
@@ -980,7 +552,9 @@ const PlotFilters = component$<{
       </div>
 
       <div
-        class={`${isExpanded.value ? 'block' : 'hidden'} md:block space-y-4 md:space-y-0 md:grid md:grid-cols-3 lg:grid-cols-6 md:gap-4`}
+        class={`${
+          isExpanded.value ? 'block' : 'hidden'
+        } md:block space-y-4 md:space-y-0 md:grid md:grid-cols-3 lg:grid-cols-6 md:gap-4`}
       >
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -1120,10 +694,17 @@ const PlotFilters = component$<{
   );
 });
 
-// Main Plot Listing Component
+// --- Main Plot Listing Component (Removed Contact Modal Logic) ---
+
 export default component$(() => {
   const selectedPlot = useSignal<Plot | null>(null);
-  const isModalOpen = useSignal(false);
+  const isGalleryOpen = useSignal(false);
+
+  // General WhatsApp number for the CTA
+  const generalWhatsAppNumber = '254700000000';
+  const generalWhatsAppLink = `https://wa.me/${generalWhatsAppNumber}?text=${encodeURIComponent(
+    "Hello, I'm looking for specific land requirements in Eldoret. Can you assist me?"
+  )}`;
 
   const filters = useStore<PlotFilterState>({
     minPrice: PRICE_RANGES.MIN,
@@ -1167,13 +748,15 @@ export default component$(() => {
     });
   });
 
-  const openContactModal = $((plot: Plot) => {
+  // Open the new image gallery modal
+  const openGallery = $((plot: Plot) => {
     selectedPlot.value = plot;
-    isModalOpen.value = true;
+    isGalleryOpen.value = true;
   });
 
-  const closeModal = $(() => {
-    isModalOpen.value = false;
+  // Close the new image gallery modal
+  const closeGallery = $(() => {
+    isGalleryOpen.value = false;
     selectedPlot.value = null;
   });
 
@@ -1248,7 +831,7 @@ export default component$(() => {
                 <PlotCard
                   key={plot.id}
                   plot={plot}
-                  onContact={openContactModal}
+                  onViewGallery={openGallery}
                 />
               ))}
             </section>
@@ -1277,7 +860,7 @@ export default component$(() => {
             </div>
           )}
 
-          {/* Call to Action */}
+          {/* Call to Action with WhatsApp (Replaced form button) */}
           <aside class="text-center mt-16">
             <div class="bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto border border-green-200">
               <h3 class="text-2xl font-bold text-gray-900 mb-4">
@@ -1288,21 +871,27 @@ export default component$(() => {
                 matches your specific needs, budget, and development plans. Get
                 expert guidance on land acquisition.
               </p>
-              <button
-                onClick$={() => openContactModal(plots[0])}
-                class="bg-green-600 hover:bg-green-700 text-white py-3 px-8 rounded-md transition-colors font-medium text-lg"
+              <a
+                href={generalWhatsAppLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-8 rounded-md transition-colors font-medium text-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
               >
-                Speak to a Land Specialist
-              </button>
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                </svg>
+                Chat with a Land Specialist
+              </a>
             </div>
           </aside>
         </div>
       </main>
 
-      <PlotContactModal
+      {/* Image Gallery Modal */}
+      <ImageGalleryModal
         plot={selectedPlot.value}
-        isOpen={isModalOpen.value}
-        onClose={closeModal}
+        isOpen={isGalleryOpen.value}
+        onClose={closeGallery}
       />
     </div>
   );
