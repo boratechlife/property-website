@@ -341,7 +341,7 @@ const PropertyCard = component$<{
             Pending
           </div>
         )}
-        <div class="absolute bottom-3 left-3 bg-blue-600 text-white px-2 py-1 rounded-md text-xs font-medium">
+        <div class="absolute bottom-3 left-3 bg-[#F04A00] text-white px-2 py-1 rounded-md text-xs font-medium">
           {getPropertyDisplayName(props.property.type)}
         </div>
 

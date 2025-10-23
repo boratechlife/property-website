@@ -585,7 +585,7 @@ const RentCollectionInquiry = component$<{
                 <button
                   type="submit"
                   disabled={isSubmitting.value}
-                  class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
+                  class="flex-1 px-6 py-3 bg-[#F04A00] text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
                 >
                   {isSubmitting.value
                     ? 'Sending...'
@@ -1078,7 +1078,7 @@ export default component$(() => {
                       key={item}
                       class="flex items-center text-sm text-slate-600"
                     >
-                      <div class="w-2 h-2 bg-blue-600 rounded-full mr-2 flex-shrink-0"></div>
+                      <div class="w-2 h-2 bg-[#F04A00] rounded-full mr-2 flex-shrink-0"></div>
                       {item}
                     </div>
                   ))}
@@ -1109,7 +1109,7 @@ export default component$(() => {
                   onClick$={() => (activeTab.value = category)}
                   class={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${
                     activeTab.value === category
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-[#F04A00] text-white'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >

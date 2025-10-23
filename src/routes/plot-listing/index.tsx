@@ -8,7 +8,11 @@ import {
 } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
-// Plot-specific TypeScript interfaces
+// Define the main brand color for re-use
+const BRAND_COLOR = '#F04A00'; // Bright Orange / Red-Orange
+const SECONDARY_ACCENT_COLOR = 'green-600'; // Retaining Green for WhatsApp/Success elements
+
+// Plot-specific TypeScript interfaces (unchanged)
 interface Plot {
   readonly id: string;
   readonly title: string;
@@ -32,8 +36,8 @@ interface Plot {
   readonly dateAdded: string;
   readonly topography: 'flat' | 'gently-sloping' | 'hilly' | 'valley';
   readonly soilType?: string;
-  readonly leasePeriod?: string; // For lease plots
-  readonly whatsappNumber: string; // <-- ADDED: Individual plot contact
+  readonly leasePeriod?: string;
+  readonly whatsappNumber: string;
 }
 
 interface PlotFilterState {
@@ -47,7 +51,7 @@ interface PlotFilterState {
   topography: string;
 }
 
-// Constants
+// Constants (unchanged)
 const PRICE_RANGES = {
   MIN: 100000,
   MAX: 50000000,
@@ -60,7 +64,7 @@ const SIZE_RANGES = {
   STEP: 0.25,
 } as const;
 
-// Enhanced sample plot data with images array and whatsappNumber
+// Enhanced sample plot data (unchanged)
 const plots: readonly Plot[] = [
   {
     id: '1',
@@ -102,7 +106,7 @@ const plots: readonly Plot[] = [
   },
 ] as const;
 
-// --- Utility Functions ---
+// --- Utility Functions (unchanged) ---
 
 const formatPrice = (price: number): string => {
   return new Intl.NumberFormat('en-KE', {
@@ -158,7 +162,7 @@ const generateWhatsAppLink = (plot: Plot): string => {
   )}?text=${message}`;
 };
 
-// --- Image Gallery Modal Component (Kept) ---
+// --- Image Gallery Modal Component ---
 
 const ImageGalleryModal = component$<{
   plot: Plot | null;
@@ -191,7 +195,7 @@ const ImageGalleryModal = component$<{
     }
   });
 
-  // Keyboard navigation and body scroll lock
+  // Keyboard navigation and body scroll lock (unchanged as colors are black/white)
   useTask$(({ track }) => {
     track(() => props.isOpen);
 
@@ -233,7 +237,7 @@ const ImageGalleryModal = component$<{
       aria-modal="true"
     >
       <div class="relative w-full max-w-6xl">
-        {/* Close Button */}
+        {/* Close Button (colors are fine) */}
         <button
           onClick$={props.onClose}
           class="absolute -top-12 right-0 text-white hover:text-gray-300 text-4xl font-bold z-10"
@@ -243,7 +247,7 @@ const ImageGalleryModal = component$<{
           ×
         </button>
 
-        {/* Property Title */}
+        {/* Property Title (colors are fine) */}
         <h3
           id="gallery-title"
           class="text-white text-xl font-semibold mb-4 text-center"
@@ -251,7 +255,7 @@ const ImageGalleryModal = component$<{
           {props.plot.title} - {props.plot.location}
         </h3>
 
-        {/* Main Image Container */}
+        {/* Main Image Container (colors are fine) */}
         <div class="relative bg-black rounded-lg overflow-hidden">
           <img
             src={images[currentImageIndex.value]}
@@ -260,7 +264,7 @@ const ImageGalleryModal = component$<{
             loading="eager"
           />
 
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows (colors are fine) */}
           {images.length > 1 && (
             <>
               <button
@@ -306,7 +310,7 @@ const ImageGalleryModal = component$<{
             </>
           )}
 
-          {/* Image Counter */}
+          {/* Image Counter (colors are fine) */}
           <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black bg-opacity-75 text-white px-4 py-2 rounded-full text-sm">
             {currentImageIndex.value + 1} / {images.length}
           </div>
@@ -320,8 +324,9 @@ const ImageGalleryModal = component$<{
                 key={index}
                 onClick$={() => goToImage(index)}
                 class={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                  // CHANGE 1: Thumbnail border color from green to brand orange
                   currentImageIndex.value === index
-                    ? 'border-green-500 scale-105'
+                    ? `border-[${BRAND_COLOR}] scale-105`
                     : 'border-transparent hover:border-gray-400'
                 }`}
                 aria-label={`View image ${index + 1}`}
@@ -341,7 +346,7 @@ const ImageGalleryModal = component$<{
   );
 });
 
-// --- Plot Card Component (Modified for WhatsApp CTA) ---
+// --- Plot Card Component ---
 
 const PlotCard = component$<{
   plot: Plot;
@@ -383,11 +388,14 @@ const PlotCard = component$<{
           </div>
         )}
 
-        <div class="absolute bottom-3 left-3 bg-blue-600 text-white px-2 py-1 rounded-md text-xs font-medium">
+        <div class="absolute bottom-3 left-3 bg-[#F04A00] text-white px-2 py-1 rounded-md text-xs font-medium">
           {getTransactionTypeDisplayName(props.plot.transactionType)}
         </div>
 
-        <div class="absolute bottom-3 right-3 bg-purple-600 text-white px-2 py-1 rounded-md text-xs font-medium">
+        <div
+          // CHANGE 2: Land Use badge color from purple to red
+          class={`absolute bottom-3 right-3 bg-red-600 text-white px-2 py-1 rounded-md text-xs font-medium`}
+        >
           {getLandUseDisplayName(props.plot.landUse)}
         </div>
 
@@ -427,7 +435,8 @@ const PlotCard = component$<{
           </h3>
           <p class="text-gray-600 text-sm flex items-center">
             <svg
-              class="w-4 h-4 mr-1 text-green-600 flex-shrink-0"
+              // CHANGE 3: Location pin color from green to brand orange
+              class={`w-4 h-4 mr-1 text-[${BRAND_COLOR}] flex-shrink-0`}
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -444,7 +453,8 @@ const PlotCard = component$<{
         <div class="flex items-center justify-between text-sm text-gray-600 mb-4 p-3 bg-gray-50 rounded-lg">
           <div class="flex items-center">
             <svg
-              class="w-4 h-4 mr-1 flex-shrink-0 text-green-600"
+              // CHANGE 4: Size icon color from green to brand orange
+              class={`w-4 h-4 mr-1 flex-shrink-0 text-[${BRAND_COLOR}]`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -463,7 +473,8 @@ const PlotCard = component$<{
 
           <div class="flex items-center">
             <svg
-              class="w-4 h-4 mr-1 flex-shrink-0 text-green-600"
+              // CHANGE 5: Topography icon color from green to brand orange
+              class={`w-4 h-4 mr-1 flex-shrink-0 text-[${BRAND_COLOR}]`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -487,7 +498,8 @@ const PlotCard = component$<{
           {props.plot.features.slice(0, 3).map((feature) => (
             <span
               key={feature}
-              class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full"
+              // CHANGE 6: Feature tag colors from green to brand orange/red
+              class={`px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full`}
             >
               {feature}
             </span>
@@ -500,12 +512,15 @@ const PlotCard = component$<{
         </div>
 
         {props.plot.leasePeriod && (
-          <div class="text-xs text-purple-600 mb-3 italic">
+          <div
+            // CHANGE 7: Lease period text color from purple to red
+            class={`text-red-600 mb-3 text-xs italic`}
+          >
             Lease: {props.plot.leasePeriod}
           </div>
         )}
 
-        {/* WhatsApp Button (Replaced Inquire Now button) */}
+        {/* WhatsApp Button (Green is kept for the final CTA) */}
         <a
           href={whatsappLink}
           target="_blank"
@@ -514,7 +529,7 @@ const PlotCard = component$<{
             props.plot.availability === 'sold' ||
             props.plot.availability === 'leased'
               ? 'bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none'
-              : 'bg-green-600 hover:bg-green-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
+              : `bg-${SECONDARY_ACCENT_COLOR} hover:bg-green-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2`
           }`}
           aria-label={`Chat via WhatsApp about ${props.plot.title}`}
         >
@@ -531,7 +546,7 @@ const PlotCard = component$<{
   );
 });
 
-// Plot Filters Component (Original, unchanged)
+// Plot Filters Component
 const PlotFilters = component$<{
   filters: PlotFilterState;
   onFiltersChange: QRL<(filters: Partial<PlotFilterState>) => void>;
@@ -545,7 +560,8 @@ const PlotFilters = component$<{
         <h3 class="text-lg font-semibold text-gray-900">Filter Plots</h3>
         <button
           onClick$={() => (isExpanded.value = !isExpanded.value)}
-          class="md:hidden px-3 py-1 text-sm bg-green-100 text-green-800 rounded-md hover:bg-green-200 transition-colors"
+          // CHANGE 8: Filter button accent color from green to brand orange
+          class={`md:hidden px-3 py-1 text-sm bg-red-100 text-red-800 rounded-md hover:bg-red-200 transition-colors`}
         >
           {isExpanded.value ? 'Hide' : 'Show'} Filters
         </button>
@@ -571,7 +587,8 @@ const PlotFilters = component$<{
                 maxPrice: parseInt((e.target as HTMLInputElement).value),
               });
             }}
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            // CHANGE 9: Range slider track color to brand orange
+            class={`w-full h-2 bg-red-200 rounded-lg appearance-none cursor-pointer`}
           />
         </div>
 
@@ -590,7 +607,8 @@ const PlotFilters = component$<{
                 maxSize: parseFloat((e.target as HTMLInputElement).value),
               });
             }}
-            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            // CHANGE 10: Range slider track color to brand orange
+            class={`w-full h-2 bg-red-200 rounded-lg appearance-none cursor-pointer`}
           />
         </div>
 
@@ -605,7 +623,8 @@ const PlotFilters = component$<{
                 transactionType: (e.target as HTMLSelectElement).value,
               });
             }}
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            // CHANGE 11: Select focus ring from green to brand orange
+            class={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[${BRAND_COLOR}]`}
           >
             <option value="all">All</option>
             <option value="sale">For Sale</option>
@@ -625,7 +644,8 @@ const PlotFilters = component$<{
                 landUse: (e.target as HTMLSelectElement).value,
               });
             }}
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            // CHANGE 12: Select focus ring from green to brand orange
+            class={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[${BRAND_COLOR}]`}
           >
             <option value="all">All Types</option>
             <option value="residential">Residential</option>
@@ -647,7 +667,8 @@ const PlotFilters = component$<{
                 topography: (e.target as HTMLSelectElement).value,
               });
             }}
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            // CHANGE 13: Select focus ring from green to brand orange
+            class={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[${BRAND_COLOR}]`}
           >
             <option value="all">All Types</option>
             <option value="flat">Flat</option>
@@ -668,7 +689,8 @@ const PlotFilters = component$<{
                 location: (e.target as HTMLSelectElement).value,
               });
             }}
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            // CHANGE 14: Select focus ring from green to brand orange
+            class={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[${BRAND_COLOR}]`}
           >
             <option value="">All Locations</option>
             <option value="CBD">CBD</option>
@@ -694,7 +716,7 @@ const PlotFilters = component$<{
   );
 });
 
-// --- Main Plot Listing Component (Removed Contact Modal Logic) ---
+// --- Main Plot Listing Component ---
 
 export default component$(() => {
   const selectedPlot = useSignal<Plot | null>(null);
@@ -765,9 +787,15 @@ export default component$(() => {
   });
 
   return (
-    <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div
+      // CHANGE 15: Main section background gradient from green/blue to red/orange
+      class={`min-h-screen bg-gradient-to-br from-red-50 to-orange-50`}
+    >
       {/* Hero Section */}
-      <header class="relative bg-gradient-to-r from-green-600 to-blue-600 text-white py-20">
+      <header
+        // CHANGE 16: Hero header gradient from green/blue to red/orange
+        class={`relative bg-gradient-to-r from-[${BRAND_COLOR}] to-red-600 text-white py-20`}
+      >
         <div class="absolute inset-0 bg-black opacity-10"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -779,20 +807,38 @@ export default component$(() => {
             perfect investment.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {/* Verified Title Deeds */}
             <div class="flex items-center text-lg">
-              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg
+                // CHANGE 17: Feature icon color
+                class={`w-6 h-6 mr-2 text-white`}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               Verified Title Deeds
             </div>
+            {/* Expert Guidance */}
             <div class="flex items-center text-lg">
-              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg
+                // CHANGE 18: Feature icon color
+                class={`w-6 h-6 mr-2 text-white`}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
                 <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4z" />
               </svg>
               Expert Guidance
             </div>
+            {/* Secure Transactions */}
             <div class="flex items-center text-lg">
-              <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg
+                // CHANGE 19: Feature icon color
+                class={`w-6 h-6 mr-2 text-white`}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
                 <path
                   fill-rule="evenodd"
                   d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2z"
@@ -853,16 +899,20 @@ export default component$(() => {
                   filters.location = '';
                   filters.topography = 'all';
                 }}
-                class="bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-md transition-colors font-medium"
+                // CHANGE 20: Reset button background and hover color (retaining green)
+                class={`bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-md transition-colors font-medium`}
               >
                 Reset Filters
               </button>
             </div>
           )}
 
-          {/* Call to Action with WhatsApp (Replaced form button) */}
+          {/* Call to Action with WhatsApp */}
           <aside class="text-center mt-16">
-            <div class="bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto border border-green-200">
+            <div
+              // CHANGE 21: CTA border color from green to brand orange
+              class={`bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto border border-red-200`}
+            >
               <h3 class="text-2xl font-bold text-gray-900 mb-4">
                 Looking for Specific Land Requirements?
               </h3>
@@ -875,7 +925,9 @@ export default component$(() => {
                 href={generalWhatsAppLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-8 rounded-md transition-colors font-medium text-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                // CHANGE 22: CTA button colors (retaining green for WhatsApp)
+                class={`inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-8 rounded-md transition-colors font-medium text-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2`}
+                aria-label={`Chat with a Land Specialist`}
               >
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -887,7 +939,7 @@ export default component$(() => {
         </div>
       </main>
 
-      {/* Image Gallery Modal */}
+      {/* Image Gallery Modal is unchanged */}
       <ImageGalleryModal
         plot={selectedPlot.value}
         isOpen={isGalleryOpen.value}

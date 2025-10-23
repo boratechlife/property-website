@@ -730,7 +730,7 @@ const PropertyOwnerModal = component$<{
                 <button
                   type="submit"
                   disabled={isSubmitting.value}
-                  class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
+                  class="flex-1 px-6 py-3 bg-[#F04A00] text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
                 >
                   {isSubmitting.value ? 'Sending...' : 'Get Free Analysis'}
                 </button>
@@ -789,7 +789,7 @@ export default component$(() => {
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div class="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div class="inline-flex items-center bg-blue-600/20 text-blue-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <div class="inline-flex items-center bg-[#F04A00]/20 text-blue-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
                 <svg
                   class="w-4 h-4 mr-2"
                   fill="currentColor"
@@ -817,7 +817,7 @@ export default component$(() => {
               <div class="flex flex-col sm:flex-row gap-4 mb-12">
                 <button
                   onClick$={() => openModal()}
-                  class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                  class="px-8 py-4 bg-[#F04A00] hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
                 >
                   Get Free Property Analysis
                 </button>
@@ -1022,7 +1022,7 @@ export default component$(() => {
                   class={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-200 ${
                     pkg.popular
                       ? 'bg-white text-blue-600 hover:bg-slate-50 shadow-lg'
-                      : 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl'
+                      : 'bg-[#F04A00] text-white hover:bg-blue-700 shadow-lg hover:shadow-xl'
                   }`}
                 >
                   Get Started
@@ -1113,7 +1113,7 @@ export default component$(() => {
                     onClick$={() => (activeTab.value = category)}
                     class={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${
                       activeTab.value === category
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-[#F04A00] text-white'
                         : 'bg-white text-slate-600 hover:bg-slate-100'
                     }`}
                   >

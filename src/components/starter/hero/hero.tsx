@@ -17,6 +17,9 @@ export default component$(() => {
   const buildingContainer = useSignal<HTMLElement>();
   const isAnimating = useSignal(false);
 
+  // Define the main brand color for re-use
+  const BRAND_COLOR = '#F04A00'; // Bright Orange / Red-Orange
+
   const initializeAnimations = $(() => {
     if (!window.gsap || !heroRef.value) return;
 
@@ -173,9 +176,6 @@ export default component$(() => {
   });
 
   // Demo Lottie animation data (in real app, load from JSON file)
-  /*
-   * Corrected createPropertyAnimationData function
-   */
   const createPropertyAnimationData = $(() =>
     $({
       v: '5.7.4',
@@ -223,18 +223,20 @@ export default component$(() => {
     <section
       ref={heroRef}
       id="hero"
-      class="relative bg-[url('/images/herosection.webp')] bg-center pt-16 lg:pt-32 min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900 dark:to-indigo-950"
+      // CHANGE 1: Hero background gradient from cool (blue/indigo) to warm (red/orange/slate)
+      class="relative bg-[url('/images/herosection.webp')] bg-center pt-16 lg:pt-32 min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-orange-50 to-red-100 dark:from-gray-900 dark:via-slate-900 dark:to-red-950"
       role="banner"
       aria-labelledby="hero-title"
     >
       {/* Animated Background Elements */}
       <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
-        {/* GSAP Animated Buildings */}
+        {/* GSAP Animated Buildings (Changing blue/indigo to orange/red/yellow) */}
         <div
           ref={buildingContainer}
           class="absolute inset-0 pointer-events-none"
         >
-          <div class="building-element building-1 absolute bottom-0 left-[10%] w-16 h-32 bg-gradient-to-t from-blue-600 to-blue-400 opacity-20 rounded-t-lg">
+          {/* CHANGE 2: Building 1 from blue to orange */}
+          <div class="building-element building-1 absolute bottom-0 left-[10%] w-16 h-32 bg-gradient-to-t from-orange-600 to-orange-400 opacity-20 rounded-t-lg">
             <div class="absolute top-2 left-2 right-2 grid grid-cols-2 gap-1">
               {Array.from({ length: 8 }).map((_, i) => (
                 <div
@@ -246,7 +248,8 @@ export default component$(() => {
             </div>
           </div>
 
-          <div class="building-element building-2 absolute bottom-0 left-[25%] w-20 h-40 bg-gradient-to-t from-indigo-600 to-indigo-400 opacity-25 rounded-t-lg">
+          {/* CHANGE 3: Building 2 from indigo to red */}
+          <div class="building-element building-2 absolute bottom-0 left-[25%] w-20 h-40 bg-gradient-to-t from-red-600 to-red-400 opacity-25 rounded-t-lg">
             <div class="absolute top-2 left-2 right-2 grid grid-cols-3 gap-1">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
@@ -258,7 +261,8 @@ export default component$(() => {
             </div>
           </div>
 
-          <div class="building-element building-3 absolute bottom-0 right-[15%] w-14 h-36 bg-gradient-to-t from-purple-600 to-purple-400 opacity-20 rounded-t-lg">
+          {/* CHANGE 4: Building 3 from purple to amber */}
+          <div class="building-element building-3 absolute bottom-0 right-[15%] w-14 h-36 bg-gradient-to-t from-amber-600 to-amber-400 opacity-20 rounded-t-lg">
             <div class="absolute top-2 left-1 right-1 grid grid-cols-2 gap-1">
               {Array.from({ length: 10 }).map((_, i) => (
                 <div
@@ -270,7 +274,8 @@ export default component$(() => {
             </div>
           </div>
 
-          <div class="building-element building-1 absolute bottom-0 right-[35%] w-12 h-28 bg-gradient-to-t from-teal-600 to-teal-400 opacity-15 rounded-t-lg">
+          {/* CHANGE 5: Building 4 from teal to deep orange (main color) */}
+          <div class="building-element building-1 absolute bottom-0 right-[35%] w-12 h-28 bg-gradient-to-t from-red-700 to-red-500 opacity-15 rounded-t-lg">
             <div class="absolute top-2 left-1 right-1 grid grid-cols-2 gap-1">
               {Array.from({ length: 6 }).map((_, i) => (
                 <div
@@ -288,7 +293,8 @@ export default component$(() => {
           {Array.from({ length: 20 }).map((_, i) => (
             <div
               key={i}
-              class="absolute w-1 h-1 bg-blue-400 rounded-full opacity-30 animate-float"
+              // CHANGE 6: Floating particle color from blue-400 to orange-400
+              class="absolute w-1 h-1 bg-orange-400 rounded-full opacity-30 animate-float"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -306,7 +312,10 @@ export default component$(() => {
           <div class="text-center lg:text-left">
             {/* Animated Subtitle */}
             <div class="hero-element hero-subtitle-line mb-4">
-              <span class="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full text-sm font-semibold tracking-wide uppercase">
+              <span
+                // CHANGE 7: Subtitle tag color from blue to orange
+                class="inline-block px-4 py-2 bg-orange-100 dark:bg-orange-900 text-orange-600 dark:text-orange-400 rounded-full text-sm font-semibold tracking-wide uppercase"
+              >
                 Premium Property Management
               </span>
             </div>
@@ -319,12 +328,15 @@ export default component$(() => {
               <span class="hero-element hero-main-title block text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-2">
                 Management
               </span>
-              <span class="hero-element hero-gradient-title block text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              <span
+                // CHANGE 8: Title gradient from blue/indigo/purple to red/orange/amber
+                class="hero-element hero-gradient-title block text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-red-600 via-orange-600 to-amber-500 bg-clip-text text-transparent"
+              >
                 You Can Rely On
               </span>
             </h1>
 
-            {/* Description */}
+            {/* Description is fine as-is */}
             <p class="hero-element hero-description text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
               Maximize your rental income with our comprehensive property
               management services. Licensed, transparent, and trusted by
@@ -335,7 +347,8 @@ export default component$(() => {
             <div class="hero-element hero-cta flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
               <a
                 href="#contact"
-                class="group bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
+                // CHANGE 9: Primary CTA button gradient to use BRAND_COLOR and red tones
+                class={`group bg-gradient-to-r from-[${BRAND_COLOR}] to-red-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-red-700 hover:to-red-700 transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl`}
               >
                 Get Started Today
                 <svg
@@ -354,7 +367,8 @@ export default component$(() => {
               </a>
               <a
                 href="#services"
-                class="border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-blue-600 hover:text-white transition-all"
+                // CHANGE 10: Secondary CTA border and text color to BRAND_COLOR, hover to solid BRAND_COLOR
+                class={`border-2 border-[${BRAND_COLOR}] text-[${BRAND_COLOR}] dark:text-orange-400 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-[${BRAND_COLOR}] hover:text-white transition-all`}
               >
                 View Our Services
               </a>
@@ -363,13 +377,17 @@ export default component$(() => {
             {/* Trust Indicators with Stagger Animation */}
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
               <div class="hero-element trust-indicator-item text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
-                <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                <div
+                  // CHANGE 11: Trust indicator stat color from blue-600 to orange-600
+                  class="text-2xl font-bold text-orange-600 dark:text-orange-400"
+                >
                   500+
                 </div>
                 <div class="text-sm text-gray-600 dark:text-gray-400">
                   Properties Managed
                 </div>
               </div>
+              {/* Other stats colors remain for contrast (green, purple, orange) */}
               <div class="hero-element trust-indicator-item text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
                 <div class="text-2xl font-bold text-green-600">98%</div>
                 <div class="text-sm text-gray-600 dark:text-gray-400">
@@ -406,7 +424,8 @@ export default component$(() => {
                 {/* Central Building Icon */}
                 <div class="absolute inset-0 flex items-center justify-center">
                   <svg
-                    class="w-32 h-32 text-blue-600 opacity-20 animate-pulse"
+                    // CHANGE 12: Central icon color from blue-600 to orange-600
+                    class="w-32 h-32 text-orange-600 opacity-20 animate-pulse"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -414,8 +433,9 @@ export default component$(() => {
                   </svg>
                 </div>
 
-                {/* Orbiting Elements */}
+                {/* Orbiting Elements - Adjusted colors for cohesion */}
                 <div class="absolute inset-0 animate-spin-slow">
+                  {/* Top: Green (Check) - remains for contrast */}
                   <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 w-8 h-8 bg-green-500 rounded-full opacity-60 flex items-center justify-center">
                     <svg
                       class="w-4 h-4 text-white"
@@ -430,7 +450,8 @@ export default component$(() => {
                     </svg>
                   </div>
 
-                  <div class="absolute right-0 top-1/2 transform translate-x-2 -translate-y-1/2 w-8 h-8 bg-blue-500 rounded-full opacity-60 flex items-center justify-center">
+                  {/* Right: Blue (Pie Chart) - changed to red-500 */}
+                  <div class="absolute right-0 top-1/2 transform translate-x-2 -translate-y-1/2 w-8 h-8 bg-red-500 rounded-full opacity-60 flex items-center justify-center">
                     <svg
                       class="w-4 h-4 text-white"
                       fill="currentColor"
@@ -440,6 +461,7 @@ export default component$(() => {
                     </svg>
                   </div>
 
+                  {/* Bottom: Purple (Boxes) - remains for contrast */}
                   <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2 w-8 h-8 bg-purple-500 rounded-full opacity-60 flex items-center justify-center">
                     <svg
                       class="w-4 h-4 text-white"
@@ -450,6 +472,7 @@ export default component$(() => {
                     </svg>
                   </div>
 
+                  {/* Left: Orange (Arrow) - remains as-is (close to brand color) */}
                   <div class="absolute left-0 top-1/2 transform -translate-x-2 -translate-y-1/2 w-8 h-8 bg-orange-500 rounded-full opacity-60 flex items-center justify-center">
                     <svg
                       class="w-4 h-4 text-white"
@@ -501,7 +524,7 @@ export default component$(() => {
           transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Custom scrollbar for better UX */
+        /* Custom scrollbar - changing thumb color from blue to your brand color */
         ::-webkit-scrollbar {
           width: 8px;
         }
@@ -511,12 +534,12 @@ export default component$(() => {
         }
 
         ::-webkit-scrollbar-thumb {
-          background: #3b82f6;
+          background: ${BRAND_COLOR}; /* CHANGE: Scrollbar color */
           border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-          background: #1d4ed8;
+          background: #d94a00; /* Darker shade of brand color */
         }
       `}</style>
     </section>

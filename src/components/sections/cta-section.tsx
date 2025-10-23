@@ -1,6 +1,9 @@
 import { component$ } from '@builder.io/qwik';
 
 export const CtaSection = component$(() => {
+  // Define the main brand color for re-use
+  // Bright Orange / Red-Orange
+
   return (
     <section class="py-24 bg-neutral-900">
       <div class="max-w-3xl mx-auto px-6 text-center">
@@ -14,9 +17,15 @@ export const CtaSection = component$(() => {
           </h2>
         </div>
 
-        <button class="group relative bg-white text-neutral-900 px-12 py-4 text-base font-medium transition-all duration-300 hover:bg-neutral-100 hover:scale-[1.02] active:scale-[0.98]">
+        <button
+          // Retaining white button style for high contrast on black background
+          class="group relative bg-white text-neutral-900 px-12 py-4 text-base font-medium transition-all duration-300 hover:bg-neutral-100 hover:scale-[1.02] active:scale-[0.98]"
+        >
           <span class="relative z-10">Get Started</span>
-          <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          {/* CHANGE 1: Button hover background gradient from blue/indigo to brand orange/red */}
+          <div
+            class={`absolute inset-0 bg-gradient-to-r from-red-50 to-orange-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+          ></div>
         </button>
       </div>
     </section>

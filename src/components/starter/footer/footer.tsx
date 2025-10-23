@@ -1,6 +1,9 @@
 import { component$ } from '@builder.io/qwik';
 
 export default component$(() => {
+  // Define the main brand color for re-use
+  const BRAND_COLOR = '#F04A00'; // Bright Orange / Red-Orange
+
   return (
     <>
       <style>{`
@@ -17,6 +20,7 @@ export default component$(() => {
           transform: translateX(4px);
         }
         
+        /* CHANGE 1: Footer link underline gradient to orange/red */
         .footer-link::after {
           content: '';
           position: absolute;
@@ -24,7 +28,7 @@ export default component$(() => {
           left: 0;
           width: 0;
           height: 1px;
-          background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+          background: linear-gradient(90deg, ${BRAND_COLOR}, #f97316); /* Orange to Amber */
           transition: width 0.3s ease;
         }
         
@@ -36,17 +40,20 @@ export default component$(() => {
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
+        /* CHANGE 2: Social icon hover shadow to brand orange */
         .social-icon:hover {
           transform: translateY(-2px);
-          filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
+          filter: drop-shadow(0 4px 8px rgba(240, 74, 0, 0.3)); 
         }
         
+        /* CHANGE 3: Logo glow effect to brand orange */
         .logo-glow {
-          filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.2));
+          filter: drop-shadow(0 0 20px rgba(240, 74, 0, 0.2));
         }
         
+        /* CHANGE 4: Section divider gradient to brand orange */
         .section-divider {
-          background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+          background: linear-gradient(90deg, transparent, rgba(240, 74, 0, 0.3), transparent);
           height: 1px;
         }
         
@@ -72,6 +79,7 @@ export default component$(() => {
           background-clip: text;
         }
         
+        /* Status pulse remains green/emerald as it typically signifies 'live' or 'active' status */
         .status-pulse {
           animation: pulse-glow 2s infinite;
         }
@@ -92,7 +100,7 @@ export default component$(() => {
           <div
             class="absolute top-0 left-0 w-full h-full"
             style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0);
-                      background-size: 40px 40px;"
+                     background-size: 40px 40px;"
           ></div>
         </div>
 
@@ -104,22 +112,20 @@ export default component$(() => {
               <div class="lg:col-span-5 fade-in-up">
                 <div class="flex items-center space-x-3 mb-6">
                   <div class="relative">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center logo-glow transform rotate-3">
-                      <svg
-                        class="w-7 h-7 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2.5"
-                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                        />
-                      </svg>
+                    {/* CHANGE 5: Logo icon background gradient to brand orange/red */}
+                    <div
+                      class={`w-12 h-12 bg-gradient-to-br from-[${BRAND_COLOR}] to-red-600 rounded-2xl flex items-center justify-center logo-glow transform rotate-3`}
+                    >
+                      <img
+                        src="/images/nexa-logo.jpg"
+                        alt=""
+                        class="w-[48px] h-[48px]"
+                      />
                     </div>
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl opacity-20 blur"></div>
+                    {/* CHANGE 6: Logo icon background blur to brand orange/red */}
+                    <div
+                      class={`absolute -inset-1 bg-gradient-to-r from-[${BRAND_COLOR}] to-red-600 rounded-2xl opacity-20 blur`}
+                    ></div>
                   </div>
                   <span class="text-2xl font-bold text-gradient">
                     NexaRealty
@@ -157,6 +163,7 @@ export default component$(() => {
                         key={index}
                         href="#"
                         class="w-10 h-10 bg-slate-800/50 hover:bg-slate-700 rounded-xl flex items-center justify-center social-icon border border-slate-700/50"
+                        aria-label={social.label}
                       >
                         <svg
                           class="w-4 h-4 text-slate-300 hover:text-white"
@@ -177,7 +184,10 @@ export default component$(() => {
                 <div class="fade-in-up" style="animation-delay: 0.1s">
                   <h3 class="text-white text-sm font-semibold tracking-wider uppercase mb-6 relative">
                     Services
-                    <div class="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-transparent rounded-full"></div>
+                    {/* CHANGE 7: Header underline gradient to orange/transparent */}
+                    <div
+                      class={`absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-[${BRAND_COLOR}] to-transparent rounded-full`}
+                    ></div>
                   </h3>
                   <ul class="space-y-3">
                     {[
@@ -208,7 +218,8 @@ export default component$(() => {
                 <div class="fade-in-up" style="animation-delay: 0.2s">
                   <h3 class="text-white text-sm font-semibold tracking-wider uppercase mb-6 relative">
                     Company
-                    <div class="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-purple-500 to-transparent rounded-full"></div>
+                    {/* CHANGE 8: Header underline gradient to orange/transparent */}
+                    <div class="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-orange-500 to-transparent rounded-full"></div>
                   </h3>
                   <ul class="space-y-3">
                     {[
@@ -229,7 +240,7 @@ export default component$(() => {
                   </ul>
                 </div>
 
-                {/* Legal */}
+                {/* Legal (Retaining Emerald/Green accent for Legal documents for contrast/professionalism) */}
                 <div class="fade-in-up" style="animation-delay: 0.3s">
                   <h3 class="text-white text-sm font-semibold tracking-wider uppercase mb-6 relative">
                     Legal
@@ -279,6 +290,7 @@ export default component$(() => {
                 <span class="text-slate-500 text-sm font-medium">
                   Licensed Property Management
                 </span>
+                {/* Status pulse remains emerald/green */}
                 <div class="relative">
                   <div class="w-2 h-2 bg-emerald-500 rounded-full status-pulse"></div>
                   <div class="absolute inset-0 w-2 h-2 bg-emerald-400 rounded-full animate-ping opacity-75"></div>

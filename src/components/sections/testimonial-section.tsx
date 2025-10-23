@@ -3,6 +3,7 @@ import { component$, useSignal, useVisibleTask$, $ } from '@builder.io/qwik';
 export const TestimonialSection = component$(() => {
   const currentIndex = useSignal(0);
   const isVisible = useSignal(false);
+  const BRAND_COLOR = '#F04A00'; // Bright Orange / Red-Orange
 
   const testimonials = [
     {
@@ -76,17 +77,25 @@ export const TestimonialSection = component$(() => {
         <div
           class={`text-center mb-16 transition-all duration-1000 ${isVisible.value ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
-          <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-blue-200/50 rounded-full px-6 py-2 mb-6">
-            <div class="w-2 h-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-pulse"></div>
-            <span class="text-sm font-medium text-blue-700">
+          <div
+            // CHANGE 7: Header badge gradient, border, and inner color to brand orange/red
+            class={`inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-red-200/50 rounded-full px-6 py-2 mb-6`}
+          >
+            <div
+              class={`w-2 h-2 bg-gradient-to-r from-[${BRAND_COLOR}] to-red-600 rounded-full animate-pulse`}
+            ></div>
+            <span class={`text-sm font-medium text-red-700`}>
               Client Testimonials
             </span>
           </div>
 
-          <h2 class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-6 leading-tight">
+          <h2 class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-red-900 to-orange-900 bg-clip-text text-transparent mb-6 leading-tight">
             Real Stories from
             <br />
-            <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span
+              // CHANGE 8: Title emphasis gradient from blue/indigo to brand orange/red
+              class={`bg-gradient-to-r from-[${BRAND_COLOR}] to-red-600 bg-clip-text text-transparent`}
+            >
               Satisfied Clients
             </span>
           </h2>

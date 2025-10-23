@@ -1,21 +1,34 @@
 import { component$ } from '@builder.io/qwik';
 
 export default component$(() => {
+  // Define the main brand color for re-use
+  const BRAND_COLOR = '#F04A00'; // Bright Orange / Red-Orange
+
   return (
     <section
       id="services"
-      class="relative py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-950"
+      // CHANGE 1: Main Section Background Gradient from cool (blue) to warm (red/orange)
+      class="relative py-24 bg-gradient-to-br from-slate-50 via-white to-red-50 dark:from-gray-900 dark:via-gray-900 dark:to-red-950"
     >
       {/* Background decorative elements */}
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-20 left-10 w-32 h-32 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl opacity-40"></div>
-        <div class="absolute bottom-20 right-10 w-40 h-40 bg-indigo-100 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-40"></div>
+        {/* CHANGE 2: Decorative circle 1 color */}
+        <div
+          class={`absolute top-20 left-10 w-32 h-32 bg-orange-100 dark:bg-orange-900/20 rounded-full blur-3xl opacity-40`}
+        ></div>
+        {/* CHANGE 3: Decorative circle 2 color */}
+        <div
+          class={`absolute bottom-20 right-10 w-40 h-40 bg-red-100 dark:bg-red-900/20 rounded-full blur-3xl opacity-40`}
+        ></div>
       </div>
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Enhanced Header Section */}
         <div class="text-center mb-20">
-          <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-sm font-medium mb-6">
+          <div
+            // CHANGE 4: Header Tag color to brand-aligned orange
+            class={`inline-flex items-center px-4 py-2 rounded-full bg-orange-100 dark:bg-orange-900/30 text-red-800 dark:text-orange-200 text-sm font-medium mb-6`}
+          >
             <svg
               class="w-4 h-4 mr-2"
               fill="none"
@@ -33,7 +46,10 @@ export default component$(() => {
           </div>
           <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             <span class="block">Comprehensive Property</span>
-            <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span
+              // CHANGE 5: Header Gradient color to brand-aligned red/orange
+              class="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent"
+            >
               Management Solutions
             </span>
           </h2>
@@ -46,7 +62,7 @@ export default component$(() => {
 
         {/* Enhanced Services Grid */}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          {/* Service Card 1 - Financial Management */}
+          {/* Service Card 1 - Financial Management (Emerald/Green Theme - remains) */}
           <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-2">
             <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-50 to-blue-50 dark:from-emerald-900/10 dark:to-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="relative">
@@ -137,11 +153,13 @@ export default component$(() => {
             </div>
           </div>
 
-          {/* Service Card 2 - Maintenance */}
+          {/* Service Card 2 - Maintenance (Amber/Yellow Theme) */}
           <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-2">
-            <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            {/* CHANGE 6: Background hover gradient to amber/yellow */}
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-900/10 dark:to-yellow-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="relative">
-              <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              {/* CHANGE 7: Icon background gradient to amber/yellow */}
+              <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <svg
                   class="w-8 h-8 text-white"
                   fill="none"
@@ -163,7 +181,10 @@ export default component$(() => {
                 </svg>
               </div>
 
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <h3
+                // CHANGE 8: Hover text color to amber/yellow
+                class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors"
+              >
                 Maintenance & Repairs Coordination
               </h3>
 
@@ -175,9 +196,10 @@ export default component$(() => {
 
               <div class="space-y-3">
                 <div class="flex items-center space-x-3">
-                  <div class="w-5 h-5 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  {/* CHANGE 9: List item icon background and color to amber/yellow */}
+                  <div class="w-5 h-5 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center flex-shrink-0">
                     <svg
-                      class="w-3 h-3 text-blue-600 dark:text-blue-400"
+                      class="w-3 h-3 text-amber-600 dark:text-amber-400"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -194,9 +216,10 @@ export default component$(() => {
                 </div>
 
                 <div class="flex items-center space-x-3">
-                  <div class="w-5 h-5 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  {/* CHANGE 10: List item icon background and color to amber/yellow */}
+                  <div class="w-5 h-5 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center flex-shrink-0">
                     <svg
-                      class="w-3 h-3 text-blue-600 dark:text-blue-400"
+                      class="w-3 h-3 text-amber-600 dark:text-amber-400"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -213,9 +236,10 @@ export default component$(() => {
                 </div>
 
                 <div class="flex items-center space-x-3">
-                  <div class="w-5 h-5 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  {/* CHANGE 11: List item icon background and color to amber/yellow */}
+                  <div class="w-5 h-5 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center flex-shrink-0">
                     <svg
-                      class="w-3 h-3 text-blue-600 dark:text-blue-400"
+                      class="w-3 h-3 text-amber-600 dark:text-amber-400"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -234,11 +258,13 @@ export default component$(() => {
             </div>
           </div>
 
-          {/* Service Card 3 - Tenant Management */}
+          {/* Service Card 3 - Tenant Management (Violet/Indigo Theme) */}
           <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-2">
-            <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/10 dark:to-pink-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            {/* CHANGE 12: Background hover gradient to violet/indigo */}
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-900/10 dark:to-indigo-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="relative">
-              <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              {/* CHANGE 13: Icon background gradient to violet/indigo */}
+              <div class="w-16 h-16 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <svg
                   class="w-8 h-8 text-white"
                   fill="none"
@@ -254,7 +280,10 @@ export default component$(() => {
                 </svg>
               </div>
 
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+              <h3
+                // CHANGE 14: Hover text color to violet/indigo
+                class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors"
+              >
                 Tenant Screening & Relations
               </h3>
 
@@ -266,9 +295,10 @@ export default component$(() => {
 
               <div class="space-y-3">
                 <div class="flex items-center space-x-3">
-                  <div class="w-5 h-5 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  {/* CHANGE 15: List item icon background and color to violet/indigo */}
+                  <div class="w-5 h-5 bg-violet-100 dark:bg-violet-900/30 rounded-full flex items-center justify-center flex-shrink-0">
                     <svg
-                      class="w-3 h-3 text-purple-600 dark:text-purple-400"
+                      class="w-3 h-3 text-violet-600 dark:text-violet-400"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -285,9 +315,10 @@ export default component$(() => {
                 </div>
 
                 <div class="flex items-center space-x-3">
-                  <div class="w-5 h-5 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  {/* CHANGE 16: List item icon background and color to violet/indigo */}
+                  <div class="w-5 h-5 bg-violet-100 dark:bg-violet-900/30 rounded-full flex items-center justify-center flex-shrink-0">
                     <svg
-                      class="w-3 h-3 text-purple-600 dark:text-purple-400"
+                      class="w-3 h-3 text-violet-600 dark:text-violet-400"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -304,9 +335,10 @@ export default component$(() => {
                 </div>
 
                 <div class="flex items-center space-x-3">
-                  <div class="w-5 h-5 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                  {/* CHANGE 17: List item icon background and color to violet/indigo */}
+                  <div class="w-5 h-5 bg-violet-100 dark:bg-violet-900/30 rounded-full flex items-center justify-center flex-shrink-0">
                     <svg
-                      class="w-3 h-3 text-purple-600 dark:text-purple-400"
+                      class="w-3 h-3 text-violet-600 dark:text-violet-400"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -325,7 +357,7 @@ export default component$(() => {
             </div>
           </div>
 
-          {/* Service Card 4 - Reporting */}
+          {/* Service Card 4 - Reporting (Orange/Red Theme - remains) */}
           <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-2">
             <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/10 dark:to-red-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="relative">
@@ -416,7 +448,7 @@ export default component$(() => {
             </div>
           </div>
 
-          {/* Service Card 5 - Marketing */}
+          {/* Service Card 5 - Marketing (Teal/Cyan Theme - remains) */}
           <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-2">
             <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/10 dark:to-cyan-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="relative">
@@ -506,7 +538,7 @@ export default component$(() => {
             </div>
           </div>
 
-          {/* Service Card 6 - Legal Compliance */}
+          {/* Service Card 6 - Legal Compliance (Violet/Purple Theme - remains) */}
           <div class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:-translate-y-2">
             <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/10 dark:to-purple-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="relative">
@@ -599,18 +631,24 @@ export default component$(() => {
 
         {/* Enhanced CTA Section */}
         <div class="mt-20 text-center">
-          <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-12 shadow-2xl">
+          <div
+            // CHANGE 18: CTA background gradient to brand-aligned red/orange
+            class={`bg-gradient-to-r from-[${BRAND_COLOR}] to-red-700 rounded-3xl p-12 shadow-2xl`}
+          >
             <div class="max-w-3xl mx-auto">
               <h3 class="text-3xl lg:text-4xl font-bold text-white mb-6">
                 Ready to Maximize Your Property Investment?
               </h3>
-              <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+              <p class="text-xl text-red-100 mb-8 leading-relaxed">
                 Let our experienced team handle the complexities while you enjoy
                 the returns. Get started with a free property analysis and
                 consultation.
               </p>
               <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="inline-flex items-center px-8 py-4 bg-white text-blue-700 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <button
+                  // CHANGE 19: Primary CTA text color and hover text color to brand-aligned red/orange
+                  class={`inline-flex items-center px-8 py-4 bg-white text-[${BRAND_COLOR}] rounded-xl font-semibold hover:bg-red-50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
+                >
                   <svg
                     class="w-5 h-5 mr-2"
                     fill="none"
@@ -626,7 +664,10 @@ export default component$(() => {
                   </svg>
                   Get Free Consultation
                 </button>
-                <button class="inline-flex items-center px-8 py-4 bg-transparent text-white border-2 border-white rounded-xl font-semibold hover:bg-white hover:text-blue-700 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                <button
+                  // CHANGE 20: Secondary CTA hover text color to brand-aligned red/orange
+                  class={`inline-flex items-center px-8 py-4 bg-transparent text-white border-2 border-white rounded-xl font-semibold hover:bg-white hover:text-[${BRAND_COLOR}] transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
+                >
                   <svg
                     class="w-5 h-5 mr-2"
                     fill="none"
@@ -650,13 +691,17 @@ export default component$(() => {
         {/* Trust Indicators */}
         <div class="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           <div class="group">
-            <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2 group-hover:scale-110 transition-transform duration-300">
+            <div
+              // CHANGE 21: Stat color from blue-600 to brand-aligned orange
+              class={`text-3xl font-bold text-[${BRAND_COLOR}] dark:text-orange-400 mb-2 group-hover:scale-110 transition-transform duration-300`}
+            >
               500+
             </div>
             <div class="text-gray-600 dark:text-gray-400 font-medium">
               Properties Managed
             </div>
           </div>
+          {/* Remaining stats keep contrasting colors for visual appeal */}
           <div class="group">
             <div class="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2 group-hover:scale-110 transition-transform duration-300">
               98%

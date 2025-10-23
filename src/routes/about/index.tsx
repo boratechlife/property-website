@@ -7,7 +7,6 @@ import { ServicesSection } from '~/components/sections/services-section';
 import { WhyChooseUsSection } from '~/components/sections/why-choose-us-section';
 import { TeamSection } from '~/components/sections/team-section';
 import { TestimonialSection } from '~/components/sections/testimonial-section';
-import { CtaSection } from '~/components/sections/cta-section';
 
 export default component$(() => {
   return (
@@ -20,7 +19,7 @@ export default component$(() => {
         <WhyChooseUsSection />
         <TeamSection />
         <TestimonialSection />
-        <CtaSection />
+        {/* <CtaSection /> */}
       </main>
     </div>
   );
