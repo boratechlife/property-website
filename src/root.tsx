@@ -18,6 +18,21 @@ export default component$(() => {
     <QwikCityProvider>
       <head>
         <meta charset="utf-8" />
+
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-R4VB6RHL11"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-R4VB6RHL11');
+          `}
+        />
         {!isDev && (
           <link
             rel="manifest"
