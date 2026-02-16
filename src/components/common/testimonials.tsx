@@ -1,5 +1,8 @@
 import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 
+// Define the main brand color for re-use
+const BRAND_COLOR = '#F04A00'; // Bright Orange / Red-Orange
+
 const testimonials = [
   {
     quote:
@@ -133,7 +136,8 @@ export default component$(() => {
                   {/* Quote */}
                   <div class="mb-8">
                     <svg
-                      class="w-10 h-10 mx-auto mb-6 text-blue-500 dark:text-blue-400 opacity-50"
+                      // CHANGE 1: Quote icon color to brand-aligned orange
+                      class={`w-10 h-10 mx-auto mb-6 text-orange-500 dark:text-orange-400 opacity-50`}
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
@@ -144,7 +148,7 @@ export default component$(() => {
                     </blockquote>
                   </div>
 
-                  {/* Rating */}
+                  {/* Rating (Amber is a good complementary color for stars) */}
                   <div class="flex justify-center text-amber-400 mb-6 gap-1">
                     {Array.from({ length: testimonial.rating }, (_, i) => (
                       <svg
@@ -161,7 +165,8 @@ export default component$(() => {
                   {/* Author */}
                   <div class="flex items-center justify-center">
                     <img
-                      class="w-14 h-14 rounded-full object-cover mr-4 ring-4 ring-blue-100 dark:ring-blue-900"
+                      // CHANGE 2: Avatar ring color to brand-aligned orange
+                      class={`w-14 h-14 rounded-full object-cover mr-4 ring-4 ring-orange-100 dark:ring-red-900`}
                       src={testimonial.avatar}
                       alt={testimonial.name}
                       loading="lazy"
@@ -183,11 +188,13 @@ export default component$(() => {
           {/* Navigation Arrows */}
           <button
             onClick$={prevSlide}
-            class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
+            // CHANGE 3: Arrow focus ring, hover text, and hover ring to brand orange
+            class={`absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group hover:scale-110 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50`}
             aria-label="Previous testimonial"
           >
             <svg
-              class="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+              // CHANGE 4: Arrow hover color to brand orange
+              class={`w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -203,11 +210,13 @@ export default component$(() => {
 
           <button
             onClick$={nextSlide}
-            class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
+            // CHANGE 5: Arrow focus ring, hover text, and hover ring to brand orange
+            class={`absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group hover:scale-110 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50`}
             aria-label="Next testimonial"
           >
             <svg
-              class="w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+              // CHANGE 6: Arrow hover color to brand orange
+              class={`w-5 h-5 text-gray-600 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -228,9 +237,10 @@ export default component$(() => {
             <button
               key={index}
               onClick$={() => goToSlide(index)}
-              class={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 ${
+              // CHANGE 7: Active dot color and focus ring to brand color
+              class={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50 ${
                 index === currentSlide.value
-                  ? 'bg-blue-600 dark:bg-blue-400 scale-125'
+                  ? `bg-[${BRAND_COLOR}] dark:bg-orange-400 scale-125`
                   : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
@@ -242,7 +252,8 @@ export default component$(() => {
         <div class="mt-4 max-w-xs mx-auto">
           <div class="h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
             <div
-              class="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-300 ease-out"
+              // CHANGE 8: Progress bar gradient to brand orange/red
+              class={`h-full bg-gradient-to-r from-[${BRAND_COLOR}] to-red-600 transition-all duration-300 ease-out`}
               style={`width: ${((currentSlide.value + 1) / testimonials.length) * 100}%`}
             />
           </div>

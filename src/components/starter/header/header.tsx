@@ -1,4 +1,4 @@
-import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
+import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 
 export default component$(() => {
   const isMobileMenuOpen = useSignal(false);
@@ -15,12 +15,12 @@ export default component$(() => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", closeMobileMenuOnResize);
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', closeMobileMenuOnResize);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", closeMobileMenuOnResize);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', closeMobileMenuOnResize);
     };
   });
 
@@ -38,33 +38,26 @@ export default component$(() => {
         id="navbar"
         class={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled.value
-            ? "bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg"
-            : "bg-transparent"
+            ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg'
+            : 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md '
         }`}
       >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between items-center py-4">
             {/* Logo */}
-            <div class="flex items-center space-x-2 z-10">
-              <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                <svg
-                  class="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                  />
-                </svg>
+            <a href="/" class="flex items-center space-x-2 z-10">
+              <div class="w-14 h-14  rounded-lg flex items-center justify-center">
+                <img
+                  src="/images/nexa-logo.jpg"
+                  class="h-full w-full"
+                  height={40}
+                  width={40}
+                />
               </div>
               <span class="text-xl font-bold text-gray-900 dark:text-white">
                 NexaRealty
               </span>
-            </div>
+            </a>
 
             {/* Desktop Navigation */}
             <div class="hidden md:flex items-center space-x-8">
@@ -112,7 +105,7 @@ export default component$(() => {
               </a>
               <a
                 href="#contact"
-                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
+                class="bg-[#F04A00] text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
               >
                 Get Started
               </a>
@@ -128,17 +121,17 @@ export default component$(() => {
               <div class="w-6 h-6 relative">
                 <span
                   class={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${
-                    isMobileMenuOpen.value ? "rotate-45 top-2.5" : "top-1"
+                    isMobileMenuOpen.value ? 'rotate-45 top-2.5' : 'top-1'
                   }`}
                 />
                 <span
                   class={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out top-2.5 ${
-                    isMobileMenuOpen.value ? "opacity-0" : "opacity-100"
+                    isMobileMenuOpen.value ? 'opacity-0' : 'opacity-100'
                   }`}
                 />
                 <span
                   class={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${
-                    isMobileMenuOpen.value ? "-rotate-45 top-2.5" : "top-4"
+                    isMobileMenuOpen.value ? '-rotate-45 top-2.5' : 'top-4'
                   }`}
                 />
               </div>
@@ -157,14 +150,14 @@ export default component$(() => {
       {/* Mobile Menu */}
       <div
         class={`fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white dark:bg-gray-900 shadow-2xl z-50 md:hidden transform transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen.value ? "translate-x-0" : "translate-x-full"
+          isMobileMenuOpen.value ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div class="flex flex-col h-full">
           {/* Mobile Menu Header */}
           <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
             <div class="flex items-center space-x-2">
-              <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <div class="w-8 h-8 bg-[#F04A00] rounded-lg flex items-center justify-center">
                 <svg
                   class="w-5 h-5 text-white"
                   fill="none"
@@ -264,7 +257,7 @@ export default component$(() => {
             <a
               href="#contact"
               onClick$={closeMobileMenu}
-              class="block w-full text-center bg-blue-600 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-lg text-lg"
+              class="block w-full text-center bg-[#F04A00] text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-lg text-lg"
             >
               Get Started
             </a>

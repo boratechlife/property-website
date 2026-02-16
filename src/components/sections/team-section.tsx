@@ -13,20 +13,23 @@ export const TeamSection = component$(() => {
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Team Member 1 */}
+          {/* Team Member 1 - Primary Brand Color (Red/Orange) */}
           <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
             <div class="p-8 text-center">
               <div class="mb-6">
                 <img
                   src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format"
                   alt="Michael Rodriguez"
-                  class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-gray-100 group-hover:border-blue-200 transition-colors duration-300"
+                  class={`w-24 h-24 rounded-full mx-auto object-cover border-4 border-gray-100 group-hover:border-red-200 transition-colors duration-300`}
                 />
               </div>
               <h3 class="text-xl font-semibold text-gray-900 mb-1">
                 Michael Rodriguez
               </h3>
-              <p class="text-blue-600 font-medium mb-3">
+              <p
+                // CHANGE 1: Role text color to brand red-600
+                class="text-red-600 font-medium mb-3"
+              >
                 Chief Executive Officer
               </p>
               <p class="text-gray-600 text-sm mb-6 leading-relaxed">
@@ -36,7 +39,8 @@ export const TeamSection = component$(() => {
               <div class="flex justify-center space-x-4">
                 <a
                   href="#"
-                  class="text-gray-400 hover:text-blue-600 transition-colors duration-200"
+                  // CHANGE 2: Social icon hover color to brand red-600
+                  class="text-gray-400 hover:text-red-600 transition-colors duration-200"
                   aria-label="LinkedIn profile"
                 >
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -49,7 +53,8 @@ export const TeamSection = component$(() => {
                 </a>
                 <a
                   href="#"
-                  class="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                  // CHANGE 3: Social icon hover color to brand orange-500
+                  class="text-gray-400 hover:text-orange-500 transition-colors duration-200"
                   aria-label="Twitter profile"
                 >
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -60,7 +65,7 @@ export const TeamSection = component$(() => {
             </div>
           </div>
 
-          {/* Team Member 2 */}
+          {/* Team Member 2 - Secondary Brand Color (Green) */}
           <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
             <div class="p-8 text-center">
               <div class="mb-6">
@@ -83,7 +88,8 @@ export const TeamSection = component$(() => {
               <div class="flex justify-center space-x-4">
                 <a
                   href="#"
-                  class="text-gray-400 hover:text-blue-600 transition-colors duration-200"
+                  // CHANGE 4: Social icon hover color to brand red-600
+                  class="text-gray-400 hover:text-red-600 transition-colors duration-200"
                   aria-label="LinkedIn profile"
                 >
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -96,7 +102,8 @@ export const TeamSection = component$(() => {
                 </a>
                 <a
                   href="#"
-                  class="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                  // CHANGE 5: Social icon hover color to brand orange-500
+                  class="text-gray-400 hover:text-orange-500 transition-colors duration-200"
                   aria-label="Twitter profile"
                 >
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -107,7 +114,7 @@ export const TeamSection = component$(() => {
             </div>
           </div>
 
-          {/* Team Member 3 */}
+          {/* Team Member 3 - Tertiary Brand Color (Purple) */}
           <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
             <div class="p-8 text-center">
               <div class="mb-6">
@@ -130,7 +137,8 @@ export const TeamSection = component$(() => {
               <div class="flex justify-center space-x-4">
                 <a
                   href="#"
-                  class="text-gray-400 hover:text-blue-600 transition-colors duration-200"
+                  // CHANGE 6: Social icon hover color to brand red-600
+                  class="text-gray-400 hover:text-red-600 transition-colors duration-200"
                   aria-label="LinkedIn profile"
                 >
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -143,7 +151,8 @@ export const TeamSection = component$(() => {
                 </a>
                 <a
                   href="#"
-                  class="text-gray-400 hover:text-blue-500 transition-colors duration-200"
+                  // CHANGE 7: Social icon hover color to brand orange-500
+                  class="text-gray-400 hover:text-orange-500 transition-colors duration-200"
                   aria-label="Twitter profile"
                 >
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">

@@ -5,8 +5,8 @@ import {
   useStore,
   useTask$,
   type QRL,
-} from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+} from '@builder.io/qwik';
+import type { DocumentHead } from '@builder.io/qwik-city';
 
 // Property Management specific interfaces
 interface PropertyManagementService {
@@ -15,14 +15,14 @@ interface PropertyManagementService {
   readonly description: string;
   readonly features: readonly string[];
   readonly icon: string;
-  readonly category: "core" | "premium" | "specialty";
+  readonly category: 'core' | 'premium' | 'specialty';
 }
 
 interface ManagementPackage {
   readonly id: string;
   readonly name: string;
   readonly price: number;
-  readonly priceUnit: "property" | "percentage";
+  readonly priceUnit: 'property' | 'percentage';
   readonly description: string;
   readonly features: readonly string[];
   readonly popular?: boolean;
@@ -67,250 +67,250 @@ interface FAQ {
   readonly id: string;
   readonly question: string;
   readonly answer: string;
-  readonly category: "general" | "pricing" | "maintenance" | "legal";
+  readonly category: 'general' | 'pricing' | 'maintenance' | 'legal';
 }
 
 // Service data
 const managementServices: readonly PropertyManagementService[] = [
   {
-    id: "tenant-screening",
-    title: "Professional Tenant Screening",
+    id: 'tenant-screening',
+    title: 'Professional Tenant Screening',
     description:
-      "Comprehensive background checks, credit verification, employment verification, and reference checks to ensure quality tenants for your property.",
+      'Comprehensive background checks, credit verification, employment verification, and reference checks to ensure quality tenants for your property.',
     features: [
-      "Credit Score Analysis",
-      "Employment Verification",
-      "Previous Landlord References",
-      "Criminal Background Check",
-      "Income Verification (3x rent rule)",
-      "Rental History Review",
+      'Credit Score Analysis',
+      'Employment Verification',
+      'Previous Landlord References',
+      'Criminal Background Check',
+      'Income Verification (3x rent rule)',
+      'Rental History Review',
     ],
-    icon: "👥",
-    category: "core",
+    icon: '👥',
+    category: 'core',
   },
   {
-    id: "rent-collection",
-    title: "Automated Rent Collection",
+    id: 'rent-collection',
+    title: 'Automated Rent Collection',
     description:
-      "Streamlined rent collection with multiple payment options, automatic reminders, and late fee management to ensure consistent cash flow.",
+      'Streamlined rent collection with multiple payment options, automatic reminders, and late fee management to ensure consistent cash flow.',
     features: [
-      "Online Payment Portal",
-      "Mobile Money Integration",
-      "Automated Reminders",
-      "Late Fee Processing",
-      "Monthly Financial Reports",
-      "Direct Bank Deposits",
+      'Online Payment Portal',
+      'Mobile Money Integration',
+      'Automated Reminders',
+      'Late Fee Processing',
+      'Monthly Financial Reports',
+      'Direct Bank Deposits',
     ],
-    icon: "💰",
-    category: "core",
+    icon: '💰',
+    category: 'core',
   },
   {
-    id: "maintenance-repairs",
-    title: "24/7 Maintenance & Repairs",
+    id: 'maintenance-repairs',
+    title: '24/7 Maintenance & Repairs',
     description:
-      "Professional maintenance coordination with trusted contractors, emergency response, and preventive maintenance programs.",
+      'Professional maintenance coordination with trusted contractors, emergency response, and preventive maintenance programs.',
     features: [
-      "24/7 Emergency Response",
-      "Vetted Contractor Network",
-      "Preventive Maintenance",
-      "Cost-Effective Repairs",
-      "Maintenance Tracking",
-      "Owner Approval System",
+      '24/7 Emergency Response',
+      'Vetted Contractor Network',
+      'Preventive Maintenance',
+      'Cost-Effective Repairs',
+      'Maintenance Tracking',
+      'Owner Approval System',
     ],
-    icon: "🔧",
-    category: "core",
+    icon: '🔧',
+    category: 'core',
   },
   {
-    id: "property-inspections",
-    title: "Regular Property Inspections",
+    id: 'property-inspections',
+    title: 'Regular Property Inspections',
     description:
-      "Scheduled property inspections to maintain property condition, identify issues early, and ensure lease compliance.",
+      'Scheduled property inspections to maintain property condition, identify issues early, and ensure lease compliance.',
     features: [
-      "Move-in/Move-out Inspections",
-      "Quarterly Condition Reports",
-      "Photo Documentation",
-      "Issue Identification",
-      "Tenant Communication",
-      "Damage Assessment",
+      'Move-in/Move-out Inspections',
+      'Quarterly Condition Reports',
+      'Photo Documentation',
+      'Issue Identification',
+      'Tenant Communication',
+      'Damage Assessment',
     ],
-    icon: "🔍",
-    category: "core",
+    icon: '🔍',
+    category: 'core',
   },
   {
-    id: "marketing-leasing",
-    title: "Professional Marketing & Leasing",
+    id: 'marketing-leasing',
+    title: 'Professional Marketing & Leasing',
     description:
-      "Expert property marketing with professional photography, online listings, and showings to minimize vacancy periods.",
+      'Expert property marketing with professional photography, online listings, and showings to minimize vacancy periods.',
     features: [
-      "Professional Photography",
-      "Multiple Platform Listings",
-      "Social Media Marketing",
-      "Virtual Tours Available",
-      "Scheduled Showings",
-      "Market Rate Analysis",
+      'Professional Photography',
+      'Multiple Platform Listings',
+      'Social Media Marketing',
+      'Virtual Tours Available',
+      'Scheduled Showings',
+      'Market Rate Analysis',
     ],
-    icon: "📸",
-    category: "premium",
+    icon: '📸',
+    category: 'premium',
   },
   {
-    id: "legal-compliance",
-    title: "Legal Compliance & Documentation",
+    id: 'legal-compliance',
+    title: 'Legal Compliance & Documentation',
     description:
-      "Ensure full compliance with Kenyan rental laws, proper lease agreements, and professional handling of legal matters.",
+      'Ensure full compliance with Kenyan rental laws, proper lease agreements, and professional handling of legal matters.',
     features: [
-      "Legally Compliant Leases",
-      "Rent Tribunal Representation",
-      "Eviction Processing",
-      "Legal Document Preparation",
-      "Compliance Monitoring",
-      "Dispute Resolution",
+      'Legally Compliant Leases',
+      'Rent Tribunal Representation',
+      'Eviction Processing',
+      'Legal Document Preparation',
+      'Compliance Monitoring',
+      'Dispute Resolution',
     ],
-    icon: "⚖️",
-    category: "premium",
+    icon: '⚖️',
+    category: 'premium',
   },
 ] as const;
 
 const managementPackages: readonly ManagementPackage[] = [
   {
-    id: "essential",
-    name: "Essential Management",
+    id: 'essential',
+    name: 'Essential Management',
     price: 8,
-    priceUnit: "percentage",
+    priceUnit: 'percentage',
     description:
-      "Perfect for hands-on property owners who want basic management support with professional tenant screening and rent collection.",
+      'Perfect for hands-on property owners who want basic management support with professional tenant screening and rent collection.',
     features: [
-      "Tenant Screening & Placement",
-      "Monthly Rent Collection",
-      "Basic Maintenance Coordination",
-      "Monthly Financial Reports",
-      "Online Owner Portal Access",
-      "Email Support",
+      'Tenant Screening & Placement',
+      'Monthly Rent Collection',
+      'Basic Maintenance Coordination',
+      'Monthly Financial Reports',
+      'Online Owner Portal Access',
+      'Email Support',
     ],
-    propertyTypes: ["single-family", "condo", "townhouse"],
+    propertyTypes: ['single-family', 'condo', 'townhouse'],
   },
   {
-    id: "complete",
-    name: "Complete Management",
+    id: 'complete',
+    name: 'Complete Management',
     price: 12,
-    priceUnit: "percentage",
+    priceUnit: 'percentage',
     description:
-      "Our most popular package offering comprehensive property management with proactive maintenance and professional marketing.",
+      'Our most popular package offering comprehensive property management with proactive maintenance and professional marketing.',
     features: [
-      "Everything in Essential",
-      "Professional Photography",
-      "Multi-Platform Marketing",
-      "Quarterly Inspections",
-      "24/7 Emergency Response",
-      "Preventive Maintenance",
-      "Dedicated Property Manager",
-      "Phone & Email Support",
+      'Everything in Essential',
+      'Professional Photography',
+      'Multi-Platform Marketing',
+      'Quarterly Inspections',
+      '24/7 Emergency Response',
+      'Preventive Maintenance',
+      'Dedicated Property Manager',
+      'Phone & Email Support',
     ],
     popular: true,
-    propertyTypes: ["single-family", "condo", "townhouse"],
+    propertyTypes: ['single-family', 'condo', 'townhouse'],
   },
   {
-    id: "premium",
-    name: "Premium Management",
+    id: 'premium',
+    name: 'Premium Management',
     price: 15,
-    priceUnit: "percentage",
+    priceUnit: 'percentage',
     description:
-      "White-glove service for discerning property owners seeking maximum returns with minimal involvement and premium tenant experience.",
+      'White-glove service for discerning property owners seeking maximum returns with minimal involvement and premium tenant experience.',
     features: [
-      "Everything in Complete",
-      "Virtual Tours & 3D Walkthroughs",
-      "Premium Tenant Concierge",
-      "Monthly Property Reports",
-      "Legal Compliance Management",
-      "Advanced Financial Analytics",
-      "Priority Support Hotline",
-      "Quarterly Strategy Reviews",
+      'Everything in Complete',
+      'Virtual Tours & 3D Walkthroughs',
+      'Premium Tenant Concierge',
+      'Monthly Property Reports',
+      'Legal Compliance Management',
+      'Advanced Financial Analytics',
+      'Priority Support Hotline',
+      'Quarterly Strategy Reviews',
     ],
-    propertyTypes: ["single-family", "condo", "townhouse", "luxury-homes"],
+    propertyTypes: ['single-family', 'condo', 'townhouse', 'luxury-homes'],
   },
 ] as const;
 
 const testimonials: readonly Testimonial[] = [
   {
-    id: "1",
-    name: "Sarah Mwangi",
-    role: "Property Owner",
+    id: '1',
+    name: 'Sarah Mwangi',
+    role: 'Property Owner',
     rating: 5,
     comment:
       "Outstanding service! They've managed my 3 properties for 2 years now. Professional tenant screening has eliminated problematic tenants, and I receive my rent on time every month. The online portal makes everything transparent.",
-    propertyType: "Single-family homes",
+    propertyType: 'Single-family homes',
     avatar:
-      "https://images.unsplash.com/photo-1494790108755-2616b612b002?w=64&h=64&fit=crop&crop=face",
-    location: "Elgon View, Eldoret",
+      'https://images.unsplash.com/photo-1494790108755-2616b612b002?w=64&h=64&fit=crop&crop=face',
+    location: 'Elgon View, Eldoret',
   },
   {
-    id: "2",
-    name: "Dr. James Kiprotich",
-    role: "Medical Practitioner",
-    company: "Moi Teaching Hospital",
+    id: '2',
+    name: 'Dr. James Kiprotich',
+    role: 'Medical Practitioner',
+    company: 'Moi Teaching Hospital',
     rating: 5,
     comment:
-      "As a busy doctor, I needed reliable property management for my rental units. Their 24/7 maintenance response and detailed monthly reports give me peace of mind. Highly recommend their complete management package.",
-    propertyType: "Townhouses",
+      'As a busy doctor, I needed reliable property management for my rental units. Their 24/7 maintenance response and detailed monthly reports give me peace of mind. Highly recommend their complete management package.',
+    propertyType: 'Townhouses',
     avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face",
-    location: "Pioneer Estate, Eldoret",
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face',
+    location: 'Pioneer Estate, Eldoret',
   },
   {
-    id: "3",
-    name: "Grace Chelimo",
-    role: "Real Estate Investor",
+    id: '3',
+    name: 'Grace Chelimo',
+    role: 'Real Estate Investor',
     rating: 5,
     comment:
       "I've worked with several management companies, but none compare to their professionalism. They increased my rental income by 15% through better marketing and reduced my vacancy rate to almost zero. Excellent ROI!",
-    propertyType: "Mixed Portfolio",
+    propertyType: 'Mixed Portfolio',
     avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=face",
-    location: "West Indies, Eldoret",
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=64&h=64&fit=crop&crop=face',
+    location: 'West Indies, Eldoret',
   },
 ] as const;
 
 const faqs: readonly FAQ[] = [
   {
-    id: "1",
-    question: "What percentage do you charge for property management?",
+    id: '1',
+    question: 'What percentage do you charge for property management?',
     answer:
-      "Our fees range from 8-15% of monthly rental income depending on the package selected. The Essential package is 8%, Complete is 12%, and Premium is 15%. All packages include core services with no hidden fees.",
-    category: "pricing",
+      'Our fees range from 8-15% of monthly rental income depending on the package selected. The Essential package is 8%, Complete is 12%, and Premium is 15%. All packages include core services with no hidden fees.',
+    category: 'pricing',
   },
   {
-    id: "2",
-    question: "How do you screen potential tenants?",
+    id: '2',
+    question: 'How do you screen potential tenants?',
     answer:
-      "We conduct comprehensive screening including credit checks, employment verification, previous landlord references, criminal background checks, and income verification following the 3x rent rule. Our screening reduces tenant issues by over 90%.",
-    category: "general",
+      'We conduct comprehensive screening including credit checks, employment verification, previous landlord references, criminal background checks, and income verification following the 3x rent rule. Our screening reduces tenant issues by over 90%.',
+    category: 'general',
   },
   {
-    id: "3",
-    question: "How quickly can you fill vacant properties?",
+    id: '3',
+    question: 'How quickly can you fill vacant properties?',
     answer:
-      "With our professional marketing approach including high-quality photos and multi-platform listings, average vacancy periods are 14-21 days for well-priced properties in good condition. Premium properties may fill within 7-10 days.",
-    category: "general",
+      'With our professional marketing approach including high-quality photos and multi-platform listings, average vacancy periods are 14-21 days for well-priced properties in good condition. Premium properties may fill within 7-10 days.',
+    category: 'general',
   },
   {
-    id: "4",
-    question: "Do you handle emergency maintenance calls?",
+    id: '4',
+    question: 'Do you handle emergency maintenance calls?',
     answer:
-      "Yes, we provide 24/7 emergency response for urgent issues like plumbing leaks, electrical problems, or security concerns. Non-emergency maintenance is typically scheduled within 48-72 hours through our vetted contractor network.",
-    category: "maintenance",
+      'Yes, we provide 24/7 emergency response for urgent issues like plumbing leaks, electrical problems, or security concerns. Non-emergency maintenance is typically scheduled within 48-72 hours through our vetted contractor network.',
+    category: 'maintenance',
   },
   {
-    id: "5",
+    id: '5',
     question: "What happens if tenants don't pay rent?",
     answer:
-      "We follow a structured process: immediate late notices, phone contact, payment plans if appropriate, and escalation to legal action if necessary. We work with legal experts to ensure proper procedures are followed under Kenyan rental law.",
-    category: "legal",
+      'We follow a structured process: immediate late notices, phone contact, payment plans if appropriate, and escalation to legal action if necessary. We work with legal experts to ensure proper procedures are followed under Kenyan rental law.',
+    category: 'legal',
   },
   {
-    id: "6",
-    question: "Can I see financial reports for my properties?",
+    id: '6',
+    question: 'Can I see financial reports for my properties?',
     answer:
-      "Absolutely. All clients receive detailed monthly reports including rent collection, expenses, maintenance costs, and net income. Our online portal provides 24/7 access to real-time financial data and property performance metrics.",
-    category: "general",
+      'Absolutely. All clients receive detailed monthly reports including rent collection, expenses, maintenance costs, and net income. Our online portal provides 24/7 access to real-time financial data and property performance metrics.',
+    category: 'general',
   },
 ] as const;
 
@@ -326,30 +326,30 @@ const validateEmail = (email: string): boolean => {
 
 const validatePhone = (phone: string): boolean => {
   const phoneRegex = /^(\+254|0)[7-9]\d{8}$/;
-  return phoneRegex.test(phone.replace(/\s/g, ""));
+  return phoneRegex.test(phone.replace(/\s/g, ''));
 };
 
 const validateInquiry = (formData: PropertyOwnerInquiry): InquiryErrors => {
   const errors: InquiryErrors = {};
 
   if (!formData.name.trim()) {
-    errors.name = "Name is required";
+    errors.name = 'Name is required';
   }
 
   if (!formData.email.trim()) {
-    errors.email = "Email is required";
+    errors.email = 'Email is required';
   } else if (!validateEmail(formData.email)) {
-    errors.email = "Please enter a valid email address";
+    errors.email = 'Please enter a valid email address';
   }
 
   if (!formData.phone.trim()) {
-    errors.phone = "Phone number is required";
+    errors.phone = 'Phone number is required';
   } else if (!validatePhone(formData.phone)) {
-    errors.phone = "Please enter a valid Kenyan phone number";
+    errors.phone = 'Please enter a valid Kenyan phone number';
   }
 
   if (!formData.propertyType) {
-    errors.propertyType = "Property type is required";
+    errors.propertyType = 'Property type is required';
   }
 
   return errors;
@@ -361,17 +361,17 @@ const PropertyOwnerModal = component$<{
   onClose: QRL<() => void>;
 }>((props) => {
   const formData = useStore<PropertyOwnerInquiry>({
-    name: "",
-    email: "",
-    phone: "",
-    propertyType: "",
-    propertyLocation: "",
+    name: '',
+    email: '',
+    phone: '',
+    propertyType: '',
+    propertyLocation: '',
     propertyCount: 1,
-    currentStatus: "",
-    message: "",
+    currentStatus: '',
+    message: '',
     servicesInterested: [],
-    preferredContactMethod: "email",
-    timeline: "",
+    preferredContactMethod: 'email',
+    timeline: '',
   });
 
   const errors = useStore<InquiryErrors>({});
@@ -380,17 +380,17 @@ const PropertyOwnerModal = component$<{
 
   const resetForm = $(() => {
     Object.assign(formData, {
-      name: "",
-      email: "",
-      phone: "",
-      propertyType: "",
-      propertyLocation: "",
+      name: '',
+      email: '',
+      phone: '',
+      propertyType: '',
+      propertyLocation: '',
       propertyCount: 1,
-      currentStatus: "",
-      message: "",
+      currentStatus: '',
+      message: '',
       servicesInterested: [],
-      preferredContactMethod: "email",
-      timeline: "",
+      preferredContactMethod: 'email',
+      timeline: '',
     });
     Object.keys(errors).forEach(
       (key) => delete errors[key as keyof InquiryErrors]
@@ -422,8 +422,8 @@ const PropertyOwnerModal = component$<{
         resetForm();
       }, 2500);
     } catch (error) {
-      errors.general = "Failed to send inquiry. Please try again.";
-      console.log(error);
+      console.log('Error', error);
+      errors.general = 'Failed to send inquiry. Please try again.';
     } finally {
       isSubmitting.value = false;
     }
@@ -448,9 +448,9 @@ const PropertyOwnerModal = component$<{
   useTask$(({ track }) => {
     track(() => props.isOpen);
     if (props.isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
       return () => {
-        document.body.style.overflow = "unset";
+        document.body.style.overflow = 'unset';
       };
     }
   });
@@ -531,7 +531,7 @@ const PropertyOwnerModal = component$<{
                       if (errors.name) delete errors.name;
                     }}
                     class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                      errors.name ? "border-red-300" : "border-slate-300"
+                      errors.name ? 'border-red-300' : 'border-slate-300'
                     }`}
                     placeholder="Enter your full name"
                   />
@@ -552,7 +552,7 @@ const PropertyOwnerModal = component$<{
                       if (errors.phone) delete errors.phone;
                     }}
                     class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                      errors.phone ? "border-red-300" : "border-slate-300"
+                      errors.phone ? 'border-red-300' : 'border-slate-300'
                     }`}
                     placeholder="+254700000000"
                   />
@@ -574,7 +574,7 @@ const PropertyOwnerModal = component$<{
                     if (errors.email) delete errors.email;
                   }}
                   class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                    errors.email ? "border-red-300" : "border-slate-300"
+                    errors.email ? 'border-red-300' : 'border-slate-300'
                   }`}
                   placeholder="your.email@example.com"
                 />
@@ -598,8 +598,8 @@ const PropertyOwnerModal = component$<{
                     }}
                     class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                       errors.propertyType
-                        ? "border-red-300"
-                        : "border-slate-300"
+                        ? 'border-red-300'
+                        : 'border-slate-300'
                     }`}
                   >
                     <option value="">Select Type</option>
@@ -667,12 +667,12 @@ const PropertyOwnerModal = component$<{
                 </label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {[
-                    "Full Management",
-                    "Tenant Screening",
-                    "Rent Collection",
-                    "Maintenance",
-                    "Marketing",
-                    "Legal Support",
+                    'Full Management',
+                    'Tenant Screening',
+                    'Rent Collection',
+                    'Maintenance',
+                    'Marketing',
+                    'Legal Support',
                   ].map((service) => (
                     <label key={service} class="flex items-center">
                       <input
@@ -730,9 +730,9 @@ const PropertyOwnerModal = component$<{
                 <button
                   type="submit"
                   disabled={isSubmitting.value}
-                  class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
+                  class="flex-1 px-6 py-3 bg-[#F04A00] text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
                 >
-                  {isSubmitting.value ? "Sending..." : "Get Free Analysis"}
+                  {isSubmitting.value ? 'Sending...' : 'Get Free Analysis'}
                 </button>
               </div>
             </form>
@@ -746,8 +746,8 @@ const PropertyOwnerModal = component$<{
 // Main Component
 export default component$(() => {
   const isModalOpen = useSignal(false);
-  const selectedPackage = useSignal("");
-  const activeTab = useSignal("general");
+  const selectedPackage = useSignal('');
+  const activeTab = useSignal('general');
 
   const openModal = $((packageId?: string) => {
     if (packageId) {
@@ -758,7 +758,7 @@ export default component$(() => {
 
   const closeModal = $(() => {
     isModalOpen.value = false;
-    selectedPackage.value = "";
+    selectedPackage.value = '';
   });
 
   return (
@@ -789,7 +789,7 @@ export default component$(() => {
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div class="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div class="inline-flex items-center bg-blue-600/20 text-blue-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <div class="inline-flex items-center bg-[#F04A00]/20 text-blue-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
                 <svg
                   class="w-4 h-4 mr-2"
                   fill="currentColor"
@@ -804,7 +804,7 @@ export default component$(() => {
                 Professional
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
                   Property Management
-                </span>{" "}
+                </span>{' '}
                 in Eldoret
               </h1>
 
@@ -817,7 +817,7 @@ export default component$(() => {
               <div class="flex flex-col sm:flex-row gap-4 mb-12">
                 <button
                   onClick$={() => openModal()}
-                  class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+                  class="px-8 py-4 bg-[#F04A00] hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
                 >
                   Get Free Property Analysis
                 </button>
@@ -959,8 +959,8 @@ export default component$(() => {
                 key={pkg.id}
                 class={`relative rounded-2xl p-8 ${
                   pkg.popular
-                    ? "bg-gradient-to-br from-blue-600 to-blue-700 text-white transform scale-105 shadow-2xl"
-                    : "bg-white border border-slate-200 shadow-lg"
+                    ? 'bg-gradient-to-br from-blue-600 to-blue-700 text-white transform scale-105 shadow-2xl'
+                    : 'bg-white border border-slate-200 shadow-lg'
                 }`}
               >
                 {pkg.popular && (
@@ -973,24 +973,24 @@ export default component$(() => {
 
                 <div class="mb-8">
                   <h3
-                    class={`text-2xl font-bold mb-2 ${pkg.popular ? "text-white" : "text-slate-900"}`}
+                    class={`text-2xl font-bold mb-2 ${pkg.popular ? 'text-white' : 'text-slate-900'}`}
                   >
                     {pkg.name}
                   </h3>
                   <div class="flex items-baseline mb-4">
                     <span
-                      class={`text-5xl font-bold ${pkg.popular ? "text-white" : "text-slate-900"}`}
+                      class={`text-5xl font-bold ${pkg.popular ? 'text-white' : 'text-slate-900'}`}
                     >
                       {formatPercentage(pkg.price)}
                     </span>
                     <span
-                      class={`ml-2 ${pkg.popular ? "text-blue-100" : "text-slate-600"}`}
+                      class={`ml-2 ${pkg.popular ? 'text-blue-100' : 'text-slate-600'}`}
                     >
                       of monthly rent
                     </span>
                   </div>
                   <p
-                    class={`${pkg.popular ? "text-blue-100" : "text-slate-600"}`}
+                    class={`${pkg.popular ? 'text-blue-100' : 'text-slate-600'}`}
                   >
                     {pkg.description}
                   </p>
@@ -1001,7 +1001,7 @@ export default component$(() => {
                     <div key={feature} class="flex items-start">
                       <svg
                         class={`w-5 h-5 mt-0.5 mr-3 flex-shrink-0 ${
-                          pkg.popular ? "text-green-300" : "text-green-500"
+                          pkg.popular ? 'text-green-300' : 'text-green-500'
                         }`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
@@ -1009,7 +1009,7 @@ export default component$(() => {
                         <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
                       </svg>
                       <span
-                        class={`${pkg.popular ? "text-white" : "text-slate-700"}`}
+                        class={`${pkg.popular ? 'text-white' : 'text-slate-700'}`}
                       >
                         {feature}
                       </span>
@@ -1021,8 +1021,8 @@ export default component$(() => {
                   onClick$={() => openModal(pkg.id)}
                   class={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-200 ${
                     pkg.popular
-                      ? "bg-white text-blue-600 hover:bg-slate-50 shadow-lg"
-                      : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl"
+                      ? 'bg-white text-blue-600 hover:bg-slate-50 shadow-lg'
+                      : 'bg-[#F04A00] text-white hover:bg-blue-700 shadow-lg hover:shadow-xl'
                   }`}
                 >
                   Get Started
@@ -1106,15 +1106,15 @@ export default component$(() => {
 
           <div class="mb-8">
             <div class="flex flex-wrap justify-center gap-2">
-              {["general", "pricing", "maintenance", "legal"].map(
+              {['general', 'pricing', 'maintenance', 'legal'].map(
                 (category) => (
                   <button
                     key={category}
                     onClick$={() => (activeTab.value = category)}
                     class={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${
                       activeTab.value === category
-                        ? "bg-blue-600 text-white"
-                        : "bg-white text-slate-600 hover:bg-slate-100"
+                        ? 'bg-[#F04A00] text-white'
+                        : 'bg-white text-slate-600 hover:bg-slate-100'
                     }`}
                   >
                     {category}
@@ -1127,7 +1127,7 @@ export default component$(() => {
           <div class="space-y-4">
             {faqs
               .filter((faq) =>
-                activeTab.value === "general"
+                activeTab.value === 'general'
                   ? true
                   : faq.category === activeTab.value
               )
@@ -1194,149 +1194,149 @@ export default component$(() => {
 
 export const head: DocumentHead = {
   title:
-    "Residential Property Management Services in Eldoret | Single-Family Homes, Condos & Townhouses | EldoretManage",
+    'Residential Property Management Services in Eldoret | Single-Family Homes, Condos & Townhouses | EldoretManage',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "Professional residential property management in Eldoret for single-family homes, condominiums, and townhouses. Maximize rental income with our comprehensive tenant screening, rent collection, maintenance, and property marketing services. Trusted by 500+ property owners.",
+        'Professional residential property management in Eldoret for single-family homes, condominiums, and townhouses. Maximize rental income with our comprehensive tenant screening, rent collection, maintenance, and property marketing services. Trusted by 500+ property owners.',
     },
     {
-      name: "keywords",
+      name: 'keywords',
       content:
-        "residential property management Eldoret, single family home management, condo management, townhouse rental management, property management company Kenya, tenant screening Eldoret, rent collection services, property maintenance, rental property marketing",
+        'residential property management Eldoret, single family home management, condo management, townhouse rental management, property management company Kenya, tenant screening Eldoret, rent collection services, property maintenance, rental property marketing',
     },
     {
-      name: "viewport",
-      content: "width=device-width, initial-scale=1.0",
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1.0',
     },
     {
-      name: "robots",
+      name: 'robots',
       content:
-        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+        'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
     },
     {
-      property: "og:title",
+      property: 'og:title',
       content:
-        "Professional Residential Property Management in Eldoret - Single-Family Homes, Condos & Townhouses",
+        'Professional Residential Property Management in Eldoret - Single-Family Homes, Condos & Townhouses',
     },
     {
-      property: "og:description",
+      property: 'og:description',
       content:
-        "Maximize your rental property income with our comprehensive management services. Professional tenant screening, rent collection, 24/7 maintenance, and marketing for single-family homes, condos, and townhouses in Eldoret.",
+        'Maximize your rental property income with our comprehensive management services. Professional tenant screening, rent collection, 24/7 maintenance, and marketing for single-family homes, condos, and townhouses in Eldoret.',
     },
     {
-      property: "og:type",
-      content: "website",
+      property: 'og:type',
+      content: 'website',
     },
     {
-      property: "og:locale",
-      content: "en_KE",
+      property: 'og:locale',
+      content: 'en_KE',
     },
     {
-      property: "og:image",
+      property: 'og:image',
       content:
-        "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop",
+        'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop',
     },
     {
-      property: "og:image:alt",
+      property: 'og:image:alt',
       content:
-        "Modern residential properties managed by professional property management company in Eldoret",
+        'Modern residential properties managed by professional property management company in Eldoret',
     },
     {
-      property: "og:site_name",
-      content: "EldoretManage - Residential Property Management",
+      property: 'og:site_name',
+      content: 'EldoretManage - Residential Property Management',
     },
     {
-      name: "twitter:card",
-      content: "summary_large_image",
+      name: 'twitter:card',
+      content: 'summary_large_image',
     },
     {
-      name: "twitter:title",
-      content: "Residential Property Management Services in Eldoret",
+      name: 'twitter:title',
+      content: 'Residential Property Management Services in Eldoret',
     },
     {
-      name: "twitter:description",
+      name: 'twitter:description',
       content:
-        "Professional management for single-family homes, condos & townhouses. Maximize rental income with expert tenant screening, maintenance & marketing services.",
+        'Professional management for single-family homes, condos & townhouses. Maximize rental income with expert tenant screening, maintenance & marketing services.',
     },
     {
-      name: "twitter:image",
+      name: 'twitter:image',
       content:
-        "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop",
+        'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop',
     },
     {
-      name: "theme-color",
-      content: "#2563eb",
+      name: 'theme-color',
+      content: '#2563eb',
     },
     {
-      name: "apple-mobile-web-app-capable",
-      content: "yes",
+      name: 'apple-mobile-web-app-capable',
+      content: 'yes',
     },
     {
-      name: "apple-mobile-web-app-status-bar-style",
-      content: "black-translucent",
+      name: 'apple-mobile-web-app-status-bar-style',
+      content: 'black-translucent',
     },
     // Structured Data for Local Business
     {
-      name: "geo.region",
-      content: "KE-30",
+      name: 'geo.region',
+      content: 'KE-30',
     },
     {
-      name: "geo.placename",
-      content: "Eldoret",
+      name: 'geo.placename',
+      content: 'Eldoret',
     },
     {
-      name: "geo.position",
-      content: "0.5143;35.2699",
+      name: 'geo.position',
+      content: '0.5143;35.2699',
     },
     // Schema.org markup
     {
-      property: "business:contact_data:street_address",
-      content: "Eldoret, Kenya",
+      property: 'business:contact_data:street_address',
+      content: 'Eldoret, Kenya',
     },
     {
-      property: "business:contact_data:locality",
-      content: "Eldoret",
+      property: 'business:contact_data:locality',
+      content: 'Eldoret',
     },
     {
-      property: "business:contact_data:region",
-      content: "Uasin Gishu County",
+      property: 'business:contact_data:region',
+      content: 'Uasin Gishu County',
     },
     {
-      property: "business:contact_data:country_name",
-      content: "Kenya",
+      property: 'business:contact_data:country_name',
+      content: 'Kenya',
     },
   ],
   links: [
     {
-      rel: "canonical",
-      href: "https://eldoretmanage.co.ke/residential-property-management",
+      rel: 'canonical',
+      href: 'https://eldoretmanage.co.ke/residential-property-management',
     },
     {
-      rel: "icon",
-      type: "image/png",
-      sizes: "32x32",
-      href: "/favicon-32x32.png",
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      href: '/favicon-32x32.png',
     },
     {
-      rel: "icon",
-      type: "image/png",
-      sizes: "16x16",
-      href: "/favicon-16x16.png",
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      href: '/favicon-16x16.png',
     },
     {
-      rel: "apple-touch-icon",
-      sizes: "180x180",
-      href: "/apple-touch-icon.png",
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      href: '/apple-touch-icon.png',
     },
     {
-      rel: "preconnect",
-      href: "https://images.unsplash.com",
+      rel: 'preconnect',
+      href: 'https://images.unsplash.com',
     },
     {
-      rel: "dns-prefetch",
-      href: "https://images.unsplash.com",
+      rel: 'dns-prefetch',
+      href: 'https://images.unsplash.com',
     },
   ],
 };

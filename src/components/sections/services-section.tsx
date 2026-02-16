@@ -1,17 +1,28 @@
 import { component$ } from '@builder.io/qwik';
 
 export const ServicesSection = component$(() => {
+  // Define the main brand color for re-use
+  const BRAND_COLOR = '#F04A00'; // Bright Orange / Red-Orange
+
   return (
     <section class="py-32 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
       {/* Background Elements */}
-      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-50/20 via-transparent to-transparent"></div>
-      <div class="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-blue-100/30 to-purple-100/30 rounded-full blur-3xl transform -translate-x-36 -translate-y-36"></div>
+      {/* CHANGE 1: Radial gradient from blue to brand orange */}
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-orange-50/20 via-transparent to-transparent"></div>
+      {/* CHANGE 2: Top-left blur gradient from blue/purple to orange/red */}
+      <div
+        class={`absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-orange-100/30 to-red-100/30 rounded-full blur-3xl transform -translate-x-36 -translate-y-36`}
+      ></div>
+      {/* Bottom-right blur gradient (Green and Orange remain for contrast) */}
       <div class="absolute bottom-0 right-0 w-72 h-72 bg-gradient-to-tl from-green-100/30 to-orange-100/30 rounded-full blur-3xl transform translate-x-36 translate-y-36"></div>
 
       <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
         {/* Header */}
         <div class="text-center mb-24">
-          <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100 rounded-full text-blue-700 text-sm font-medium mb-6">
+          {/* CHANGE 3: Header badge gradient, border, and text color from blue/purple to brand orange/red */}
+          <div
+            class={`inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-50 to-orange-50 border border-red-100 rounded-full text-red-700 text-sm font-medium mb-6`}
+          >
             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
@@ -23,7 +34,10 @@ export const ServicesSection = component$(() => {
           </div>
           <h2 class="text-4xl lg:text-6xl font-bold text-gray-900 tracking-tight mb-6">
             Comprehensive Property
-            <span class="block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+            <span
+              // CHANGE 4: Title text gradient from blue/purple to brand orange/red
+              class={`block bg-gradient-to-r from-[${BRAND_COLOR}] via-red-600 to-orange-800 bg-clip-text text-transparent`}
+            >
               Management Solutions
             </span>
           </h2>
@@ -44,13 +58,19 @@ export const ServicesSection = component$(() => {
                 alt="Modern apartment building"
                 class="w-full h-full object-cover opacity-30"
               />
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-purple-900/60 to-blue-900/80"></div>
+              {/* CHANGE 5: Image overlay gradient from blue/purple to red/orange */}
+              <div
+                class={`absolute inset-0 bg-gradient-to-r from-red-900/80 via-orange-900/60 to-red-900/80`}
+              ></div>
             </div>
 
             {/* Floating Analytics Dashboard */}
             <div class="absolute top-8 right-8 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 p-6 max-w-sm group hover:scale-105 transition-all duration-300">
               <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                {/* CHANGE 6: Dashboard icon background gradient from blue to brand orange/red */}
+                <div
+                  class={`w-10 h-10 bg-gradient-to-br from-[${BRAND_COLOR}] to-red-600 rounded-xl flex items-center justify-center shadow-lg`}
+                >
                   <svg
                     class="w-5 h-5 text-white"
                     fill="currentColor"
@@ -78,14 +98,19 @@ export const ServicesSection = component$(() => {
                     KSh 1.24M
                   </span>
                 </div>
-                <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                {/* CHANGE 7: Occupancy rate colors from blue to red */}
+                <div
+                  class={`flex justify-between items-center p-3 bg-red-50 rounded-lg`}
+                >
                   <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    <div
+                      class={`w-2 h-2 bg-red-500 rounded-full animate-pulse`}
+                    ></div>
                     <span class="text-gray-700 font-medium">
                       Occupancy Rate
                     </span>
                   </div>
-                  <span class="font-bold text-blue-600 text-lg">96%</span>
+                  <span class={`font-bold text-red-600 text-lg`}>96%</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
                   <div class="flex items-center gap-2">
@@ -133,8 +158,11 @@ export const ServicesSection = component$(() => {
                 <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
                 Automated Systems
               </div>
+              {/* CHANGE 8: Monitoring indicator color from blue to red */}
               <div class="bg-white/10 backdrop-blur-md rounded-full px-4 py-2 text-white text-sm font-medium">
-                <span class="inline-block w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></span>
+                <span
+                  class={`inline-block w-2 h-2 bg-red-400 rounded-full mr-2 animate-pulse`}
+                ></span>
                 24/7 Monitoring
               </div>
             </div>
@@ -145,10 +173,16 @@ export const ServicesSection = component$(() => {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
           {/* Service 1 - Rent Collection */}
           <div class="group relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-            <div class="relative bg-white hover:bg-gradient-to-br hover:from-blue-50/50 hover:to-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 transform group-hover:-translate-y-2 h-full">
+            {/* CHANGE 9: Hover blur gradient from blue/cyan to brand orange/red */}
+            <div
+              class={`absolute inset-0 bg-gradient-to-r from-[${BRAND_COLOR}]/10 to-red-500/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500`}
+            ></div>
+            <div class="relative bg-white hover:bg-gradient-to-br hover:from-red-50/50 hover:to-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-red-200 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300 transform group-hover:-translate-y-2 h-full">
               <div class="flex items-center gap-4 mb-6">
-                <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg shadow-blue-500/25">
+                {/* CHANGE 10: Icon background gradient from blue/cyan to brand orange/red */}
+                <div
+                  class={`w-14 h-14 bg-gradient-to-br from-[${BRAND_COLOR}] to-red-600 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg shadow-red-500/25`}
+                >
                   <svg
                     class="w-7 h-7 text-white"
                     fill="none"
@@ -171,7 +205,8 @@ export const ServicesSection = component$(() => {
                   />
                 </div>
               </div>
-              <h3 class="font-bold text-gray-900 mb-4 text-xl group-hover:text-blue-600 transition-colors duration-300">
+              {/* CHANGE 11: Hover text color from blue to red-600 */}
+              <h3 class="font-bold text-gray-900 mb-4 text-xl group-hover:text-red-600 transition-colors duration-300">
                 Smart Rent Collection
               </h3>
               <p class="text-gray-600 leading-relaxed mb-4">
@@ -179,7 +214,10 @@ export const ServicesSection = component$(() => {
                 late fee management, and transparent financial reporting for
                 maximum efficiency.
               </p>
-              <div class="flex items-center text-blue-600 text-sm font-medium group-hover:text-blue-700 transition-colors duration-300">
+              {/* CHANGE 12: Link text color from blue to red-600 */}
+              <div
+                class={`flex items-center text-red-600 text-sm font-medium group-hover:text-red-700 transition-colors duration-300`}
+              >
                 <span>Learn More</span>
                 <svg
                   class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300"
@@ -198,7 +236,7 @@ export const ServicesSection = component$(() => {
             </div>
           </div>
 
-          {/* Service 2 - Maintenance */}
+          {/* Service 2 - Maintenance (Green remains) */}
           <div class="group relative">
             <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
             <div class="relative bg-white hover:bg-gradient-to-br hover:from-green-50/50 hover:to-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-green-200 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 transform group-hover:-translate-y-2 h-full">
@@ -259,7 +297,7 @@ export const ServicesSection = component$(() => {
             </div>
           </div>
 
-          {/* Service 3 - Tenant Relations */}
+          {/* Service 3 - Tenant Relations (Orange/Red theme) */}
           <div class="group relative">
             <div class="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
             <div class="relative bg-white hover:bg-gradient-to-br hover:from-orange-50/50 hover:to-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/10 transition-all duration-300 transform group-hover:-translate-y-2 h-full">
@@ -314,7 +352,7 @@ export const ServicesSection = component$(() => {
             </div>
           </div>
 
-          {/* Service 4 - Analytics & Reporting */}
+          {/* Service 4 - Analytics & Reporting (Purple/Pink remains) */}
           <div class="group relative">
             <div class="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
             <div class="relative bg-white hover:bg-gradient-to-br hover:from-purple-50/50 hover:to-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-purple-200 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 transform group-hover:-translate-y-2 h-full">
@@ -372,8 +410,13 @@ export const ServicesSection = component$(() => {
 
         {/* Enhanced Process Flow */}
         <div class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-12 lg:p-16 relative overflow-hidden mb-24">
-          <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
-          <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-full blur-2xl"></div>
+          {/* CHANGE 13: Background element gradient from blue/purple to orange/red */}
+          <div
+            class={`absolute inset-0 bg-gradient-to-r from-[${BRAND_COLOR}]/10 to-red-600/10`}
+          ></div>
+          <div
+            class={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[${BRAND_COLOR}]/10 to-transparent rounded-full blur-2xl`}
+          ></div>
 
           <div class="relative text-center mb-12">
             <h3 class="text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -388,7 +431,10 @@ export const ServicesSection = component$(() => {
           <div class="relative grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Process Step 1 */}
             <div class="text-center group">
-              <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/25">
+              {/* CHANGE 14: Step 1 icon background from blue to brand orange/red */}
+              <div
+                class={`w-16 h-16 bg-gradient-to-br from-[${BRAND_COLOR}] to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-red-500/25`}
+              >
                 <span class="text-white font-bold text-xl">1</span>
               </div>
               <h4 class="text-white font-semibold mb-2">Property Assessment</h4>
@@ -397,7 +443,7 @@ export const ServicesSection = component$(() => {
               </p>
             </div>
 
-            {/* Process Step 2 */}
+            {/* Process Step 2 (Green remains) */}
             <div class="text-center group">
               <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-green-500/25">
                 <span class="text-white font-bold text-xl">2</span>
@@ -408,7 +454,7 @@ export const ServicesSection = component$(() => {
               </p>
             </div>
 
-            {/* Process Step 3 */}
+            {/* Process Step 3 (Orange/Red remains) */}
             <div class="text-center group">
               <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-orange-500/25">
                 <span class="text-white font-bold text-xl">3</span>
@@ -419,7 +465,7 @@ export const ServicesSection = component$(() => {
               </p>
             </div>
 
-            {/* Process Step 4 */}
+            {/* Process Step 4 (Purple/Pink remains) */}
             <div class="text-center group">
               <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/25">
                 <span class="text-white font-bold text-xl">4</span>
@@ -431,13 +477,19 @@ export const ServicesSection = component$(() => {
             </div>
 
             {/* Connection Lines */}
-            <div class="absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 via-green-500 via-orange-500 to-purple-500 opacity-30 hidden md:block"></div>
+            {/* CHANGE 15: Connection line gradient from blue/green/orange/purple to red/green/orange/purple */}
+            <div
+              class={`absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 via-green-500 via-orange-500 to-purple-500 opacity-30 hidden md:block`}
+            ></div>
           </div>
         </div>
 
         {/* Enhanced Call to Action */}
         <div class="text-center">
-          <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-12 lg:p-16 border border-blue-100">
+          {/* CHANGE 16: CTA card background gradient from blue/purple to red/orange */}
+          <div
+            class={`bg-gradient-to-r from-red-50 to-orange-50 rounded-3xl p-12 lg:p-16 border border-red-100`}
+          >
             <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
               Ready to Transform Your Property Investment?
             </h3>
@@ -447,10 +499,16 @@ export const ServicesSection = component$(() => {
               discover your property's potential.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <button class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transform hover:-translate-y-1">
+              <button
+                // CHANGE 17: Primary button gradient and shadow from blue/purple to brand orange/red
+                class={`bg-gradient-to-r from-[${BRAND_COLOR}] to-red-600 hover:from-red-700 hover:to-red-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg shadow-red-500/25 hover:shadow-xl hover:shadow-red-500/30 transform hover:-translate-y-1`}
+              >
                 Get Free Consultation
               </button>
-              <button class="border-2 border-gray-300 hover:border-blue-500 text-gray-700 hover:text-blue-600 font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1">
+              <button
+                // CHANGE 18: Secondary button hover border and text from blue to red
+                class={`border-2 border-gray-300 hover:border-red-500 text-gray-700 hover:text-red-600 font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1`}
+              >
                 Download Service Guide
               </button>
             </div>

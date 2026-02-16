@@ -2,10 +2,10 @@ import {
   component$,
   useVisibleTask$,
   useStylesScoped$,
-} from "@builder.io/qwik";
-import { type DocumentHead } from "@builder.io/qwik-city";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+} from '@builder.io/qwik';
+import { type DocumentHead } from '@builder.io/qwik-city';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export default component$(() => {
   // Use useStylesScoped$ to keep styles local to this component.
@@ -198,13 +198,13 @@ export default component$(() => {
 
     // GSAP animations
     gsap.fromTo(
-      "#subtitle",
+      '#subtitle',
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+      { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
     );
 
     gsap.fromTo(
-      "#main-title",
+      '#main-title',
       { opacity: 0, y: 50, scale: 0.95 },
       {
         opacity: 1,
@@ -212,18 +212,18 @@ export default component$(() => {
         scale: 1,
         duration: 1.2,
         delay: 0.2,
-        ease: "power4.out",
+        ease: 'power4.out',
       }
     );
 
     gsap.fromTo(
-      "#description",
+      '#description',
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, delay: 0.4, ease: "power3.out" }
+      { opacity: 1, y: 0, duration: 1, delay: 0.4, ease: 'power3.out' }
     );
 
     gsap.fromTo(
-      ".service-card",
+      '.service-card',
       { opacity: 0, y: 100, scale: 0.8, rotationY: -15 },
       {
         opacity: 1,
@@ -233,29 +233,29 @@ export default component$(() => {
         duration: 1.4,
         stagger: {
           amount: 0.8,
-          from: "start",
-          ease: "power2.out",
+          from: 'start',
+          ease: 'power2.out',
         },
-        ease: "power4.out",
+        ease: 'power4.out',
         delay: 0.6,
       }
     );
 
-    gsap.to(".floating-icon", {
+    gsap.to('.floating-icon', {
       y: -8,
       rotation: 2,
       duration: 3,
-      ease: "power2.inOut",
+      ease: 'power2.inOut',
       yoyo: true,
       repeat: -1,
       stagger: {
         amount: 1.5,
-        from: "random",
+        from: 'random',
       },
     });
 
     gsap.fromTo(
-      "#cta-button",
+      '#cta-button',
       { scale: 0, rotation: -270, opacity: 0 },
       {
         scale: 1,
@@ -263,12 +263,29 @@ export default component$(() => {
         opacity: 1,
         duration: 1.5,
         delay: 2.5,
-        ease: "back.out(2)",
+        ease: 'back.out(2)',
       }
     );
 
+    ScrollTrigger.create({
+      trigger: '#services',
+      start: 'top bottom',
+      end: 'bottom top',
+      onUpdate: (self) => {
+        const progress = self.progress;
+        gsap.to('.mesh-bg', {
+          opacity: 0.3 + progress * 0.15,
+          duration: 0.3,
+        });
+      },
+    });
+
     // Hover interactions
-    const serviceCards = document.querySelectorAll(".service-card");
+    const serviceCards = document.querySelectorAll(
+      '.service-card'
+    ) as NodeListOf<HTMLElement>;
+
+    //const serviceCards = document.querySelectorAll('.service-card');
     const handleMouseMove = (e: MouseEvent) => {
       const card = e.currentTarget as HTMLElement;
       const rect = card.getBoundingClientRect();
@@ -284,7 +301,7 @@ export default component$(() => {
         rotationX: rotateX,
         rotationY: rotateY,
         transformPerspective: 1000,
-        ease: "power2.out",
+        ease: 'power2.out',
       });
     };
 
@@ -294,51 +311,51 @@ export default component$(() => {
         duration: 0.6,
         rotationX: 0,
         rotationY: 0,
-        ease: "power2.out",
+        ease: 'power2.out',
       });
     };
 
     serviceCards.forEach((card) => {
-      card.addEventListener("mousemove", handleMouseMove);
-      card.addEventListener("mouseleave", handleMouseLeave);
+      card.addEventListener('mousemove', handleMouseMove);
+      card.addEventListener('mouseleave', handleMouseLeave);
     });
 
     // Mobile optimizations
     if (window.innerWidth < 768) {
-      gsap.set(".service-card", {
+      gsap.set('.service-card', {
         transformPerspective: 800,
       });
     }
 
     // CTA button click handler
-    const ctaButton = document.getElementById("cta-button");
+    const ctaButton = document.getElementById('cta-button');
     const handleCtaClick = () => {
       gsap.to(ctaButton, {
         scale: 0.92,
         duration: 0.1,
         yoyo: true,
         repeat: 1,
-        ease: "power2.inOut",
+        ease: 'power2.inOut',
         onComplete: () => {
           gsap.to(ctaButton, {
-            boxShadow: "0 0 0 20px rgba(59, 130, 246, 0)",
+            boxShadow: '0 0 0 20px rgba(59, 130, 246, 0)',
             duration: 0.6,
-            ease: "power2.out",
+            ease: 'power2.out',
           });
         },
       });
-      console.log("Free Property Review requested - NexaRealty");
+      console.log('Free Property Review requested - NexaRealty');
     };
-    ctaButton?.addEventListener("click", handleCtaClick);
+    ctaButton?.addEventListener('click', handleCtaClick);
 
     // Cleanup function provided by useVisibleTask$
     cleanup(() => {
-      ScrollTrigger.kill();
+      //  ScrollTrigger.kill();
       serviceCards.forEach((card) => {
-        card.removeEventListener("mousemove", handleMouseMove);
-        card.removeEventListener("mouseleave", handleMouseLeave);
+        card.removeEventListener('mousemove', handleMouseMove);
+        card.removeEventListener('mouseleave', handleMouseLeave);
       });
-      ctaButton?.removeEventListener("click", handleCtaClick);
+      ctaButton?.removeEventListener('click', handleCtaClick);
     });
   });
 
@@ -557,12 +574,12 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "NexaRealty Services",
+  title: 'NexaRealty Services',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "NexaRealty provides comprehensive property management services for landlords in Kenya.",
+        'NexaRealty provides comprehensive property management services for landlords in Kenya.',
     },
   ],
 };

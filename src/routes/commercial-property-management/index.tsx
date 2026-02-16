@@ -5,8 +5,8 @@ import {
   useStore,
   useTask$,
   type QRL,
-} from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+} from '@builder.io/qwik';
+import type { DocumentHead } from '@builder.io/qwik-city';
 
 // Commercial Property Management interfaces
 interface CommercialService {
@@ -15,7 +15,7 @@ interface CommercialService {
   readonly description: string;
   readonly features: readonly string[];
   readonly icon: string;
-  readonly category: "core" | "financial" | "strategic" | "specialized";
+  readonly category: 'core' | 'financial' | 'strategic' | 'specialized';
   readonly propertyTypes: readonly string[];
 }
 
@@ -23,7 +23,7 @@ interface CommercialPackage {
   readonly id: string;
   readonly name: string;
   readonly basePrice: number;
-  readonly priceUnit: "sqft" | "percentage" | "fixed";
+  readonly priceUnit: 'sqft' | 'percentage' | 'fixed';
   readonly minFee: number;
   readonly description: string;
   readonly features: readonly string[];
@@ -76,293 +76,293 @@ interface CommercialFAQ {
   readonly question: string;
   readonly answer: string;
   readonly category:
-    | "leasing"
-    | "financial"
-    | "maintenance"
-    | "legal"
-    | "strategic";
+    | 'leasing'
+    | 'financial'
+    | 'maintenance'
+    | 'legal'
+    | 'strategic';
 }
 
 // Commercial services data
 const commercialServices: readonly CommercialService[] = [
   {
-    id: "tenant-leasing",
-    title: "Strategic Tenant Leasing & Retention",
+    id: 'tenant-leasing',
+    title: 'Strategic Tenant Leasing & Retention',
     description:
-      "Comprehensive tenant acquisition and retention strategies that optimize tenant mix, minimize vacancy, and maximize long-term asset value.",
+      'Comprehensive tenant acquisition and retention strategies that optimize tenant mix, minimize vacancy, and maximize long-term asset value.',
     features: [
-      "Market Analysis & Competitive Positioning",
-      "Professional Tenant Prospecting",
-      "Lease Negotiation & Structuring",
-      "Tenant Mix Optimization",
-      "Renewal Strategies & Retention",
-      "Space Planning & Optimization",
+      'Market Analysis & Competitive Positioning',
+      'Professional Tenant Prospecting',
+      'Lease Negotiation & Structuring',
+      'Tenant Mix Optimization',
+      'Renewal Strategies & Retention',
+      'Space Planning & Optimization',
     ],
-    icon: "🏢",
-    category: "core",
-    propertyTypes: ["office", "retail", "warehouse", "mixed-use"],
+    icon: '🏢',
+    category: 'core',
+    propertyTypes: ['office', 'retail', 'warehouse', 'mixed-use'],
   },
   {
-    id: "lease-administration",
-    title: "Advanced Lease Administration",
+    id: 'lease-administration',
+    title: 'Advanced Lease Administration',
     description:
-      "Professional lease management with automated tracking, CAM reconciliation, and compliance monitoring to ensure maximum revenue capture.",
+      'Professional lease management with automated tracking, CAM reconciliation, and compliance monitoring to ensure maximum revenue capture.',
     features: [
-      "CAM Charges & Reconciliation",
-      "Lease Compliance Monitoring",
-      "Automated Rent Escalations",
-      "Operating Expense Recovery",
-      "Lease Audit & Documentation",
-      "Tenant Notice Management",
+      'CAM Charges & Reconciliation',
+      'Lease Compliance Monitoring',
+      'Automated Rent Escalations',
+      'Operating Expense Recovery',
+      'Lease Audit & Documentation',
+      'Tenant Notice Management',
     ],
-    icon: "📋",
-    category: "financial",
-    propertyTypes: ["office", "retail", "warehouse"],
+    icon: '📋',
+    category: 'financial',
+    propertyTypes: ['office', 'retail', 'warehouse'],
   },
   {
-    id: "facility-management",
-    title: "Comprehensive Facility Management",
+    id: 'facility-management',
+    title: 'Comprehensive Facility Management',
     description:
-      "Professional facility operations including HVAC, security systems, preventive maintenance, and emergency response for optimal building performance.",
+      'Professional facility operations including HVAC, security systems, preventive maintenance, and emergency response for optimal building performance.',
     features: [
-      "HVAC System Management",
-      "24/7 Security Coordination",
-      "Preventive Maintenance Programs",
-      "Emergency Response Protocols",
-      "Vendor Management & Procurement",
-      "Energy Efficiency Optimization",
+      'HVAC System Management',
+      '24/7 Security Coordination',
+      'Preventive Maintenance Programs',
+      'Emergency Response Protocols',
+      'Vendor Management & Procurement',
+      'Energy Efficiency Optimization',
     ],
-    icon: "⚙️",
-    category: "core",
-    propertyTypes: ["office", "warehouse", "mixed-use"],
+    icon: '⚙️',
+    category: 'core',
+    propertyTypes: ['office', 'warehouse', 'mixed-use'],
   },
   {
-    id: "financial-reporting",
-    title: "Advanced Financial Reporting & Analytics",
+    id: 'financial-reporting',
+    title: 'Advanced Financial Reporting & Analytics',
     description:
-      "Detailed financial analysis, budgeting, and performance reporting with real-time dashboards and strategic insights for informed decision-making.",
+      'Detailed financial analysis, budgeting, and performance reporting with real-time dashboards and strategic insights for informed decision-making.',
     features: [
-      "Monthly P&L Statements",
-      "Annual Budget Planning",
-      "Cash Flow Analysis",
-      "Market Performance Benchmarking",
-      "Capital Expenditure Planning",
-      "ROI & Asset Performance Metrics",
+      'Monthly P&L Statements',
+      'Annual Budget Planning',
+      'Cash Flow Analysis',
+      'Market Performance Benchmarking',
+      'Capital Expenditure Planning',
+      'ROI & Asset Performance Metrics',
     ],
-    icon: "📊",
-    category: "financial",
-    propertyTypes: ["office", "retail", "warehouse", "mixed-use"],
+    icon: '📊',
+    category: 'financial',
+    propertyTypes: ['office', 'retail', 'warehouse', 'mixed-use'],
   },
   {
-    id: "tenant-improvements",
-    title: "Tenant Improvement Coordination",
+    id: 'tenant-improvements',
+    title: 'Tenant Improvement Coordination',
     description:
-      "Project management for tenant improvements, space modifications, and build-outs to enhance tenant satisfaction and property value.",
+      'Project management for tenant improvements, space modifications, and build-outs to enhance tenant satisfaction and property value.',
     features: [
-      "TI Project Management",
-      "Contractor Vetting & Selection",
-      "Permit & Approval Processing",
-      "Timeline & Budget Management",
-      "Quality Control & Inspections",
-      "Move-in Coordination",
+      'TI Project Management',
+      'Contractor Vetting & Selection',
+      'Permit & Approval Processing',
+      'Timeline & Budget Management',
+      'Quality Control & Inspections',
+      'Move-in Coordination',
     ],
-    icon: "🔨",
-    category: "specialized",
-    propertyTypes: ["office", "retail"],
+    icon: '🔨',
+    category: 'specialized',
+    propertyTypes: ['office', 'retail'],
   },
   {
-    id: "asset-optimization",
-    title: "Strategic Asset Value Optimization",
+    id: 'asset-optimization',
+    title: 'Strategic Asset Value Optimization',
     description:
-      "Long-term strategic planning to maximize property value through market positioning, capital improvements, and performance optimization.",
+      'Long-term strategic planning to maximize property value through market positioning, capital improvements, and performance optimization.',
     features: [
-      "Asset Valuation Analysis",
-      "Capital Improvement Planning",
-      "Market Repositioning Strategies",
-      "Disposition Planning Support",
-      "Investment Performance Analysis",
-      "Exit Strategy Development",
+      'Asset Valuation Analysis',
+      'Capital Improvement Planning',
+      'Market Repositioning Strategies',
+      'Disposition Planning Support',
+      'Investment Performance Analysis',
+      'Exit Strategy Development',
     ],
-    icon: "📈",
-    category: "strategic",
-    propertyTypes: ["office", "retail", "warehouse", "mixed-use"],
+    icon: '📈',
+    category: 'strategic',
+    propertyTypes: ['office', 'retail', 'warehouse', 'mixed-use'],
   },
 ] as const;
 
 const commercialPackages: readonly CommercialPackage[] = [
   {
-    id: "professional",
-    name: "Professional Management",
+    id: 'professional',
+    name: 'Professional Management',
     basePrice: 4,
-    priceUnit: "percentage",
+    priceUnit: 'percentage',
     minFee: 15000,
     description:
-      "Comprehensive property management for established commercial properties with stable tenant base and standard operational requirements.",
+      'Comprehensive property management for established commercial properties with stable tenant base and standard operational requirements.',
     features: [
-      "Tenant Leasing & Relations",
-      "Lease Administration & CAM",
-      "Basic Facility Management",
-      "Monthly Financial Reporting",
-      "Vendor Coordination",
-      "Emergency Response",
-      "Quarterly Property Inspections",
-      "Online Owner Portal",
+      'Tenant Leasing & Relations',
+      'Lease Administration & CAM',
+      'Basic Facility Management',
+      'Monthly Financial Reporting',
+      'Vendor Coordination',
+      'Emergency Response',
+      'Quarterly Property Inspections',
+      'Online Owner Portal',
     ],
     bestFor: [
-      "Established Office Buildings",
-      "Strip Centers",
-      "Small Warehouses",
+      'Established Office Buildings',
+      'Strip Centers',
+      'Small Warehouses',
     ],
   },
   {
-    id: "premium",
-    name: "Premium Management",
+    id: 'premium',
+    name: 'Premium Management',
     basePrice: 6,
-    priceUnit: "percentage",
+    priceUnit: 'percentage',
     minFee: 25000,
     description:
-      "Advanced management solution with strategic leasing, detailed analytics, and proactive asset optimization for growing commercial portfolios.",
+      'Advanced management solution with strategic leasing, detailed analytics, and proactive asset optimization for growing commercial portfolios.',
     features: [
-      "Everything in Professional",
-      "Strategic Tenant Mix Planning",
-      "Advanced Financial Analytics",
-      "Capital Planning & Budgeting",
-      "Market Analysis & Positioning",
-      "Tenant Improvement Coordination",
-      "Preventive Maintenance Programs",
-      "Dedicated Account Manager",
+      'Everything in Professional',
+      'Strategic Tenant Mix Planning',
+      'Advanced Financial Analytics',
+      'Capital Planning & Budgeting',
+      'Market Analysis & Positioning',
+      'Tenant Improvement Coordination',
+      'Preventive Maintenance Programs',
+      'Dedicated Account Manager',
     ],
     popular: true,
     bestFor: [
-      "Multi-tenant Office Buildings",
-      "Shopping Centers",
-      "Distribution Centers",
+      'Multi-tenant Office Buildings',
+      'Shopping Centers',
+      'Distribution Centers',
     ],
   },
   {
-    id: "institutional",
-    name: "Institutional Management",
+    id: 'institutional',
+    name: 'Institutional Management',
     basePrice: 8,
-    priceUnit: "percentage",
+    priceUnit: 'percentage',
     minFee: 50000,
     description:
-      "White-glove institutional-grade management with comprehensive strategic services, asset optimization, and maximum value enhancement.",
+      'White-glove institutional-grade management with comprehensive strategic services, asset optimization, and maximum value enhancement.',
     features: [
-      "Everything in Premium",
-      "Asset Value Optimization",
-      "Investment Performance Analysis",
-      "Disposition Planning Support",
-      "Advanced Market Intelligence",
-      "Executive-level Reporting",
-      "24/7 Dedicated Support",
-      "Quarterly Strategy Reviews",
+      'Everything in Premium',
+      'Asset Value Optimization',
+      'Investment Performance Analysis',
+      'Disposition Planning Support',
+      'Advanced Market Intelligence',
+      'Executive-level Reporting',
+      '24/7 Dedicated Support',
+      'Quarterly Strategy Reviews',
     ],
     bestFor: [
-      "Class A Office Towers",
-      "Major Retail Centers",
-      "Industrial Complexes",
+      'Class A Office Towers',
+      'Major Retail Centers',
+      'Industrial Complexes',
     ],
   },
 ] as const;
 
 const commercialTestimonials: readonly CommercialTestimonial[] = [
   {
-    id: "1",
-    companyName: "Eldoret Business Park Ltd",
-    contactName: "Michael Koros",
-    position: "Managing Director",
-    industry: "Real Estate Investment",
+    id: '1',
+    companyName: 'Eldoret Business Park Ltd',
+    contactName: 'Michael Koros',
+    position: 'Managing Director',
+    industry: 'Real Estate Investment',
     rating: 5,
     comment:
       "Their strategic tenant leasing approach transformed our occupancy from 72% to 96% within 18 months. The financial reporting is institutional-grade, and they've increased our NOI by 28% through better lease terms and operational efficiency.",
-    propertyType: "Class A Office Complex",
-    results: "24% NOI increase, 96% occupancy",
+    propertyType: 'Class A Office Complex',
+    results: '24% NOI increase, 96% occupancy',
     avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=face",
-    location: "West Indies, Eldoret",
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=face',
+    location: 'West Indies, Eldoret',
   },
   {
-    id: "2",
-    companyName: "Pioneer Retail Holdings",
-    contactName: "Catherine Mbugua",
-    position: "Investment Manager",
-    industry: "Retail Real Estate",
+    id: '2',
+    companyName: 'Pioneer Retail Holdings',
+    contactName: 'Catherine Mbugua',
+    position: 'Investment Manager',
+    industry: 'Retail Real Estate',
     rating: 5,
     comment:
-      "Managing our 15,000 sqft shopping center was complex until we partnered with them. Their tenant mix optimization brought in anchor tenants, and CAM reconciliation recovered 92% of operating expenses. Professional service that delivers results.",
-    propertyType: "Community Shopping Center",
-    results: "35% revenue increase, optimal tenant mix",
+      'Managing our 15,000 sqft shopping center was complex until we partnered with them. Their tenant mix optimization brought in anchor tenants, and CAM reconciliation recovered 92% of operating expenses. Professional service that delivers results.',
+    propertyType: 'Community Shopping Center',
+    results: '35% revenue increase, optimal tenant mix',
     avatar:
-      "https://images.unsplash.com/photo-1494790108755-2616b612b002?w=64&h=64&fit=crop&crop=face",
-    location: "Uganda Road, Eldoret",
+      'https://images.unsplash.com/photo-1494790108755-2616b612b002?w=64&h=64&fit=crop&crop=face',
+    location: 'Uganda Road, Eldoret',
   },
   {
-    id: "3",
-    companyName: "Industrial Properties East Africa",
-    contactName: "David Kimutai",
-    position: "Portfolio Manager",
-    industry: "Industrial Real Estate",
+    id: '3',
+    companyName: 'Industrial Properties East Africa',
+    contactName: 'David Kimutai',
+    position: 'Portfolio Manager',
+    industry: 'Industrial Real Estate',
     rating: 5,
     comment:
-      "Their facility management expertise is unmatched for our warehouse portfolio. 24/7 security coordination, preventive maintenance programs, and strategic tenant retention have reduced our operational costs by 18% while improving tenant satisfaction scores.",
-    propertyType: "Industrial Warehouse Complex",
-    results: "18% cost reduction, 100% tenant retention",
+      'Their facility management expertise is unmatched for our warehouse portfolio. 24/7 security coordination, preventive maintenance programs, and strategic tenant retention have reduced our operational costs by 18% while improving tenant satisfaction scores.',
+    propertyType: 'Industrial Warehouse Complex',
+    results: '18% cost reduction, 100% tenant retention',
     avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face",
-    location: "Industrial Area, Eldoret",
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face',
+    location: 'Industrial Area, Eldoret',
   },
 ] as const;
 
 const commercialFAQs: readonly CommercialFAQ[] = [
   {
-    id: "1",
-    question: "What are your management fees for commercial properties?",
+    id: '1',
+    question: 'What are your management fees for commercial properties?',
     answer:
-      "Our fees range from 4-8% of gross rental income depending on property type and service level. Professional Management is 4% (min KES 15,000), Premium is 6% (min KES 25,000), and Institutional is 8% (min KES 50,000). All packages include comprehensive services with no hidden fees.",
-    category: "financial",
+      'Our fees range from 4-8% of gross rental income depending on property type and service level. Professional Management is 4% (min KES 15,000), Premium is 6% (min KES 25,000), and Institutional is 8% (min KES 50,000). All packages include comprehensive services with no hidden fees.',
+    category: 'financial',
   },
   {
-    id: "2",
-    question: "How do you handle CAM charges and expense recovery?",
+    id: '2',
+    question: 'How do you handle CAM charges and expense recovery?',
     answer:
-      "We provide detailed CAM administration including budget preparation, monthly billing, annual reconciliation, and audit support. Our sophisticated accounting systems ensure accurate expense allocation and maximum recovery rates, typically achieving 90-95% collection efficiency.",
-    category: "financial",
+      'We provide detailed CAM administration including budget preparation, monthly billing, annual reconciliation, and audit support. Our sophisticated accounting systems ensure accurate expense allocation and maximum recovery rates, typically achieving 90-95% collection efficiency.',
+    category: 'financial',
   },
   {
-    id: "3",
-    question: "What is your average time to lease vacant commercial space?",
+    id: '3',
+    question: 'What is your average time to lease vacant commercial space?',
     answer:
-      "Leasing timelines vary by property type and market conditions. Office space typically leases within 60-90 days, retail within 90-120 days, and warehouse space within 30-60 days. Our strategic marketing approach and extensive tenant network significantly reduce vacancy periods.",
-    category: "leasing",
+      'Leasing timelines vary by property type and market conditions. Office space typically leases within 60-90 days, retail within 90-120 days, and warehouse space within 30-60 days. Our strategic marketing approach and extensive tenant network significantly reduce vacancy periods.',
+    category: 'leasing',
   },
   {
-    id: "4",
-    question: "Do you provide emergency maintenance for commercial properties?",
+    id: '4',
+    question: 'Do you provide emergency maintenance for commercial properties?',
     answer:
-      "Yes, we offer 24/7 emergency response for critical issues including HVAC failures, security breaches, plumbing emergencies, and power outages. Our vetted contractor network ensures rapid response times and quality repairs to minimize tenant disruption and property damage.",
-    category: "maintenance",
+      'Yes, we offer 24/7 emergency response for critical issues including HVAC failures, security breaches, plumbing emergencies, and power outages. Our vetted contractor network ensures rapid response times and quality repairs to minimize tenant disruption and property damage.',
+    category: 'maintenance',
   },
   {
-    id: "5",
-    question: "How do you optimize tenant mix for retail properties?",
+    id: '5',
+    question: 'How do you optimize tenant mix for retail properties?',
     answer:
-      "We analyze market demographics, competitor analysis, and traffic patterns to develop optimal tenant mix strategies. This includes identifying anchor tenants, complementary businesses, and avoiding over-saturation of similar services to maximize foot traffic and rental income.",
-    category: "strategic",
+      'We analyze market demographics, competitor analysis, and traffic patterns to develop optimal tenant mix strategies. This includes identifying anchor tenants, complementary businesses, and avoiding over-saturation of similar services to maximize foot traffic and rental income.',
+    category: 'strategic',
   },
   {
-    id: "6",
-    question: "What financial reporting do you provide to property owners?",
+    id: '6',
+    question: 'What financial reporting do you provide to property owners?',
     answer:
-      "Monthly reports include detailed P&L statements, cash flow analysis, budget vs actual comparisons, and key performance metrics. Quarterly reports add market analysis and strategic recommendations. All reporting is available through our secure online portal with real-time access.",
-    category: "financial",
+      'Monthly reports include detailed P&L statements, cash flow analysis, budget vs actual comparisons, and key performance metrics. Quarterly reports add market analysis and strategic recommendations. All reporting is available through our secure online portal with real-time access.',
+    category: 'financial',
   },
 ] as const;
 
 // Utility functions
 const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat("en-KE", {
-    style: "currency",
-    currency: "KES",
+  return new Intl.NumberFormat('en-KE', {
+    style: 'currency',
+    currency: 'KES',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price);
@@ -375,7 +375,7 @@ const validateEmail = (email: string): boolean => {
 
 const validatePhone = (phone: string): boolean => {
   const phoneRegex = /^(\+254|0)[7-9]\d{8}$/;
-  return phoneRegex.test(phone.replace(/\s/g, ""));
+  return phoneRegex.test(phone.replace(/\s/g, ''));
 };
 
 const validateCommercialInquiry = (
@@ -384,27 +384,27 @@ const validateCommercialInquiry = (
   const errors: CommercialInquiryErrors = {};
 
   if (!formData.companyName.trim()) {
-    errors.companyName = "Company name is required";
+    errors.companyName = 'Company name is required';
   }
 
   if (!formData.contactName.trim()) {
-    errors.contactName = "Contact name is required";
+    errors.contactName = 'Contact name is required';
   }
 
   if (!formData.email.trim()) {
-    errors.email = "Email is required";
+    errors.email = 'Email is required';
   } else if (!validateEmail(formData.email)) {
-    errors.email = "Please enter a valid email address";
+    errors.email = 'Please enter a valid email address';
   }
 
   if (!formData.phone.trim()) {
-    errors.phone = "Phone number is required";
+    errors.phone = 'Phone number is required';
   } else if (!validatePhone(formData.phone)) {
-    errors.phone = "Please enter a valid Kenyan phone number";
+    errors.phone = 'Please enter a valid Kenyan phone number';
   }
 
   if (!formData.propertyType) {
-    errors.propertyType = "Property type is required";
+    errors.propertyType = 'Property type is required';
   }
 
   return errors;
@@ -416,20 +416,20 @@ const CommercialInquiryModal = component$<{
   onClose: QRL<() => void>;
 }>((props) => {
   const formData = useStore<CommercialInquiry>({
-    companyName: "",
-    contactName: "",
-    title: "",
-    email: "",
-    phone: "",
-    propertyType: "",
-    propertySize: "",
-    propertyLocation: "",
-    currentOccupancy: "",
-    annualRevenue: "",
+    companyName: '',
+    contactName: '',
+    title: '',
+    email: '',
+    phone: '',
+    propertyType: '',
+    propertySize: '',
+    propertyLocation: '',
+    currentOccupancy: '',
+    annualRevenue: '',
     managementNeeds: [],
-    timeline: "",
-    budget: "",
-    message: "",
+    timeline: '',
+    budget: '',
+    message: '',
   });
 
   const errors = useStore<CommercialInquiryErrors>({});
@@ -438,20 +438,20 @@ const CommercialInquiryModal = component$<{
 
   const resetForm = $(() => {
     Object.assign(formData, {
-      companyName: "",
-      contactName: "",
-      title: "",
-      email: "",
-      phone: "",
-      propertyType: "",
-      propertySize: "",
-      propertyLocation: "",
-      currentOccupancy: "",
-      annualRevenue: "",
+      companyName: '',
+      contactName: '',
+      title: '',
+      email: '',
+      phone: '',
+      propertyType: '',
+      propertySize: '',
+      propertyLocation: '',
+      currentOccupancy: '',
+      annualRevenue: '',
       managementNeeds: [],
-      timeline: "",
-      budget: "",
-      message: "",
+      timeline: '',
+      budget: '',
+      message: '',
     });
     Object.keys(errors).forEach(
       (key) => delete errors[key as keyof CommercialInquiryErrors]
@@ -483,7 +483,8 @@ const CommercialInquiryModal = component$<{
         resetForm();
       }, 3000);
     } catch (error) {
-      errors.general = "Failed to send inquiry. Please try again.";
+      console.log('Error', error);
+      errors.general = 'Failed to send inquiry. Please try again.';
     } finally {
       isSubmitting.value = false;
     }
@@ -508,9 +509,9 @@ const CommercialInquiryModal = component$<{
   useTask$(({ track }) => {
     track(() => props.isOpen);
     if (props.isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
       return () => {
-        document.body.style.overflow = "unset";
+        document.body.style.overflow = 'unset';
       };
     }
   });
@@ -603,8 +604,8 @@ const CommercialInquiryModal = component$<{
                       }}
                       class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
                         errors.companyName
-                          ? "border-red-300"
-                          : "border-slate-300"
+                          ? 'border-red-300'
+                          : 'border-slate-300'
                       }`}
                       placeholder="Your company name"
                     />
@@ -657,8 +658,8 @@ const CommercialInquiryModal = component$<{
                       }}
                       class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
                         errors.contactName
-                          ? "border-red-300"
-                          : "border-slate-300"
+                          ? 'border-red-300'
+                          : 'border-slate-300'
                       }`}
                       placeholder="Primary contact name"
                     />
@@ -698,7 +699,7 @@ const CommercialInquiryModal = component$<{
                         if (errors.email) delete errors.email;
                       }}
                       class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                        errors.email ? "border-red-300" : "border-slate-300"
+                        errors.email ? 'border-red-300' : 'border-slate-300'
                       }`}
                       placeholder="business.email@company.com"
                     />
@@ -719,7 +720,7 @@ const CommercialInquiryModal = component$<{
                         if (errors.phone) delete errors.phone;
                       }}
                       class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                        errors.phone ? "border-red-300" : "border-slate-300"
+                        errors.phone ? 'border-red-300' : 'border-slate-300'
                       }`}
                       placeholder="+254700000000"
                     />
@@ -749,8 +750,8 @@ const CommercialInquiryModal = component$<{
                       }}
                       class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
                         errors.propertyType
-                          ? "border-red-300"
-                          : "border-slate-300"
+                          ? 'border-red-300'
+                          : 'border-slate-300'
                       }`}
                     >
                       <option value="">Select Property Type</option>
@@ -862,12 +863,12 @@ const CommercialInquiryModal = component$<{
                 </label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {[
-                    "Tenant Leasing",
-                    "Lease Administration",
-                    "Facility Management",
-                    "Financial Reporting",
-                    "Tenant Improvements",
-                    "Asset Optimization",
+                    'Tenant Leasing',
+                    'Lease Administration',
+                    'Facility Management',
+                    'Financial Reporting',
+                    'Tenant Improvements',
+                    'Asset Optimization',
                   ].map((need) => (
                     <label
                       key={need}
@@ -961,7 +962,7 @@ const CommercialInquiryModal = component$<{
                       Analyzing Portfolio...
                     </>
                   ) : (
-                    "Get Commercial Property Assessment"
+                    'Get Commercial Property Assessment'
                   )}
                 </button>
               </div>
@@ -976,7 +977,7 @@ const CommercialInquiryModal = component$<{
 // Main Component
 export default component$(() => {
   const isModalOpen = useSignal(false);
-  const activeTab = useSignal("leasing");
+  const activeTab = useSignal('leasing');
 
   const openModal = $(() => {
     isModalOpen.value = true;
@@ -1173,7 +1174,7 @@ export default component$(() => {
                           key={type}
                           class="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full"
                         >
-                          {type.replace("-", " ")}
+                          {type.replace('-', ' ')}
                         </span>
                       ))}
                     </div>
@@ -1205,9 +1206,9 @@ export default component$(() => {
                 key={pkg.id}
                 class={`relative rounded-3xl p-8 border-2 transition-all duration-500 ${
                   pkg.popular
-                    ? "bg-gradient-to-br from-purple-600 via-purple-700 to-pink-700 text-white border-purple-500 transform scale-105 shadow-2xl shadow-purple-500/25"
-                    : "bg-white border-slate-200 hover:border-purple-200 hover:shadow-xl"
-                } ${index === 0 ? "lg:-rotate-2" : index === 2 ? "lg:rotate-2" : ""}`}
+                    ? 'bg-gradient-to-br from-purple-600 via-purple-700 to-pink-700 text-white border-purple-500 transform scale-105 shadow-2xl shadow-purple-500/25'
+                    : 'bg-white border-slate-200 hover:border-purple-200 hover:shadow-xl'
+                } ${index === 0 ? 'lg:-rotate-2' : index === 2 ? 'lg:rotate-2' : ''}`}
               >
                 {pkg.popular && (
                   <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
@@ -1219,29 +1220,29 @@ export default component$(() => {
 
                 <div class="mb-8">
                   <h3
-                    class={`text-3xl font-bold mb-3 ${pkg.popular ? "text-white" : "text-slate-900"}`}
+                    class={`text-3xl font-bold mb-3 ${pkg.popular ? 'text-white' : 'text-slate-900'}`}
                   >
                     {pkg.name}
                   </h3>
                   <div class="flex items-baseline mb-2">
                     <span
-                      class={`text-6xl font-bold ${pkg.popular ? "text-white" : "text-slate-900"}`}
+                      class={`text-6xl font-bold ${pkg.popular ? 'text-white' : 'text-slate-900'}`}
                     >
                       {pkg.basePrice}%
                     </span>
                     <span
-                      class={`ml-3 text-lg ${pkg.popular ? "text-purple-100" : "text-slate-600"}`}
+                      class={`ml-3 text-lg ${pkg.popular ? 'text-purple-100' : 'text-slate-600'}`}
                     >
                       of gross revenue
                     </span>
                   </div>
                   <p
-                    class={`text-sm ${pkg.popular ? "text-purple-100" : "text-slate-500"}`}
+                    class={`text-sm ${pkg.popular ? 'text-purple-100' : 'text-slate-500'}`}
                   >
                     Minimum {formatPrice(pkg.minFee)}/month
                   </p>
                   <p
-                    class={`mt-4 text-lg ${pkg.popular ? "text-purple-100" : "text-slate-600"}`}
+                    class={`mt-4 text-lg ${pkg.popular ? 'text-purple-100' : 'text-slate-600'}`}
                   >
                     {pkg.description}
                   </p>
@@ -1252,7 +1253,7 @@ export default component$(() => {
                     <div key={feature} class="flex items-start">
                       <svg
                         class={`w-6 h-6 mt-0.5 mr-4 flex-shrink-0 ${
-                          pkg.popular ? "text-green-300" : "text-green-500"
+                          pkg.popular ? 'text-green-300' : 'text-green-500'
                         }`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
@@ -1260,7 +1261,7 @@ export default component$(() => {
                         <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
                       </svg>
                       <span
-                        class={`${pkg.popular ? "text-white" : "text-slate-700"}`}
+                        class={`${pkg.popular ? 'text-white' : 'text-slate-700'}`}
                       >
                         {feature}
                       </span>
@@ -1270,7 +1271,7 @@ export default component$(() => {
 
                 <div class="mb-8">
                   <div
-                    class={`text-sm font-medium mb-3 ${pkg.popular ? "text-purple-100" : "text-slate-600"}`}
+                    class={`text-sm font-medium mb-3 ${pkg.popular ? 'text-purple-100' : 'text-slate-600'}`}
                   >
                     Best For:
                   </div>
@@ -1280,8 +1281,8 @@ export default component$(() => {
                         key={type}
                         class={`px-3 py-1 text-xs font-medium rounded-full ${
                           pkg.popular
-                            ? "bg-white/20 text-white"
-                            : "bg-purple-100 text-purple-700"
+                            ? 'bg-white/20 text-white'
+                            : 'bg-purple-100 text-purple-700'
                         }`}
                       >
                         {type}
@@ -1294,8 +1295,8 @@ export default component$(() => {
                   onClick$={() => openModal()}
                   class={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl ${
                     pkg.popular
-                      ? "bg-white text-purple-700 hover:bg-slate-50 transform hover:-translate-y-1"
-                      : "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
+                      ? 'bg-white text-purple-700 hover:bg-slate-50 transform hover:-translate-y-1'
+                      : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
                   }`}
                 >
                   Get Started
@@ -1324,7 +1325,7 @@ export default component$(() => {
               <div
                 key={testimonial.id}
                 class={`bg-white rounded-3xl p-8 border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 ${
-                  index === 1 ? "transform lg:scale-105" : ""
+                  index === 1 ? 'transform lg:scale-105' : ''
                 }`}
               >
                 <div class="flex items-center mb-6">
@@ -1401,19 +1402,19 @@ export default component$(() => {
           <div class="mb-12">
             <div class="flex flex-wrap justify-center gap-3">
               {[
-                "leasing",
-                "financial",
-                "maintenance",
-                "strategic",
-                "legal",
+                'leasing',
+                'financial',
+                'maintenance',
+                'strategic',
+                'legal',
               ].map((category) => (
                 <button
                   key={category}
                   onClick$={() => (activeTab.value = category)}
                   class={`px-6 py-3 rounded-full font-semibold capitalize transition-all duration-300 ${
                     activeTab.value === category
-                      ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
                   {category}
@@ -1505,141 +1506,141 @@ export default component$(() => {
 
 export const head: DocumentHead = {
   title:
-    "Commercial Property Management Services in Eldoret | Office Buildings, Retail Centers & Warehouses | EldoretCommercial",
+    'Commercial Property Management Services in Eldoret | Office Buildings, Retail Centers & Warehouses | EldoretCommercial',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "Professional commercial property management in Eldoret for office buildings, retail spaces, and warehouses. Maximize NOI with our comprehensive tenant leasing, facility management, financial reporting, and asset optimization services. Trusted by 150+ commercial property owners.",
+        'Professional commercial property management in Eldoret for office buildings, retail spaces, and warehouses. Maximize NOI with our comprehensive tenant leasing, facility management, financial reporting, and asset optimization services. Trusted by 150+ commercial property owners.',
     },
     {
-      name: "keywords",
+      name: 'keywords',
       content:
-        "commercial property management Eldoret, office building management, retail property management, warehouse management, commercial real estate Eldoret, tenant leasing services, facility management, CAM administration, commercial property Kenya, NOI optimization",
+        'commercial property management Eldoret, office building management, retail property management, warehouse management, commercial real estate Eldoret, tenant leasing services, facility management, CAM administration, commercial property Kenya, NOI optimization',
     },
     {
-      name: "viewport",
-      content: "width=device-width, initial-scale=1.0",
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1.0',
     },
     {
-      name: "robots",
+      name: 'robots',
       content:
-        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+        'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
     },
     {
-      property: "og:title",
+      property: 'og:title',
       content:
-        "Professional Commercial Property Management in Eldoret - Office Buildings, Retail & Warehouses",
+        'Professional Commercial Property Management in Eldoret - Office Buildings, Retail & Warehouses',
     },
     {
-      property: "og:description",
+      property: 'og:description',
       content:
-        "Institutional-grade commercial property management services for office buildings, retail centers, and warehouses in Eldoret. Advanced tenant leasing, facility management, and asset optimization to maximize your commercial real estate returns.",
+        'Institutional-grade commercial property management services for office buildings, retail centers, and warehouses in Eldoret. Advanced tenant leasing, facility management, and asset optimization to maximize your commercial real estate returns.',
     },
     {
-      property: "og:type",
-      content: "website",
+      property: 'og:type',
+      content: 'website',
     },
     {
-      property: "og:locale",
-      content: "en_KE",
+      property: 'og:locale',
+      content: 'en_KE',
     },
     {
-      property: "og:image",
+      property: 'og:image',
       content:
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=630&fit=crop",
+        'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=630&fit=crop',
     },
     {
-      property: "og:image:alt",
+      property: 'og:image:alt',
       content:
-        "Modern commercial office buildings and retail centers managed by professional property management company in Eldoret",
+        'Modern commercial office buildings and retail centers managed by professional property management company in Eldoret',
     },
     {
-      property: "og:site_name",
-      content: "EldoretCommercial - Commercial Property Management",
+      property: 'og:site_name',
+      content: 'EldoretCommercial - Commercial Property Management',
     },
     {
-      name: "twitter:card",
-      content: "summary_large_image",
+      name: 'twitter:card',
+      content: 'summary_large_image',
     },
     {
-      name: "twitter:title",
-      content: "Commercial Property Management Services in Eldoret",
+      name: 'twitter:title',
+      content: 'Commercial Property Management Services in Eldoret',
     },
     {
-      name: "twitter:description",
+      name: 'twitter:description',
       content:
-        "Professional management for office buildings, retail centers & warehouses. Maximize NOI with expert tenant leasing, facility management & financial reporting services.",
+        'Professional management for office buildings, retail centers & warehouses. Maximize NOI with expert tenant leasing, facility management & financial reporting services.',
     },
     {
-      name: "twitter:image",
+      name: 'twitter:image',
       content:
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=630&fit=crop",
+        'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=630&fit=crop',
     },
     {
-      name: "theme-color",
-      content: "#7c3aed",
+      name: 'theme-color',
+      content: '#7c3aed',
     },
     // Local Business Schema
     {
-      name: "geo.region",
-      content: "KE-30",
+      name: 'geo.region',
+      content: 'KE-30',
     },
     {
-      name: "geo.placename",
-      content: "Eldoret",
+      name: 'geo.placename',
+      content: 'Eldoret',
     },
     {
-      name: "geo.position",
-      content: "0.5143;35.2699",
+      name: 'geo.position',
+      content: '0.5143;35.2699',
     },
     // Business Information
     {
-      property: "business:contact_data:street_address",
-      content: "Eldoret, Kenya",
+      property: 'business:contact_data:street_address',
+      content: 'Eldoret, Kenya',
     },
     {
-      property: "business:contact_data:locality",
-      content: "Eldoret",
+      property: 'business:contact_data:locality',
+      content: 'Eldoret',
     },
     {
-      property: "business:contact_data:region",
-      content: "Uasin Gishu County",
+      property: 'business:contact_data:region',
+      content: 'Uasin Gishu County',
     },
     {
-      property: "business:contact_data:country_name",
-      content: "Kenya",
+      property: 'business:contact_data:country_name',
+      content: 'Kenya',
     },
   ],
   links: [
     {
-      rel: "canonical",
-      href: "https://eldoretcommercial.co.ke/commercial-property-management",
+      rel: 'canonical',
+      href: 'https://eldoretcommercial.co.ke/commercial-property-management',
     },
     {
-      rel: "icon",
-      type: "image/png",
-      sizes: "32x32",
-      href: "/favicon-32x32.png",
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      href: '/favicon-32x32.png',
     },
     {
-      rel: "icon",
-      type: "image/png",
-      sizes: "16x16",
-      href: "/favicon-16x16.png",
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      href: '/favicon-16x16.png',
     },
     {
-      rel: "apple-touch-icon",
-      sizes: "180x180",
-      href: "/apple-touch-icon.png",
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      href: '/apple-touch-icon.png',
     },
     {
-      rel: "preconnect",
-      href: "https://images.unsplash.com",
+      rel: 'preconnect',
+      href: 'https://images.unsplash.com',
     },
     {
-      rel: "dns-prefetch",
-      href: "https://images.unsplash.com",
+      rel: 'dns-prefetch',
+      href: 'https://images.unsplash.com',
     },
   ],
 };

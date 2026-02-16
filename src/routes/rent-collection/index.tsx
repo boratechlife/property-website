@@ -5,8 +5,8 @@ import {
   useStore,
   useTask$,
   type QRL,
-} from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+} from '@builder.io/qwik';
+import type { DocumentHead } from '@builder.io/qwik-city';
 
 // Rent Collection interfaces
 interface PaymentMethod {
@@ -48,188 +48,188 @@ interface FAQ {
   readonly id: string;
   readonly question: string;
   readonly answer: string;
-  readonly category: "process" | "payments" | "reporting" | "legal";
+  readonly category: 'process' | 'payments' | 'reporting' | 'legal';
 }
 
 // Payment methods data
 const paymentMethods: readonly PaymentMethod[] = [
   {
-    id: "mobile-money",
-    name: "Mobile Money",
+    id: 'mobile-money',
+    name: 'Mobile Money',
     description:
-      "M-Pesa, Airtel Money, and other mobile payment platforms for convenient rent payments",
-    icon: "📱",
+      'M-Pesa, Airtel Money, and other mobile payment platforms for convenient rent payments',
+    icon: '📱',
     features: [
-      "Instant payment confirmation",
-      "24/7 availability",
-      "SMS notifications",
-      "No bank charges",
-      "Works on any mobile phone",
+      'Instant payment confirmation',
+      '24/7 availability',
+      'SMS notifications',
+      'No bank charges',
+      'Works on any mobile phone',
     ],
-    processingTime: "Instant",
+    processingTime: 'Instant',
   },
   {
-    id: "bank-transfers",
-    name: "Bank Transfers",
+    id: 'bank-transfers',
+    name: 'Bank Transfers',
     description:
-      "Direct bank-to-bank transfers and online banking payments for secure transactions",
-    icon: "🏦",
+      'Direct bank-to-bank transfers and online banking payments for secure transactions',
+    icon: '🏦',
     features: [
-      "Secure encrypted transfers",
-      "Online banking integration",
-      "Automated reconciliation",
-      "Transaction receipts",
-      "Bulk payment options",
+      'Secure encrypted transfers',
+      'Online banking integration',
+      'Automated reconciliation',
+      'Transaction receipts',
+      'Bulk payment options',
     ],
-    processingTime: "Same day",
+    processingTime: 'Same day',
   },
   {
-    id: "online-payments",
-    name: "Online Payments",
+    id: 'online-payments',
+    name: 'Online Payments',
     description:
-      "Credit/debit card payments and digital wallets through our secure payment portal",
-    icon: "💳",
+      'Credit/debit card payments and digital wallets through our secure payment portal',
+    icon: '💳',
     features: [
-      "Secure SSL encryption",
-      "Multiple card types accepted",
-      "Automatic payment scheduling",
-      "Digital receipts",
-      "Payment history tracking",
+      'Secure SSL encryption',
+      'Multiple card types accepted',
+      'Automatic payment scheduling',
+      'Digital receipts',
+      'Payment history tracking',
     ],
-    processingTime: "Instant",
+    processingTime: 'Instant',
   },
   {
-    id: "cash-payments",
-    name: "Cash Payments",
+    id: 'cash-payments',
+    name: 'Cash Payments',
     description:
-      "In-person cash collection with proper documentation and secure handling",
-    icon: "💰",
+      'In-person cash collection with proper documentation and secure handling',
+    icon: '💰',
     features: [
-      "Official receipt issued",
-      "Secure collection points",
-      "Same-day banking",
-      "Photo documentation",
-      "Audit trail maintenance",
+      'Official receipt issued',
+      'Secure collection points',
+      'Same-day banking',
+      'Photo documentation',
+      'Audit trail maintenance',
     ],
-    processingTime: "Same day",
+    processingTime: 'Same day',
   },
 ] as const;
 
 // Collection process steps
 const collectionSteps: readonly CollectionStep[] = [
   {
-    id: "setup",
+    id: 'setup',
     step: 1,
-    title: "System Setup & Tenant Registration",
+    title: 'System Setup & Tenant Registration',
     description:
-      "We register all tenants in our automated system with their preferred payment methods and contact information. Each tenant receives login credentials for our online portal.",
-    timeframe: "Day 1",
-    icon: "⚙️",
+      'We register all tenants in our automated system with their preferred payment methods and contact information. Each tenant receives login credentials for our online portal.',
+    timeframe: 'Day 1',
+    icon: '⚙️',
   },
   {
-    id: "reminders",
+    id: 'reminders',
     step: 2,
-    title: "Automated Rent Reminders",
+    title: 'Automated Rent Reminders',
     description:
-      "Our system sends automated reminders 7 days, 3 days, and 1 day before rent is due via SMS, email, and in-app notifications to ensure tenants never forget.",
-    timeframe: "Weekly",
-    icon: "🔔",
+      'Our system sends automated reminders 7 days, 3 days, and 1 day before rent is due via SMS, email, and in-app notifications to ensure tenants never forget.',
+    timeframe: 'Weekly',
+    icon: '🔔',
   },
   {
-    id: "collection",
+    id: 'collection',
     step: 3,
-    title: "Multi-Channel Rent Collection",
+    title: 'Multi-Channel Rent Collection',
     description:
-      "On the due date, tenants can pay through their preferred method - mobile money, bank transfer, online payment, or cash at our collection points.",
-    timeframe: "Due Date",
-    icon: "💸",
+      'On the due date, tenants can pay through their preferred method - mobile money, bank transfer, online payment, or cash at our collection points.',
+    timeframe: 'Due Date',
+    icon: '💸',
   },
   {
-    id: "tracking",
+    id: 'tracking',
     step: 4,
-    title: "Real-Time Payment Tracking",
+    title: 'Real-Time Payment Tracking',
     description:
-      "All payments are automatically recorded and verified in real-time. Both property owners and tenants receive instant confirmation of successful payments.",
-    timeframe: "Immediate",
-    icon: "📊",
+      'All payments are automatically recorded and verified in real-time. Both property owners and tenants receive instant confirmation of successful payments.',
+    timeframe: 'Immediate',
+    icon: '📊',
   },
   {
-    id: "followup",
+    id: 'followup',
     step: 5,
-    title: "Late Payment Follow-Up",
+    title: 'Late Payment Follow-Up',
     description:
-      "For overdue payments, our system initiates a structured follow-up process including phone calls, site visits, and formal notices as required by Kenyan law.",
-    timeframe: "Day 2+",
-    icon: "📞",
+      'For overdue payments, our system initiates a structured follow-up process including phone calls, site visits, and formal notices as required by Kenyan law.',
+    timeframe: 'Day 2+',
+    icon: '📞',
   },
   {
-    id: "reporting",
+    id: 'reporting',
     step: 6,
-    title: "Financial Reporting & Transfer",
+    title: 'Financial Reporting & Transfer',
     description:
-      "Collected rents are transferred to property owners through their preferred payment method, along with detailed financial reports and transaction summaries.",
-    timeframe: "Monthly",
-    icon: "📈",
+      'Collected rents are transferred to property owners through their preferred payment method, along with detailed financial reports and transaction summaries.',
+    timeframe: 'Monthly',
+    icon: '📈',
   },
 ] as const;
 
 // FAQ data
 const faqs: readonly FAQ[] = [
   {
-    id: "1",
-    question: "How does your automated rent collection system work?",
+    id: '1',
+    question: 'How does your automated rent collection system work?',
     answer:
-      "Our system automatically sends payment reminders to tenants, accepts payments through multiple channels, verifies and records all transactions, and provides real-time reporting to property owners. The entire process is automated from reminder to payment confirmation.",
-    category: "process",
+      'Our system automatically sends payment reminders to tenants, accepts payments through multiple channels, verifies and records all transactions, and provides real-time reporting to property owners. The entire process is automated from reminder to payment confirmation.',
+    category: 'process',
   },
   {
-    id: "2",
-    question: "What payment methods do you accept for rent collection?",
+    id: '2',
+    question: 'What payment methods do you accept for rent collection?',
     answer:
-      "We accept mobile money (M-Pesa, Airtel Money), bank transfers, online card payments, and cash payments. This variety ensures every tenant can pay using their preferred method, improving collection rates.",
-    category: "payments",
+      'We accept mobile money (M-Pesa, Airtel Money), bank transfers, online card payments, and cash payments. This variety ensures every tenant can pay using their preferred method, improving collection rates.',
+    category: 'payments',
   },
   {
-    id: "3",
-    question: "How quickly do property owners receive their rent money?",
+    id: '3',
+    question: 'How quickly do property owners receive their rent money?',
     answer:
-      "We transfer collected rents to property owners through their preferred payment method - typically within 1-2 business days of collection. Emergency transfers can be arranged if needed.",
-    category: "process",
+      'We transfer collected rents to property owners through their preferred payment method - typically within 1-2 business days of collection. Emergency transfers can be arranged if needed.',
+    category: 'process',
   },
   {
-    id: "4",
+    id: '4',
     question: "What happens when tenants don't pay rent on time?",
     answer:
-      "We follow a structured legal process: immediate follow-up calls, formal written notices, site visits, and if necessary, legal proceedings in accordance with Kenyan rental laws. We handle all dispute resolution professionally.",
-    category: "legal",
+      'We follow a structured legal process: immediate follow-up calls, formal written notices, site visits, and if necessary, legal proceedings in accordance with Kenyan rental laws. We handle all dispute resolution professionally.',
+    category: 'legal',
   },
   {
-    id: "5",
-    question: "Do you provide financial reports to property owners?",
+    id: '5',
+    question: 'Do you provide financial reports to property owners?',
     answer:
-      "Yes, we provide detailed monthly financial reports showing all rent collections, outstanding amounts, tenant payment history, and transaction summaries. Reports are available through our online portal 24/7.",
-    category: "reporting",
+      'Yes, we provide detailed monthly financial reports showing all rent collections, outstanding amounts, tenant payment history, and transaction summaries. Reports are available through our online portal 24/7.',
+    category: 'reporting',
   },
   {
-    id: "6",
-    question: "Can you handle security deposits and other fees besides rent?",
+    id: '6',
+    question: 'Can you handle security deposits and other fees besides rent?',
     answer:
-      "Absolutely. We manage all tenant payments including security deposits, utility bills, maintenance fees, and any other charges related to the property. All funds are tracked separately and reported clearly.",
-    category: "process",
+      'Absolutely. We manage all tenant payments including security deposits, utility bills, maintenance fees, and any other charges related to the property. All funds are tracked separately and reported clearly.',
+    category: 'process',
   },
   {
-    id: "7",
-    question: "What is your typical rent collection rate?",
+    id: '7',
+    question: 'What is your typical rent collection rate?',
     answer:
-      "Our professional rent collection system achieves collection rates of 90-100%, significantly higher than self-managed properties. This is due to our automated reminders, multiple payment options, and professional follow-up processes.",
-    category: "process",
+      'Our professional rent collection system achieves collection rates of 90-100%, significantly higher than self-managed properties. This is due to our automated reminders, multiple payment options, and professional follow-up processes.',
+    category: 'process',
   },
   {
-    id: "8",
-    question: "How do you ensure payment security and prevent fraud?",
+    id: '8',
+    question: 'How do you ensure payment security and prevent fraud?',
     answer:
-      "We use secure payment gateways, verify all transactions, maintain detailed audit trails, and follow banking security protocols. All cash payments are documented with receipts and banked the same day.",
-    category: "payments",
+      'We use secure payment gateways, verify all transactions, maintain detailed audit trails, and follow banking security protocols. All cash payments are documented with receipts and banked the same day.',
+    category: 'payments',
   },
 ] as const;
 
@@ -241,26 +241,26 @@ const validateEmail = (email: string): boolean => {
 
 const validatePhone = (phone: string): boolean => {
   const phoneRegex = /^(\+254|0)[7-9]\d{8}$/;
-  return phoneRegex.test(phone.replace(/\s/g, ""));
+  return phoneRegex.test(phone.replace(/\s/g, ''));
 };
 
 const validateInquiry = (formData: RentCollectionInquiry): InquiryErrors => {
   const errors: InquiryErrors = {};
 
   if (!formData.name.trim()) {
-    errors.name = "Name is required";
+    errors.name = 'Name is required';
   }
 
   if (!formData.email.trim()) {
-    errors.email = "Email is required";
+    errors.email = 'Email is required';
   } else if (!validateEmail(formData.email)) {
-    errors.email = "Please enter a valid email address";
+    errors.email = 'Please enter a valid email address';
   }
 
   if (!formData.phone.trim()) {
-    errors.phone = "Phone number is required";
+    errors.phone = 'Phone number is required';
   } else if (!validatePhone(formData.phone)) {
-    errors.phone = "Please enter a valid Kenyan phone number";
+    errors.phone = 'Please enter a valid Kenyan phone number';
   }
 
   return errors;
@@ -272,13 +272,13 @@ const RentCollectionInquiry = component$<{
   onClose: QRL<() => void>;
 }>((props) => {
   const formData = useStore<RentCollectionInquiry>({
-    name: "",
-    email: "",
-    phone: "",
+    name: '',
+    email: '',
+    phone: '',
     propertyCount: 1,
     currentChallenges: [],
-    collectionRate: "",
-    message: "",
+    collectionRate: '',
+    message: '',
   });
 
   const errors = useStore<InquiryErrors>({});
@@ -287,13 +287,13 @@ const RentCollectionInquiry = component$<{
 
   const resetForm = $(() => {
     Object.assign(formData, {
-      name: "",
-      email: "",
-      phone: "",
+      name: '',
+      email: '',
+      phone: '',
       propertyCount: 1,
       currentChallenges: [],
-      collectionRate: "",
-      message: "",
+      collectionRate: '',
+      message: '',
     });
     Object.keys(errors).forEach(
       (key) => delete errors[key as keyof InquiryErrors]
@@ -325,8 +325,8 @@ const RentCollectionInquiry = component$<{
         resetForm();
       }, 2500);
     } catch (error) {
-      errors.general = "Failed to send inquiry. Please try again.";
-      console.log("error", error);
+      console.log('Error', error);
+      errors.general = 'Failed to send inquiry. Please try again.';
     } finally {
       isSubmitting.value = false;
     }
@@ -351,9 +351,9 @@ const RentCollectionInquiry = component$<{
   useTask$(({ track }) => {
     track(() => props.isOpen);
     if (props.isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
       return () => {
-        document.body.style.overflow = "unset";
+        document.body.style.overflow = 'unset';
       };
     }
   });
@@ -434,7 +434,7 @@ const RentCollectionInquiry = component$<{
                       if (errors.name) delete errors.name;
                     }}
                     class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                      errors.name ? "border-red-300" : "border-slate-300"
+                      errors.name ? 'border-red-300' : 'border-slate-300'
                     }`}
                     placeholder="Enter your full name"
                   />
@@ -455,7 +455,7 @@ const RentCollectionInquiry = component$<{
                       if (errors.phone) delete errors.phone;
                     }}
                     class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                      errors.phone ? "border-red-300" : "border-slate-300"
+                      errors.phone ? 'border-red-300' : 'border-slate-300'
                     }`}
                     placeholder="+254700000000"
                   />
@@ -477,7 +477,7 @@ const RentCollectionInquiry = component$<{
                     if (errors.email) delete errors.email;
                   }}
                   class={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                    errors.email ? "border-red-300" : "border-slate-300"
+                    errors.email ? 'border-red-300' : 'border-slate-300'
                   }`}
                   placeholder="your.email@example.com"
                 />
@@ -537,12 +537,12 @@ const RentCollectionInquiry = component$<{
                 </label>
                 <div class="grid grid-cols-2 gap-3">
                   {[
-                    "Late Payments",
-                    "Payment Tracking",
-                    "Manual Follow-ups",
-                    "Multiple Payment Methods",
-                    "Financial Reports",
-                    "Legal Issues",
+                    'Late Payments',
+                    'Payment Tracking',
+                    'Manual Follow-ups',
+                    'Multiple Payment Methods',
+                    'Financial Reports',
+                    'Legal Issues',
                   ].map((challenge) => (
                     <label key={challenge} class="flex items-center">
                       <input
@@ -585,11 +585,11 @@ const RentCollectionInquiry = component$<{
                 <button
                   type="submit"
                   disabled={isSubmitting.value}
-                  class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
+                  class="flex-1 px-6 py-3 bg-[#F04A00] text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 font-medium"
                 >
                   {isSubmitting.value
-                    ? "Sending..."
-                    : "Get Rent Collection Analysis"}
+                    ? 'Sending...'
+                    : 'Get Rent Collection Analysis'}
                 </button>
               </div>
             </form>
@@ -603,7 +603,7 @@ const RentCollectionInquiry = component$<{
 // Main Component
 export default component$(() => {
   const isModalOpen = useSignal(false);
-  const activeTab = useSignal("process");
+  const activeTab = useSignal('process');
 
   const openModal = $(() => {
     isModalOpen.value = true;
@@ -693,11 +693,11 @@ export default component$(() => {
                   </div>
 
                   <div
-                    class={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 0 ? "" : "lg:grid-flow-dense"}`}
+                    class={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 0 ? '' : 'lg:grid-flow-dense'}`}
                   >
                     {/* Content Card */}
                     <div
-                      class={`${index % 2 === 0 ? "lg:pr-16" : "lg:pl-16 lg:col-start-2"} relative`}
+                      class={`${index % 2 === 0 ? 'lg:pr-16' : 'lg:pl-16 lg:col-start-2'} relative`}
                     >
                       <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-slate-100">
                         <div class="flex items-center mb-6">
@@ -719,7 +719,7 @@ export default component$(() => {
 
                         {/* Step-specific highlights */}
                         <div class="flex flex-wrap gap-2">
-                          {step.id === "setup" && (
+                          {step.id === 'setup' && (
                             <>
                               <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
                                 Portal Access
@@ -729,7 +729,7 @@ export default component$(() => {
                               </span>
                             </>
                           )}
-                          {step.id === "reminders" && (
+                          {step.id === 'reminders' && (
                             <>
                               <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
                                 SMS & Email
@@ -739,7 +739,7 @@ export default component$(() => {
                               </span>
                             </>
                           )}
-                          {step.id === "collection" && (
+                          {step.id === 'collection' && (
                             <>
                               <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
                                 M-Pesa Ready
@@ -749,7 +749,7 @@ export default component$(() => {
                               </span>
                             </>
                           )}
-                          {step.id === "tracking" && (
+                          {step.id === 'tracking' && (
                             <>
                               <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium">
                                 Real-Time
@@ -759,7 +759,7 @@ export default component$(() => {
                               </span>
                             </>
                           )}
-                          {step.id === "followup" && (
+                          {step.id === 'followup' && (
                             <>
                               <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">
                                 Legal Process
@@ -769,7 +769,7 @@ export default component$(() => {
                               </span>
                             </>
                           )}
-                          {step.id === "reporting" && (
+                          {step.id === 'reporting' && (
                             <>
                               <span class="px-3 py-1 bg-violet-100 text-violet-700 rounded-full text-sm font-medium">
                                 Detailed Reports
@@ -785,7 +785,7 @@ export default component$(() => {
 
                     {/* Visual Element */}
                     <div
-                      class={`${index % 2 === 0 ? "lg:pl-16" : "lg:pr-16 lg:col-start-1"} relative`}
+                      class={`${index % 2 === 0 ? 'lg:pl-16' : 'lg:pr-16 lg:col-start-1'} relative`}
                     >
                       <div class="relative group">
                         <div class="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
@@ -809,10 +809,10 @@ export default component$(() => {
                                     key={i}
                                     class={`w-3 h-3 rounded-full transition-all duration-300 ${
                                       i < step.step
-                                        ? "bg-gradient-to-r from-blue-500 to-purple-500 scale-110"
+                                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-110'
                                         : i === step.step - 1
-                                          ? "bg-gradient-to-r from-blue-600 to-purple-600 scale-125 ring-4 ring-blue-200"
-                                          : "bg-slate-300"
+                                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 scale-125 ring-4 ring-blue-200'
+                                          : 'bg-slate-300'
                                     }`}
                                   />
                                 ))}
@@ -926,14 +926,14 @@ export default component$(() => {
               </h3>
               <div class="space-y-4">
                 {[
-                  "Inconsistent collection rates (often 70-85%)",
-                  "Time-consuming manual follow-ups",
-                  "Limited payment options for tenants",
-                  "Emotional stress from difficult conversations",
-                  "Risk of legal non-compliance",
-                  "Difficulty tracking payments and records",
-                  "Personal safety concerns during collection",
-                  "Inconsistent enforcement of late fees",
+                  'Inconsistent collection rates (often 70-85%)',
+                  'Time-consuming manual follow-ups',
+                  'Limited payment options for tenants',
+                  'Emotional stress from difficult conversations',
+                  'Risk of legal non-compliance',
+                  'Difficulty tracking payments and records',
+                  'Personal safety concerns during collection',
+                  'Inconsistent enforcement of late fees',
                 ].map((challenge) => (
                   <div key={challenge} class="flex items-start">
                     <svg
@@ -955,14 +955,14 @@ export default component$(() => {
               </h3>
               <div class="space-y-4">
                 {[
-                  "Guaranteed 90-100% collection rates",
-                  "Fully automated system with minimal owner involvement",
-                  "Multiple convenient payment options",
-                  "Professional, courteous tenant relations",
-                  "Full legal compliance and proper documentation",
-                  "Real-time payment tracking and reporting",
-                  "Safe, secure collection processes",
-                  "Consistent enforcement of lease terms",
+                  'Guaranteed 90-100% collection rates',
+                  'Fully automated system with minimal owner involvement',
+                  'Multiple convenient payment options',
+                  'Professional, courteous tenant relations',
+                  'Full legal compliance and proper documentation',
+                  'Real-time payment tracking and reporting',
+                  'Safe, secure collection processes',
+                  'Consistent enforcement of lease terms',
                 ].map((benefit) => (
                   <div key={benefit} class="flex items-start">
                     <svg
@@ -997,69 +997,69 @@ export default component$(() => {
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Automated Reminders",
+                title: 'Automated Reminders',
                 description:
-                  "SMS, email, and app notifications sent automatically 7, 3, and 1 day before rent is due",
-                icon: "🔔",
+                  'SMS, email, and app notifications sent automatically 7, 3, and 1 day before rent is due',
+                icon: '🔔',
                 features: [
-                  "Multi-channel notifications",
-                  "Customizable timing",
-                  "Tenant preferences respected",
+                  'Multi-channel notifications',
+                  'Customizable timing',
+                  'Tenant preferences respected',
                 ],
               },
               {
-                title: "Real-Time Tracking",
+                title: 'Real-Time Tracking',
                 description:
-                  "Live payment status updates with instant confirmation for both owners and tenants",
-                icon: "📊",
+                  'Live payment status updates with instant confirmation for both owners and tenants',
+                icon: '📊',
                 features: [
-                  "Live payment dashboard",
-                  "Instant confirmations",
-                  "Payment history",
+                  'Live payment dashboard',
+                  'Instant confirmations',
+                  'Payment history',
                 ],
               },
               {
-                title: "Legal Compliance",
+                title: 'Legal Compliance',
                 description:
-                  "All collection activities follow Kenyan rental laws with proper documentation",
-                icon: "⚖️",
+                  'All collection activities follow Kenyan rental laws with proper documentation',
+                icon: '⚖️',
                 features: [
-                  "Legal notice procedures",
-                  "Proper documentation",
-                  "Court-ready records",
+                  'Legal notice procedures',
+                  'Proper documentation',
+                  'Court-ready records',
                 ],
               },
               {
-                title: "Financial Reporting",
+                title: 'Financial Reporting',
                 description:
-                  "Detailed monthly reports showing collections, outstanding amounts, and trends",
-                icon: "📈",
+                  'Detailed monthly reports showing collections, outstanding amounts, and trends',
+                icon: '📈',
                 features: [
-                  "Monthly statements",
-                  "Payment analytics",
-                  "Trend reports",
+                  'Monthly statements',
+                  'Payment analytics',
+                  'Trend reports',
                 ],
               },
               {
-                title: "Security Deposits",
+                title: 'Security Deposits',
                 description:
-                  "Professional management of security deposits and other tenant fees beyond rent",
-                icon: "🔒",
+                  'Professional management of security deposits and other tenant fees beyond rent',
+                icon: '🔒',
                 features: [
-                  "Separate deposit tracking",
-                  "Refund processing",
-                  "Fee management",
+                  'Separate deposit tracking',
+                  'Refund processing',
+                  'Fee management',
                 ],
               },
               {
-                title: "Professional Follow-up",
+                title: 'Professional Follow-up',
                 description:
-                  "Structured approach to late payments with phone calls, visits, and formal notices",
-                icon: "📞",
+                  'Structured approach to late payments with phone calls, visits, and formal notices',
+                icon: '📞',
                 features: [
-                  "Escalation procedures",
-                  "Professional communication",
-                  "Dispute resolution",
+                  'Escalation procedures',
+                  'Professional communication',
+                  'Dispute resolution',
                 ],
               },
             ].map((feature) => (
@@ -1078,7 +1078,7 @@ export default component$(() => {
                       key={item}
                       class="flex items-center text-sm text-slate-600"
                     >
-                      <div class="w-2 h-2 bg-blue-600 rounded-full mr-2 flex-shrink-0"></div>
+                      <div class="w-2 h-2 bg-[#F04A00] rounded-full mr-2 flex-shrink-0"></div>
                       {item}
                     </div>
                   ))}
@@ -1103,14 +1103,14 @@ export default component$(() => {
 
           <div class="mb-8">
             <div class="flex flex-wrap justify-center gap-2">
-              {["process", "payments", "reporting", "legal"].map((category) => (
+              {['process', 'payments', 'reporting', 'legal'].map((category) => (
                 <button
                   key={category}
                   onClick$={() => (activeTab.value = category)}
                   class={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${
                     activeTab.value === category
-                      ? "bg-blue-600 text-white"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      ? 'bg-[#F04A00] text-white'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
                   {category}
@@ -1184,63 +1184,63 @@ export default component$(() => {
 
 export const head: DocumentHead = {
   title:
-    "Professional Rent Collection Services in Eldoret | Automated Payment System | 90-100% Collection Rate",
+    'Professional Rent Collection Services in Eldoret | Automated Payment System | 90-100% Collection Rate',
   meta: [
     {
-      name: "description",
+      name: 'description',
       content:
-        "Professional rent collection services in Eldoret with 90-100% collection rates. Automated payment system supporting mobile money, bank transfers, and online payments. Complete financial reporting and legal compliance for property owners.",
+        'Professional rent collection services in Eldoret with 90-100% collection rates. Automated payment system supporting mobile money, bank transfers, and online payments. Complete financial reporting and legal compliance for property owners.',
     },
     {
-      name: "keywords",
+      name: 'keywords',
       content:
-        "rent collection services Eldoret, automated rent collection, mobile money rent payments, property management rent collection, tenant payment system, rent collection Kenya, M-Pesa rent payments, professional rent collection",
+        'rent collection services Eldoret, automated rent collection, mobile money rent payments, property management rent collection, tenant payment system, rent collection Kenya, M-Pesa rent payments, professional rent collection',
     },
     {
-      name: "viewport",
-      content: "width=device-width, initial-scale=1.0",
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1.0',
     },
     {
-      name: "robots",
+      name: 'robots',
       content:
-        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+        'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
     },
     {
-      property: "og:title",
+      property: 'og:title',
       content:
-        "Professional Rent Collection Services in Eldoret - 90-100% Collection Rate",
+        'Professional Rent Collection Services in Eldoret - 90-100% Collection Rate',
     },
     {
-      property: "og:description",
+      property: 'og:description',
       content:
-        "Automated rent collection system with multiple payment methods including mobile money, bank transfers, and online payments. Professional follow-up and legal compliance guaranteed.",
+        'Automated rent collection system with multiple payment methods including mobile money, bank transfers, and online payments. Professional follow-up and legal compliance guaranteed.',
     },
     {
-      property: "og:type",
-      content: "website",
+      property: 'og:type',
+      content: 'website',
     },
     {
-      property: "og:locale",
-      content: "en_KE",
+      property: 'og:locale',
+      content: 'en_KE',
     },
     {
-      name: "twitter:card",
-      content: "summary_large_image",
+      name: 'twitter:card',
+      content: 'summary_large_image',
     },
     {
-      name: "theme-color",
-      content: "#2563eb",
+      name: 'theme-color',
+      content: '#2563eb',
     },
   ],
   links: [
     {
-      rel: "canonical",
-      href: "https://eldoretmanage.co.ke/rent-collection-services",
+      rel: 'canonical',
+      href: 'https://eldoretmanage.co.ke/rent-collection-services',
     },
     {
-      rel: "icon",
-      type: "image/png",
-      href: "/favicon.png",
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.png',
     },
   ],
 };

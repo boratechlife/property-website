@@ -1,13 +1,14 @@
 import { component$ } from '@builder.io/qwik';
-import styles from './hero.module.css';
-import ImgThunder from '../../../media/thunder.png?jsx';
 
 export default component$(() => {
+  // Define the main brand color for re-use
+  const BRAND_COLOR = '#F04A00'; // Bright Orange / Red-Orange
+
   return (
     <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* <!-- Content --> */}
+          {/* */}
           <div>
             <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">
               About NexaRealty
@@ -25,11 +26,12 @@ export default component$(() => {
               your stress.
             </p>
 
-            {/* <!-- Key Points --> */}
+            {/* */}
             <div class="space-y-4">
               <div class="flex items-center space-x-3">
                 <svg
-                  class="w-6 h-6 text-green-500"
+                  // CHANGE: Checkmark color from green-500 to orange-600
+                  class="w-6 h-6 text-orange-600"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -45,7 +47,8 @@ export default component$(() => {
               </div>
               <div class="flex items-center space-x-3">
                 <svg
-                  class="w-6 h-6 text-green-500"
+                  // CHANGE: Checkmark color from green-500 to orange-600
+                  class="w-6 h-6 text-orange-600"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -61,7 +64,8 @@ export default component$(() => {
               </div>
               <div class="flex items-center space-x-3">
                 <svg
-                  class="w-6 h-6 text-green-500"
+                  // CHANGE: Checkmark color from green-500 to orange-600
+                  class="w-6 h-6 text-orange-600"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -77,7 +81,8 @@ export default component$(() => {
               </div>
               <div class="flex items-center space-x-3">
                 <svg
-                  class="w-6 h-6 text-green-500"
+                  // CHANGE: Checkmark color from green-500 to orange-600
+                  class="w-6 h-6 text-orange-600"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -96,7 +101,8 @@ export default component$(() => {
             <div class="mt-8">
               <a
                 href="#contact"
-                class="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors font-medium inline-flex items-center"
+                // CHANGE: Button background and hover color to brand color
+                class={`bg-[${BRAND_COLOR}] text-white px-8 py-3 rounded-lg hover:bg-red-600 transition-colors font-medium inline-flex items-center`}
               >
                 Schedule Free Consultation
                 <svg
@@ -116,7 +122,7 @@ export default component$(() => {
             </div>
           </div>
 
-          {/* <!-- Image --> */}
+          {/* */}
           <div class="relative">
             <img
               src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
@@ -124,14 +130,21 @@ export default component$(() => {
               class="rounded-xl shadow-lg object-cover w-full h-96"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-primary-600 bg-opacity-10 rounded-xl"></div>
+            {/* CHANGE: Image overlay color to brand color with opacity */}
+            <div
+              class={`absolute inset-0 bg-[${BRAND_COLOR}] bg-opacity-10 rounded-xl`}
+            ></div>
 
-            {/* <!-- Floating card --> */}
+            {/* */}
             <div class="absolute -bottom-6 -left-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-xs">
               <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
+                <div
+                  // CHANGE: Floating card icon background to orange-100/900
+                  class="w-12 h-12 bg-orange-100 dark:bg-red-900 rounded-full flex items-center justify-center"
+                >
                   <svg
-                    class="w-6 h-6 text-primary-600 dark:text-primary-400"
+                    // CHANGE: Floating card icon color to brand color
+                    class={`w-6 h-6 text-[${BRAND_COLOR}] dark:text-orange-400`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -148,7 +161,10 @@ export default component$(() => {
                   <div class="text-sm font-medium text-gray-900 dark:text-white">
                     Average ROI
                   </div>
-                  <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
+                  <div
+                    // CHANGE: ROI percentage text color to brand color
+                    class={`text-2xl font-bold text-[${BRAND_COLOR}] dark:text-orange-400`}
+                  >
                     12.5%
                   </div>
                 </div>
